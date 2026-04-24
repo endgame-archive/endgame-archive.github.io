@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>endgame.archive — Manifest Your Setup Era</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyan: '#00F5D4',
+                        pink: '#F15BB5',
+                        uv: '#9B5DE5',
+                        yellow: '#FEE440',
+                        abyss: '#050505',
+                        pearl: '#F8F9FF',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Nunito', 'sans-serif'],
+                    },
+                    animation: {
+                        'ooze': 'ooze 20s infinite alternate ease-in-out',
+                        'pulse-uv': 'pulse-uv 4s infinite ease-in-out',
+                        'prism-spin': 'prism-spin 25s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 10s ease infinite',
+                    },
+                    keyframes: {
+                        'ooze': { '0%': { transform: 'translate(-5%, -5%) scale(1.0)' }, '100%': { transform: 'translate(5%, 5%) scale(1.1)' } },
+                        'pulse-uv': {
+                            '0%, 100%': { borderColor: 'rgba(155, 93, 229, 0.4)', boxShadow: '0 0 15px rgba(155, 93, 229, 0.2)' },
+                            '50%': { borderColor: 'rgba(155, 93, 229, 1)', boxShadow: '0 0 35px rgba(155, 93, 229, 0.5)' },
+                        },
+                        'prism-spin': { from: { transform: 'rotate(0deg)' }, to: { transform: 'rotate(360deg)' } },
+                        'float': { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } },
+                        'shimmer': { '0%, 100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(248, 249, 255, 0.1); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); border: 2px solid rgba(155, 93, 229, 0.3); border-radius: 32px; }
+        .glass-dark { background: rgba(5, 5, 5, 0.92); backdrop-filter: blur(50px); border-radius: 40px; }
+        .ooze-blob { position: fixed; border-radius: 50%; filter: blur(140px); z-index: -1; }
+        .iridescent-text {
+            background: linear-gradient(90deg, #00F5D4, #9B5DE5, #F15BB5, #FEE440, #00F5D4);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: flow 6s linear infinite;
+        }
+        @keyframes flow { to { background-position: 200% center; } }
+        .pearl-overlay {
+            position: fixed; inset: 0; z-index: -1; pointer-events: none;
+            background: linear-gradient(105deg, transparent 0%, rgba(248,249,255,0.05) 25%, rgba(155,93,229,0.06) 40%, transparent 100%);
+            background-size: 300% 300%;
+            animation: shimmer 12s ease infinite;
+        }
+        .nav-dropdown { display: none; transform-origin: top; }
+        .group:hover .nav-dropdown { display: block; animation: dropIn 0.3s ease forwards; }
+        @keyframes dropIn { from { opacity: 0; transform: translateY(-10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+        .mock-hoodie { width: 120px; height: 140px; background: #050505; border-radius: 12px 12px 35px 35px; position: relative; box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+        .mock-hoodie::before { content:''; position: absolute; top: -18px; left: 12px; width: 96px; height: 48px; background: #050505; border-radius: 50% 50% 0 0; }
+        .mock-mat { width: 220px; height: 90px; background: linear-gradient(135deg, #9B5DE5, #00F5D4); border-radius: 10px; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 8px 25px rgba(155,93,229,0.5); }
+        .mock-plush { width: 90px; height: 90px; background: #F15BB5; border-radius: 50%; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 20px rgba(241,91,181,0.6)); font-size: 40px; }
+
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #9B5DE5; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-pearl text-abyss font-sans selection:bg-uv selection:text-white transition-colors duration-500 overflow-x-hidden">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const PrismLogo = ({ size = 32 }) => (
+            <div className="relative group cursor-pointer" style={{ width: size, height: size }}>
+                <svg viewBox="0 0 100 100" className="absolute inset-0 animate-prism-spin opacity-80">
+                    <path d="M50 5 L90 45"  stroke="#9B5DE5" strokeWidth="3" fill="none" />
+                    <path d="M95 50 L55 90" stroke="#F15BB5" strokeWidth="3" fill="none" />
+                    <path d="M50 95 L10 55" stroke="#00F5D4" strokeWidth="3" fill="none" />
+                    <path d="M5 50 L45 10"  stroke="#9B5DE5" strokeWidth="3" fill="none" />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center font-serif italic font-black text-uv" style={{ fontSize: size * 0.45 }}>E.</div>
+            </div>
+        );
+
+        const INVENTORY = {
+            Apparel: {
+                Men: [{ id: 'EA-M01', n: 'Abyssal Hoodie', t: 'Heavyweight Essential. Boxy & Cozy.', p: 145, mock: 'mock-hoodie' }],
+                Women: [{ id: 'EA-W01', n: 'Meadow Crop', t: 'Main Character micro-knit.', p: 68, mock: 'mock-hoodie' }],
+                Kids: [{ id: 'EA-K01', n: 'Slime Mini-Crew', t: 'Bubbly soft fleece for next-gen.', p: 45, mock: 'mock-hoodie' }]
+            },
+            Desktop: {
+                Office: [{ id: 'EA-D01', n: 'Liquid Sky Mat', t: 'Chrome micro-laminate surface.', p: 124, mock: 'mock-mat' }],
+                Battle: [{ id: 'EA-D02', n: 'Hades Artisan Cap', t: 'Hand-poured resin setup jewelry.', p: 189, mock: 'orb' }]
+            },
+            LilysCozyCorner: {
+                Sensory: [{ id: 'EA-L01', n: 'Botanical Slime', t: 'Iridescent setup reset.', p: 28, mock: 'mock-plush' }],
+                Softs: [{ id: 'EA-L02', n: 'Glow Squishie', t: 'Desk companion with high-def aura.', p: 42, mock: 'mock-plush' }],
+                Comfort: [{ id: 'EA-L03', n: 'Underworld Throw', t: 'Elite 550gsm luxury heavy knit.', p: 195, mock: 'mock-mat' }]
+            },
+            KitchenArchive: {
+                Vessels: [{ id: 'EA-KA1', n: 'Mana Ceramic Mug', t: 'Chrome-handle desk potion vessel.', p: 45, mock: 'mock-plush' }],
+                Utility: [{ id: 'EA-KA2', n: 'Artifact Bento', t: 'Matte obsidian setup vault.', p: 65, mock: 'mock-mat' }]
+            }
+        };
+
+        const App = () => {
+            const [view, setView] = useState('home');
+            const [activeCategory, setActiveCategory] = useState(null);
+            const [selectedItem, setSelectedItem] = useState(null);
+            const [mode, setMode] = useState('light');
+            const [cartCount, setCartCount] = useState(0);
+
+            useEffect(() => {
+                document.body.className = mode === 'light'
+                    ? 'bg-pearl text-abyss font-sans selection:bg-uv selection:text-white overflow-x-hidden'
+                    : 'bg-abyss text-pearl font-sans selection:bg-uv selection:text-white overflow-x-hidden';
+            }, [mode]);
+
+            const navigateToCategory = (cat) => {
+                setActiveCategory(cat);
+                setView('shop');
+                window.scrollTo(0, 0);
+            };
+
+            const NavItem = ({ label, items, catKey }) => (
+                <div className="group relative py-2 px-4 cursor-pointer">
+                    <button onClick={() => navigateToCategory(catKey)} className="font-black text-sm uppercase tracking-widest opacity-80 hover:text-uv transition-all flex items-center gap-2">
+                        {label} <span className="text-[10px] opacity-40">▾</span>
+                    </button>
+                    <div className="nav-dropdown absolute top-full left-0 glass-dark p-6 space-y-4 min-w-[200px] z-[300]">
+                        {Object.keys(items).map(sub => (
+                            <button key={sub} onClick={() => navigateToCategory(catKey)} className="block w-full text-left text-xs font-bold text-white/60 hover:text-uv uppercase tracking-widest">{sub}</button>
+                        ))}
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen relative">
+                    <div className="pearl-overlay"></div>
+                    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+                        <div className="ooze-blob w-[100vw] h-[100vh] top-[-20%] left-[-20%] bg-uv/15 animate-ooze"></div>
+                        <div className="ooze-blob w-[80vw] h-[80vh] bottom-[-20%] right-[-20%] bg-cyan/15 animate-ooze" style={{ animationDelay: '-5s' }}></div>
+                        <div className="ooze-blob w-[60vw] h-[60vh] top-[30%] left-[20%] bg-pink/10 animate-ooze" style={{ animationDelay: '-10s' }}></div>
+                    </div>
+
+                    {/* NAVIGATION */}
+                    <nav className={`fixed top-0 w-full z-[100] px-8 py-4 flex justify-between items-center transition-all duration-500 border-b ${mode === 'light' ? 'bg-pearl/80 border-uv/20' : 'bg-abyss/80 border-uv/40'} backdrop-blur-3xl`}>
+                        <div className="flex items-center gap-4 cursor-pointer" onClick={() => setView('home')}>
+                            <PrismLogo size={42} />
+                            <span className="font-bold text-xl tracking-tighter">endgame<span className="text-uv">.</span>archive</span>
+                        </div>
+                        <div className="hidden lg:flex items-center gap-4">
+                            <NavItem label="Apparel" items={INVENTORY.Apparel} catKey="Apparel" />
+                            <NavItem label="Desktop" items={INVENTORY.Desktop} catKey="Desktop" />
+                            <NavItem label="Lily's Corner" items={INVENTORY.LilysCozyCorner} catKey="LilysCozyCorner" />
+                            <NavItem label="Kitchen" items={INVENTORY.KitchenArchive} catKey="KitchenArchive" />
+                            <button onClick={() => setView('about')} className="font-black text-sm uppercase tracking-widest opacity-80 px-4 hover:text-uv">About</button>
+                        </div>
+                        <div className="flex items-center gap-8">
+                            <button onClick={() => setMode(m => m === 'light' ? 'dark' : 'light')} className="w-14 h-8 rounded-full border-2 border-uv/30 relative px-1 flex items-center">
+                                <div className={`w-5 h-5 rounded-full bg-uv transition-all ${mode === 'dark' ? 'translate-x-6 shadow-[0_0_10px_#9B5DE5]' : 'translate-x-0'}`}></div>
+                            </button>
+                            <button className="bg-uv px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest text-white hover:bg-pink transition-all shadow-lg shadow-uv/20">Cart ({cartCount})</button>
+                        </div>
+                    </nav>
+
+                    {/* HOME */}
+                    {view === 'home' && (
+                        <div>
+                            <header className="pt-64 pb-32 px-8 text-center relative max-w-7xl mx-auto flex flex-col items-center">
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl aspect-square z-0 pointer-events-none flex items-center justify-center opacity-70">
+                                    <div className={`absolute w-[100%] h-[100%] border-2 rotate-45 ${mode === 'light' ? 'border-uv/50 bg-uv/5' : 'border-uv/10'}`}></div>
+                                    <div className={`absolute w-[80%] h-[80%] border-2 rotate-45 ${mode === 'light' ? 'border-cyan/50 bg-cyan/5' : 'border-cyan/10'}`}></div>
+                                    <div className={`absolute w-[60%] h-[60%] border-2 rotate-45 ${mode === 'light' ? 'border-pink/50 bg-pink/5' : 'border-pink/10'}`}></div>
+                                    <div className={`absolute w-[40%] h-[40%] border-2 rotate-45 ${mode === 'light' ? 'border-yellow/50 bg-yellow/5' : 'border-yellow/10'}`}></div>
+                                </div>
+                                <div className="relative z-10 w-full flex flex-col items-center">
+                                    <div className="animate-float mb-20"><PrismLogo size={240} /></div>
+                                    <h1 className="font-serif italic text-8xl md:text-[14rem] leading-[0.8] tracking-tighter mb-12">
+                                        Your setup<br />is a <span className="iridescent-text">sanctuary.</span>
+                                    </h1>
+                                    <p className="font-bold text-2xl md:text-4xl opacity-80 mb-20 max-w-4xl">The elite aura your setup deserves. Manifesting the ultimate setup reveal.</p>
+                                    <button onClick={() => navigateToCategory('Apparel')} className="px-16 py-8 rounded-full border-4 border-uv/40 font-black text-sm tracking-widest uppercase hover:bg-uv hover:text-white transition-all shadow-2xl">Browse the Gallery</button>
+                                </div>
+                            </header>
+
+                            <section className="max-w-7xl mx-auto px-8 py-48 grid grid-cols-1 md:grid-cols-2 gap-32">
+                                <div className="glass p-12 space-y-8 flex flex-col justify-center animate-pulse-uv">
+                                    <span className="font-black text-sm text-uv uppercase tracking-[0.5em]">Collection Spotlight</span>
+                                    <h2 className="font-serif italic text-6xl leading-tight">Elite Artifacts<br />for Collectors.</h2>
+                                    <p className="font-bold text-xl opacity-80">We don't do mass production. We do alchemy. Curating the high-def items your favorite gaming worlds always deserved.</p>
+                                    <button onClick={() => navigateToCategory('Desktop')} className="w-fit border-b-4 border-uv font-black text-sm uppercase tracking-widest pb-2 hover:text-uv">Shop Desktop Upgrade</button>
+                                </div>
+                                <div className="aspect-square glass flex items-center justify-center relative overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-pink/20 to-uv/20 animate-ooze"></div>
+                                    <div className="mock-mat scale-150 rotate-12"></div>
+                                </div>
+                            </section>
+                        </div>
+                    )}
+
+                    {/* SHOP */}
+                    {view === 'shop' && activeCategory && INVENTORY[activeCategory] && (
+                        <div className="pt-48 px-8 max-w-7xl mx-auto pb-48">
+                            <div className="flex items-end justify-between border-b-4 border-uv/20 pb-12 mb-24">
+                                <div className="space-y-4">
+                                    <p className="font-black text-sm text-uv tracking-[0.5em] uppercase">Vault Segment / 0{Object.keys(INVENTORY).indexOf(activeCategory) + 1}</p>
+                                    <h2 className="font-serif italic text-8xl md:text-[9rem] leading-none">
+                                        {activeCategory === 'LilysCozyCorner' ? "Lily's Corner" : activeCategory === 'KitchenArchive' ? 'Kitchen Archive' : activeCategory}
+                                    </h2>
+                                </div>
+                                <div className="text-right">
+                                    <span className="font-bold text-xs opacity-40 uppercase tracking-[0.4em] block">Status: Access Granted</span>
+                                    <span className="font-black text-uv text-xs tracking-widest uppercase">Studio: Huntsville, AL</span>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+                                {Object.values(INVENTORY[activeCategory]).flat().map(item => (
+                                    <div key={item.id} onClick={() => setSelectedItem(item)} className="glass group p-2 cursor-pointer transition-all duration-700 hover:scale-[1.05] animate-pulse-uv">
+                                        <div className="aspect-[4/5] bg-white/5 rounded-[32px] relative flex items-center justify-center overflow-hidden">
+                                            <div className="absolute inset-0 bg-gradient-to-br from-uv/30 to-cyan/20 opacity-40 group-hover:opacity-90 transition-opacity"></div>
+                                            <div className="z-10 text-center px-12 group-hover:scale-110 transition-all duration-1000">
+                                                <div className={`mx-auto mb-10 ${item.mock === 'orb' ? 'w-24 h-24 rounded-full bg-uv/40' : item.mock}`}></div>
+                                                <h3 className="font-serif italic text-5xl leading-tight mb-8">{item.n}</h3>
+                                                <p className="font-bold text-lg opacity-90 leading-relaxed">{item.t}</p>
+                                            </div>
+                                        </div>
+                                        <div className="p-12 flex justify-between items-center">
+                                            <span className="font-black text-xs opacity-40 uppercase">Ref: {item.id}</span>
+                                            <span className="font-serif italic text-5xl text-uv">${item.p}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* ABOUT */}
+                    {view === 'about' && (
+                        <div className="pt-64 px-8 max-w-4xl mx-auto pb-48">
+                            <div className="space-y-16">
+                                <h1 className="font-serif italic text-8xl md:text-9xl">The Studio.</h1>
+                                <div className="space-y-12 font-bold text-2xl leading-relaxed opacity-80">
+                                    <p>Based in <span className="text-uv">Huntsville, AL</span>, endgame.archive is a high-fidelity collective of aesthetic architects.</p>
+                                    <p>We reject gatekeeping and low-quality merch. We manifest the high-def setup reveal through museum-grade materials and alchemical design.</p>
+                                    <div className="p-12 border-4 border-uv/20 bg-uv/5 rounded-[40px]">
+                                        <h4 className="font-black text-sm uppercase tracking-widest text-uv mb-6">Manifesto</h4>
+                                        <p className="font-serif italic text-4xl leading-tight">"To create the luxury artifacts that honor the legacy of the worlds we grew up in."</p>
+                                    </div>
+                                </div>
+                                <button onClick={() => setView('home')} className="font-black text-sm uppercase tracking-widest border-b-4 border-uv">Return to Archive</button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* PRODUCT MODAL */}
+                    {selectedItem && (
+                        <div className="fixed inset-0 z-[500] flex items-center justify-center p-6 bg-abyss/98 backdrop-blur-3xl">
+                            <div className="relative w-full max-w-6xl glass-dark border-4 border-uv/40 p-10 md:p-24 overflow-y-auto max-h-[95vh] shadow-[0_0_100px_rgba(155,93,229,0.3)]">
+                                <button onClick={() => setSelectedItem(null)} className="absolute top-8 right-8 w-16 h-16 rounded-full border-4 border-white/20 flex items-center justify-center font-black text-white hover:border-uv transition-all">✕</button>
+                                <div className="grid lg:grid-cols-2 gap-24 items-center">
+                                    <div className="aspect-square glass border-4 border-uv/40 flex items-center justify-center relative overflow-hidden animate-pulse-uv">
+                                        <div className="absolute inset-0 bg-gradient-to-tr from-uv/50 to-cyan/40 animate-ooze opacity-60"></div>
+                                        <PrismLogo size={280} />
+                                    </div>
+                                    <div className="space-y-14">
+                                        <div>
+                                            <span className="font-black text-sm text-uv uppercase tracking-[0.4em] block mb-8 px-6 py-2 bg-uv/10 rounded-full w-fit">Aura Calibration</span>
+                                            <h2 className="font-serif italic text-7xl md:text-[6rem] leading-[0.9]">{selectedItem.n}</h2>
+                                        </div>
+                                        <div className="space-y-8">
+                                            <label className="font-black text-xs uppercase tracking-widest opacity-60 block">Select Finish Tier (+$45.00)</label>
+                                            <div className="grid grid-cols-2 gap-4">
+                                                {['Liquid Chrome', 'Iridescent', 'UV-Energy', 'Void Matte'].map(f => (
+                                                    <button key={f} className="border-4 border-white/10 rounded-3xl py-6 font-black text-xs uppercase tracking-widest hover:border-uv hover:text-uv hover:bg-uv/10 transition-all">{f}</button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <div className="p-12 border-4 border-uv/40 bg-uv/5 rounded-[40px] flex justify-between items-end">
+                                            <span className="font-serif italic text-3xl opacity-60">Total Value</span>
+                                            <span className="font-serif text-7xl md:text-[7rem] text-uv leading-none italic">${selectedItem.p + 45}</span>
+                                        </div>
+                                        <div className="flex gap-8">
+                                            <button onClick={() => { setCartCount(c => c + 1); setSelectedItem(null); }} className="flex-grow bg-uv py-8 rounded-full font-black text-sm uppercase tracking-widest text-white hover:bg-pink transition-all shadow-2xl shadow-uv/40">Add to Cart</button>
+                                            <button className="px-16 font-black text-xs uppercase tracking-widest opacity-40 hover:opacity-100" onClick={() => setSelectedItem(null)}>Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* FOOTER */}
+                    <footer className={`py-48 px-12 border-t-8 transition-all ${mode === 'light' ? 'bg-pearl border-uv/10' : 'bg-abyss border-uv/30'}`}>
+                        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-24">
+                            <div className="col-span-2 space-y-12">
+                                <div className="flex items-center gap-6"><PrismLogo size={64} /><span className="font-black text-4xl tracking-tighter">endgame.archive</span></div>
+                                <p className="font-serif italic text-4xl opacity-50 leading-snug">"Setup reveals for the elite. Documented artifacts for the aesthetic architect."</p>
+                                <div className="space-y-4">
+                                    <p className="font-black text-xs uppercase tracking-widest text-uv">Crafted in Huntsville, AL</p>
+                                    <div className="flex gap-8 opacity-60 font-black text-xs uppercase tracking-widest">
+                                        <a href="#" className="hover:text-uv">TikTok</a>
+                                        <a href="#" className="hover:text-uv">Instagram</a>
+                                        <a href="#" className="hover:text-uv">Pinterest</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="space-y-10">
+                                <h5 className="font-black text-sm uppercase tracking-[0.5em] text-uv">Directory</h5>
+                                <ul className="font-bold text-2xl space-y-6 opacity-60">
+                                    <li><button onClick={() => navigateToCategory('Apparel')} className="hover:text-uv hover:translate-x-2 transition-all">Apparel Reveal</button></li>
+                                    <li><button onClick={() => navigateToCategory('Desktop')} className="hover:text-uv hover:translate-x-2 transition-all">Desktop Upgrade</button></li>
+                                    <li><button onClick={() => navigateToCategory('LilysCozyCorner')} className="hover:text-uv hover:translate-x-2 transition-all">Lily's Cozy Corner</button></li>
+                                    <li><button onClick={() => navigateToCategory('KitchenArchive')} className="hover:text-uv hover:translate-x-2 transition-all">Kitchen Archive</button></li>
+                                </ul>
+                            </div>
+                            <div className="text-right space-y-10">
+                                <div className="glass p-8 text-left space-y-4">
+                                    <p className="font-black text-xs uppercase text-uv tracking-widest">Join the Registry</p>
+                                    <input type="email" placeholder="your@email.com" className="w-full bg-white/10 p-4 rounded-xl border border-white/10 text-sm" />
+                                    <button className="w-full bg-uv py-4 rounded-full font-black text-xs uppercase text-white">Register</button>
+                                </div>
+                                <span className="font-black text-xs tracking-widest uppercase opacity-20 block">© 2026 ARCHIVE STUDIO / NODE: NOMINAL</span>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
