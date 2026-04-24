@@ -1,0 +1,828 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Crit Goods — Merch that hits different.</title>
+<meta name="description" content="Premium video game merch, designed by players and printed on demand. Hades II, Elden Ring, Baldur's Gate 3, Zelda, Street Fighter and more. Nothing sells out." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --crit:#FF2D3D;
+  --void:#0B0B10;
+  --bone:#F5F2E8;
+  --respawn:#00F5A0;
+  --gold:#FFC436;
+  --static:#B7B4A8;
+  --ash:#2A2A30;
+  --ink:#121217;
+  --line: rgba(11,11,16,.12);
+  --radius: 2px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bone);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer}
+.display, h1, h2, h3 { font-family:'Space Grotesk',system-ui,sans-serif; letter-spacing:-0.02em; font-weight:700; line-height:1.02; }
+.mono{font-family:'JetBrains Mono',monospace; font-feature-settings:'ss01' on;}
+
+/* ===== Marquee / announcement ===== */
+.marquee{background:var(--void);color:var(--bone);overflow:hidden;border-bottom:1px solid #000}
+.marquee-track{display:flex;gap:48px;padding:10px 0;animation:marq 40s linear infinite;white-space:nowrap;font-size:13px;font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
+.marquee-track span{display:inline-flex;align-items:center;gap:10px}
+.marquee-track span::after{content:"◆";color:var(--crit);margin-left:48px}
+@keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ===== Nav ===== */
+.nav{position:sticky;top:0;z-index:40;background:var(--bone);border-bottom:1px solid var(--line);backdrop-filter:saturate(140%) blur(6px)}
+.nav-inner{max-width:1320px;margin:0 auto;padding:18px 28px;display:flex;align-items:center;gap:36px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:700;font-size:22px;letter-spacing:-0.03em;color:var(--void)}
+.logo-mark{width:22px;height:22px;position:relative;display:inline-block}
+.logo-mark::before,.logo-mark::after{content:"";position:absolute;inset:0;border:2px solid var(--void)}
+.logo-mark::before{clip-path:polygon(0 0, 40% 0, 40% 2px, 2px 2px, 2px 40%, 0 40%)}
+.logo-mark::after{clip-path:polygon(100% 60%, 100% 100%, 60% 100%, 60% calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) 60%)}
+.logo-dot{position:absolute;inset:40% 40% 40% 40%;background:var(--crit)}
+.logo-tittle{color:var(--crit)}
+nav.links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--ash)}
+nav.links a{position:relative;padding:4px 0}
+nav.links a:hover{color:var(--void)}
+nav.links a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--crit)}
+.nav-spacer{flex:1}
+.nav-right{display:flex;align-items:center;gap:14px}
+.icon-btn{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:var(--radius);color:var(--void);background:transparent;transition:all .15s}
+.icon-btn:hover{border-color:var(--void);background:var(--void);color:var(--bone)}
+.bag{position:relative}
+.bag-count{position:absolute;top:-4px;right:-4px;background:var(--crit);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+
+/* ===== Hero ===== */
+.hero{background:var(--void);color:var(--bone);position:relative;overflow:hidden}
+.hero-grid{max-width:1320px;margin:0 auto;padding:96px 28px 120px;display:grid;grid-template-columns: 1.2fr .9fr; gap:60px; align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--respawn);text-transform:uppercase;margin-bottom:22px}
+.eyebrow::before{content:"";width:8px;height:8px;background:var(--respawn);border-radius:50%;box-shadow:0 0 0 4px rgba(0,245,160,.15);animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.3);opacity:.8}}
+.hero h1{font-size:clamp(48px, 8vw, 104px); line-height:.96; margin:0 0 28px}
+.hero h1 .crit{color:var(--crit)}
+.hero h1 .underline{position:relative;display:inline-block}
+.hero h1 .underline::after{content:"";position:absolute;left:0;right:0;bottom:.12em;height:.08em;background:var(--crit)}
+.hero p.lead{font-size:18px;max-width:52ch;color:#d3cfc0;margin:0 0 36px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 22px;font-size:14px;font-weight:600;letter-spacing:.02em;border-radius:var(--radius);border:1px solid transparent;transition:all .15s;text-transform:uppercase}
+.btn-primary{background:var(--crit);color:#fff}
+.btn-primary:hover{background:#fff;color:var(--crit)}
+.btn-ghost{border-color:#3a3a42;color:var(--bone)}
+.btn-ghost:hover{background:var(--bone);color:var(--void);border-color:var(--bone)}
+.hero-meta{display:flex;gap:28px;margin-top:44px;font-size:12px;font-family:'JetBrains Mono',monospace;color:#908c80;letter-spacing:.04em;text-transform:uppercase}
+.hero-meta div{display:flex;align-items:center;gap:10px}
+.hero-meta div::before{content:"◆";color:var(--crit)}
+
+/* Hero art */
+.hero-art{position:relative;aspect-ratio:1/1.1;border:1px solid rgba(245,242,232,.12);padding:24px;display:flex;flex-direction:column;justify-content:space-between}
+.hero-art .corner{position:absolute;width:22px;height:22px;border:2px solid var(--crit)}
+.hero-art .corner.tl{top:-2px;left:-2px;border-right:none;border-bottom:none}
+.hero-art .corner.tr{top:-2px;right:-2px;border-left:none;border-bottom:none}
+.hero-art .corner.bl{bottom:-2px;left:-2px;border-right:none;border-top:none}
+.hero-art .corner.br{bottom:-2px;right:-2px;border-left:none;border-top:none}
+.art-top{display:flex;justify-content:space-between;color:#9a9682;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.art-center{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.art-center .number{font-family:'Space Grotesk';font-size:clamp(64px,12vw,140px);line-height:.9;color:var(--bone);font-weight:700}
+.art-center .number .red{color:var(--crit)}
+.art-sub{font-family:'Space Grotesk';font-size:26px;margin-top:8px}
+.art-bottom{display:flex;justify-content:space-between;align-items:end;font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a9682;text-transform:uppercase}
+.art-bottom .spec{max-width:18ch;line-height:1.4}
+.crit-bg-dots{position:absolute;inset:0;opacity:.04;background-image:radial-gradient(var(--bone) 1px, transparent 1px);background-size:22px 22px;pointer-events:none}
+
+/* ===== Trust strip ===== */
+.strip{background:var(--crit);color:#fff;padding:12px 0;overflow:hidden;border-top:1px solid #000}
+.strip-inner{display:flex;gap:64px;animation:marq 30s linear infinite;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+.strip-inner span{display:inline-flex;align-items:center;gap:12px}
+.strip-inner span::after{content:"◆";color:#fff;opacity:.5;margin-left:64px}
+
+/* ===== Section shells ===== */
+section{padding:96px 0}
+.wrap{max-width:1320px;margin:0 auto;padding:0 28px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:44px;flex-wrap:wrap}
+.section-head h2{font-size:clamp(32px,5vw,64px);margin:0;max-width:16ch}
+.section-head .cap{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ash);text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;gap:10px}
+.section-head .cap::before{content:"";width:24px;height:2px;background:var(--crit)}
+.section-head .link{font-size:14px;font-weight:500;color:var(--ash);padding:6px 0;border-bottom:1px solid var(--void)}
+.section-head .link:hover{color:var(--crit);border-color:var(--crit)}
+
+/* ===== Games rail ===== */
+.games{background:var(--bone)}
+.games-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.game{position:relative;aspect-ratio:3/4;border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:transform .25s ease, border-color .15s}
+.game.active{border-color:var(--void);border-width:2px}
+.game:hover{transform:translateY(-3px)}
+.game-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;text-align:center;font-family:'Space Grotesk';font-weight:700;font-size:18px;line-height:1.05}
+.game .tag{position:absolute;top:10px;left:10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:rgba(11,11,16,.85);color:var(--bone);padding:4px 7px}
+.game .count{position:absolute;bottom:10px;right:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#555;background:rgba(245,242,232,.9);padding:2px 8px}
+.game.g1{background:linear-gradient(135deg,#1a0b14,#4a1e2a);color:#f8d4d4}
+.game.g2{background:linear-gradient(135deg,#2a1f08,#8a6a1a);color:#f4e6b0}
+.game.g3{background:linear-gradient(135deg,#0b1c2a,#1a3a4a);color:#b8d8e8}
+.game.g4{background:linear-gradient(135deg,#0a2418,#1a6a3a);color:#c8f0d8}
+.game.g5{background:linear-gradient(135deg,#2a0a14,#6a1a24);color:#f0c8c8}
+.game.g6{background:linear-gradient(135deg,#1a1a2a,#3a3a5a);color:#c8c8f0}
+.game.g7{background:linear-gradient(135deg,#2a140a,#6a3a1a);color:#f0d8b8}
+.game.g8{background:linear-gradient(135deg,#1a0a24,#4a1a6a);color:#e0c8f0}
+.game.g9{background:linear-gradient(135deg,#0a1a1a,#1a4a4a);color:#b8e0e0}
+.game.g10{background:linear-gradient(135deg,#241a0a,#6a4a1a);color:#f0e0b8}
+.game.g11{background:linear-gradient(135deg,#0a241a,#1a6a4a);color:#b8f0c8}
+.game.g12{background:linear-gradient(135deg,#241a24,#6a3a6a);color:#f0c8f0}
+
+/* ===== Product grid ===== */
+.products{background:#f0ecde}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.chip{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:8px 14px;border:1px solid var(--void);background:transparent;color:var(--void);transition:all .15s;cursor:pointer}
+.chip.active,.chip:hover{background:var(--void);color:var(--bone)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.product{background:var(--bone);border:1px solid var(--line);transition:transform .25s, box-shadow .25s;position:relative}
+.product:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(0,0,0,.2)}
+.product.hide{display:none}
+.product .media{aspect-ratio:1/1;position:relative;overflow:hidden;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:36px;text-align:center}
+.product .media .artwork{font-family:'Space Grotesk';font-weight:700;font-size:32px;line-height:.95;letter-spacing:-0.02em}
+.product .media.red{background:linear-gradient(160deg,#2a0e12,#1a0a10);color:#fff}
+.product .media.bone{background:linear-gradient(160deg,#e8e3d2,#d8d2bc);color:var(--void)}
+.product .media.void{background:linear-gradient(160deg,var(--void),#1a1a24);color:var(--bone)}
+.product .media.gold{background:linear-gradient(160deg,#1a150a,#2a2010);color:var(--gold)}
+.product .media.green{background:linear-gradient(160deg,#0a1a14,#0a2420);color:var(--respawn)}
+.product .tier-pill{position:absolute;top:12px;left:12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;background:var(--bone);color:var(--void)}
+.product .tier-pill.collector{background:var(--gold);color:var(--void)}
+.product .ship-pill{position:absolute;top:12px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.04em;padding:4px 8px;background:var(--respawn);color:var(--void);font-weight:600;text-transform:uppercase}
+.product .body{padding:18px 20px 22px}
+.product .sku{font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a9682;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+.product h3{font-size:18px;line-height:1.15;margin:0 0 6px}
+.product .game-label{font-size:12px;color:var(--ash);margin-bottom:12px}
+.product .price-row{display:flex;justify-content:space-between;align-items:center}
+.price{font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--void);font-weight:500}
+.btn-add{border:1px solid var(--void);background:transparent;color:var(--void);padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;transition:all .15s}
+.btn-add:hover{background:var(--crit);color:#fff;border-color:var(--crit)}
+
+/* ===== Value props ===== */
+.values{background:var(--void);color:var(--bone)}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.value{padding:32px;border:1px solid rgba(245,242,232,.12);position:relative;transition:border-color .15s}
+.value:hover{border-color:var(--crit)}
+.value .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--crit);letter-spacing:.08em;margin-bottom:20px}
+.value h3{font-size:28px;margin:0 0 14px;color:var(--bone)}
+.value p{color:#b5b1a2;margin:0}
+
+/* ===== Drop calendar ===== */
+.calendar{background:var(--bone)}
+.cal-row{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.cal-card{background:#fff;border:1px solid var(--line);padding:22px;position:relative;transition:transform .2s}
+.cal-card:hover{transform:translateY(-3px)}
+.cal-card.next{background:var(--void);color:var(--bone)}
+.cal-card.next .cal-num{color:var(--crit)}
+.cal-card.next .cal-date{color:var(--respawn)}
+.cal-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--crit);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.cal-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a9682;text-transform:uppercase;margin-bottom:14px;letter-spacing:.06em}
+.cal-card h4{font-family:'Space Grotesk';font-size:20px;margin:0 0 10px;line-height:1.1}
+.cal-card p{font-size:13px;margin:0;color:#5a5a5f}
+.cal-card.next p{color:#b5b1a2}
+.cal-card .badge-next{position:absolute;top:-10px;right:14px;background:var(--respawn);color:var(--void);font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+
+/* ===== Email / signup ===== */
+.signup{background:var(--crit);color:#fff;position:relative;overflow:hidden}
+.signup::before,.signup::after{content:"CRIT";font-family:'Space Grotesk';font-weight:700;font-size:280px;position:absolute;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.07);letter-spacing:-0.06em;pointer-events:none}
+.signup::before{left:-40px}
+.signup::after{right:-40px}
+.signup-inner{position:relative;text-align:center;max-width:720px;margin:0 auto;padding:96px 28px}
+.signup h2{font-size:clamp(40px,6vw,72px);margin:0 0 18px;color:#fff}
+.signup p{font-size:18px;margin:0 0 36px;color:#fff;opacity:.9}
+.signup-form{display:flex;gap:0;max-width:520px;margin:0 auto;background:#fff;padding:6px}
+.signup-form input{flex:1;border:0;padding:16px;font-family:inherit;font-size:15px;background:transparent;outline:none;color:var(--void)}
+.signup-form button{background:var(--void);color:#fff;border:0;padding:16px 22px;font-family:inherit;font-weight:600;text-transform:uppercase;font-size:13px;letter-spacing:.06em;cursor:pointer}
+.signup-form button:hover{background:var(--ash)}
+.signup small{display:block;margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;opacity:.7}
+
+/* ===== Footer ===== */
+footer{background:var(--void);color:var(--bone);padding:72px 0 32px}
+.foot-grid{display:grid;grid-template-columns:1.6fr repeat(4,1fr);gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(245,242,232,.12)}
+.foot-brand .logo{color:var(--bone);font-size:28px}
+.foot-brand p{color:#b5b1a2;margin:18px 0 0;max-width:30ch}
+.foot-col h5{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--crit);text-transform:uppercase;letter-spacing:.08em;margin:6px 0 20px}
+.foot-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:14px}
+.foot-col a:hover{color:var(--crit)}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;padding-top:28px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6a6a70;text-transform:uppercase;letter-spacing:.06em;flex-wrap:wrap;gap:14px}
+.foot-bot .big-mark{font-family:'Space Grotesk';font-weight:700;font-size:14vw;line-height:.9;color:rgba(245,242,232,.04);position:absolute;left:0;right:0;bottom:0;text-align:center;pointer-events:none;letter-spacing:-0.04em}
+
+/* ===== Responsive ===== */
+@media (max-width: 960px){
+  .hero-grid{grid-template-columns:1fr;padding:64px 28px}
+  .games-grid{grid-template-columns:repeat(3,1fr)}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .vgrid{grid-template-columns:1fr}
+  .cal-row{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  nav.links{display:none}
+}
+@media (max-width: 520px){
+  .games-grid{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}
+  .cal-row{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+}
+
+/* Cart toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--void);color:var(--bone);padding:14px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.04em;z-index:100;transition:transform .3s ease;border-left:3px solid var(--crit);text-transform:uppercase}
+.toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>free shipping on orders over $75</span>
+    <span>printed on demand — nothing sells out</span>
+    <span>drop 02 lands may 28 — maps & atlases</span>
+    <span>ships worldwide from 3 fulfillment partners</span>
+    <span>free shipping on orders over $75</span>
+    <span>printed on demand — nothing sells out</span>
+    <span>drop 02 lands may 28 — maps & atlases</span>
+    <span>ships worldwide from 3 fulfillment partners</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo"><span class="logo-mark"><span class="logo-dot"></span></span>CR<span class="logo-tittle">I</span>T GOODS</a>
+    <nav class="links">
+      <a href="#shop">Shop</a>
+      <a href="#games">Games</a>
+      <a href="#drops">Drops</a>
+      <a href="#story">Our story</a>
+      <a href="#gifts">Gift guide</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="nav-right">
+      <button class="icon-btn" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Account">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+      </button>
+      <button class="icon-btn bag" aria-label="Bag">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 7h14l-1.2 13.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9L5 7z"/><path d="M9 7a3 3 0 1 1 6 0"/></svg>
+        <span class="bag-count" id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="crit-bg-dots"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Now live · Launch drop 01 · 30 pieces</div>
+      <h1>The merch your <span class="underline">games</span><br>should have <span class="crit">made.</span></h1>
+      <p class="lead">Heavyweight blanks. Archival prints. Pins with real weight. Designed by people who actually played the game. Printed on demand — so nothing sells out, ever.</p>
+      <div class="cta-row">
+        <a href="#shop" class="btn btn-primary">Shop the drop →</a>
+        <a href="#drops" class="btn btn-ghost">See what's next</a>
+      </div>
+      <div class="hero-meta">
+        <div>11 games</div>
+        <div>30 SKUs</div>
+        <div>Ships worldwide</div>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <span class="corner tl"></span><span class="corner tr"></span>
+      <span class="corner bl"></span><span class="corner br"></span>
+      <div class="art-top">
+        <span>CG-HD2-001</span>
+        <span>EDITION 001 / 2026</span>
+      </div>
+      <div class="art-center">
+        <div>
+          <div class="number">C<span class="red">R</span>I<span class="red">T</span>.</div>
+          <div class="art-sub" style="color:var(--bone);font-family:'Space Grotesk';font-size:clamp(22px,3vw,34px);margin-top:8px">Hits that land.</div>
+        </div>
+      </div>
+      <div class="art-bottom">
+        <div class="spec">240gsm cotton<br>Water-based inks<br>Made on demand</div>
+        <div style="text-align:right">◆<br>ALWAYS<br>IN STOCK</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span>nothing sells out</span>
+    <span>designed by players</span>
+    <span>240gsm blanks</span>
+    <span>300gsm posters</span>
+    <span>printed on demand</span>
+    <span>ships in 3–5 days</span>
+    <span>nothing sells out</span>
+    <span>designed by players</span>
+    <span>240gsm blanks</span>
+    <span>300gsm posters</span>
+    <span>printed on demand</span>
+    <span>ships in 3–5 days</span>
+  </div>
+</div>
+
+<!-- GAMES -->
+<section class="games" id="games">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="cap">01 · Shop by world</div>
+        <h2>The worlds<br>that shaped us.</h2>
+        <p style="margin-top:14px;max-width:540px;color:var(--ash);font-size:15px;line-height:1.55">Unofficial, unlicensed, unapologetic. Designed by fans for fans — sorted by genre and era, not by the logos on the box.</p>
+      </div>
+      <a href="#" class="link">View all 11 worlds →</a>
+    </div>
+    <div class="games-grid" id="games-grid">
+      <div class="game g1" data-game="Greek-myth roguelike">
+        <span class="tag">New</span>
+        <div class="game-bg">GREEK-MYTH<br>ROGUELIKE</div>
+        <span class="count">4 pieces</span>
+      </div>
+      <div class="game g2" data-game="Ringed-realm soulslike">
+        <span class="tag">Deep cut</span>
+        <div class="game-bg">RINGED-REALM<br>SOULSLIKE</div>
+        <span class="count">5 pieces</span>
+      </div>
+      <div class="game g3" data-game="Tabletop CRPG">
+        <span class="tag">Fan pick</span>
+        <div class="game-bg">TABLETOP<br>CRPG</div>
+        <span class="count">4 pieces</span>
+      </div>
+      <div class="game g4" data-game="Sky-isle adventure">
+        <span class="tag">New</span>
+        <div class="game-bg">SKY-ISLE<br>ADVENTURE</div>
+        <span class="count">2 pieces</span>
+      </div>
+      <div class="game g5" data-game="Modern arcade fighter">
+        <span class="tag">Ranked</span>
+        <div class="game-bg">MODERN<br>ARCADE<br>FIGHTER</div>
+        <span class="count">2 pieces</span>
+      </div>
+      <div class="game g6" data-game="Fan favorites">
+        <span class="tag">Legendary</span>
+        <div class="game-bg">+5 MORE<br>WORLDS</div>
+        <span class="count">see all</span>
+      </div>
+      <div class="game g7" data-game="16-bit arcade fighter">
+        <span class="tag">Retro</span>
+        <div class="game-bg">16-BIT<br>ARCADE<br>FIGHTER</div>
+        <span class="count">2 pieces</span>
+      </div>
+      <div class="game g8" data-game="Finishing-move fighter">
+        <span class="tag">Finishers</span>
+        <div class="game-bg">FINISHING-MOVE<br>FIGHTER</div>
+        <span class="count">1 piece</span>
+      </div>
+      <div class="game g9" data-game="Co-op bug-hunt">
+        <span class="tag">Squad up</span>
+        <div class="game-bg">CO-OP<br>BUG-HUNT</div>
+        <span class="count">2 pieces</span>
+      </div>
+      <div class="game g10" data-game="Chinese-myth action">
+        <span class="tag">Mythic</span>
+        <div class="game-bg">CHINESE-MYTH<br>ACTION</div>
+        <span class="count">2 pieces</span>
+      </div>
+      <div class="game g11" data-game="Cinematic JRPG">
+        <span class="tag">JRPG</span>
+        <div class="game-bg">CINEMATIC<br>JRPG</div>
+        <span class="count">2 pieces</span>
+      </div>
+      <div class="game g12" data-game="Open-world creature hunt">
+        <span class="tag">2025</span>
+        <div class="game-bg">OPEN-WORLD<br>CREATURE HUNT</div>
+        <span class="count">2 pieces</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="shop">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="cap">02 · The launch catalog</div>
+        <h2>Thirty pieces.<br>Zero sellouts.</h2>
+      </div>
+      <a href="#" class="link">View all 30 pieces →</a>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="Tee">Tees</button>
+      <button class="chip" data-filter="Hoodie">Hoodies</button>
+      <button class="chip" data-filter="Poster">Posters</button>
+      <button class="chip" data-filter="Pin">Pins</button>
+      <button class="chip" data-filter="Tote">Totes</button>
+      <button class="chip" data-filter="Collector">Collector tier</button>
+    </div>
+
+    <div class="grid" id="product-grid">
+      <!-- 12 featured products -->
+      <!-- 1 -->
+      <article class="product" data-category="Tee" data-tier="Core">
+        <div class="media bone">
+          <span class="tier-pill">Tee · Core</span>
+          <span class="ship-pill">Ships 3 days</span>
+          <div class="artwork">MELINOË'S<br>LIST<br>(2026)</div>
+        </div>
+        <div class="body">
+          <div class="sku">CG-HD2-001 · 240gsm cotton</div>
+          <h3>Melinoë's List</h3>
+          <div class="game-label">Hades II</div>
+          <div class="price-row"><span class="price">$42</span><button class="btn-add" onclick="addToCart('Melinoë\'s List')">Add +</button></div>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="product" data-category="Poster" data-tier="Collector">
+        <div class="media red">
+          <span class="tier-pill collector">Poster · Collector</span>
+          <span class="ship-pill">Ships 5 days</span>
+          <div class="artwork" style="color:#ffd7a3">TARNISHED<br>ATLAS</div>
+        </div>
+        <div class="body">
+          <div class="sku">CG-ERN-002 · 300gsm matte</div>
+          <h3>Tarnished Atlas</h3>
+          <div class="game-label">Elden Ring / SOTE · Edition of 500</div>
+          <div class="price-row"><span class="price">$42</span><button class="btn-add" onclick="addToCart('Tarnished Atlas')">Add +</button></div>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="product" data-category="Tee" data-tier="Core">
+        <div class="media void">
+          <span class="tier-pill">Tee · Core</span>
+          <span class="ship-pill">Ships 3 days</span>
+          <div class="artwork">COMPANY OF<br>THE DEAD<br>THREE</div>
+        </div>
+        <div class="body">
+          <div class="sku">CG-BG3-001 · 240gsm cotton</div>
+          <h3>Company of the Dead Three</h3>
+          <div class="game-label">Baldur's Gate 3</div>
+          <div class="price-row"><span class="price">$44</span><button class="btn-add" onclick="addToCart('Company of the Dead Three')">Add +</button></div>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="product" data-category="Pin" data-tier="Core">
+        <div class="media gold">
+          <span class="tier-pill">Pin · Core</span>
+          <span class="ship-pill">Ships 3 days</span>
+          <div class="artwork" style="font-size:52px">20</div>
+        </div>
+        <div class="body">
+          <div class="sku">CG-BG3-004 · Die-struck enamel</div>
+          <h3>Nat 20 Pin</h3>
+          <div class="game-label">Baldur's Gate 3</div>
+          <div class="price-row"><span class="price">$22</span><button class="btn-add" onclick="addToCart('Nat 20 Pin')">Add +</button></div>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="product" data-category="Hoodie" data-tier="Core">
+        <div class="media void">
+          <span class="tier-pill">Hoodie · Core</span>
+          <span class="ship-pill">Ships 5 days</span>
+          <div class="artwork">MOONSTONE<br>HEAVY</div>
+        </div>
+        <div class="body">
+          <div class="sku">CG-HD2-004 · 450gsm fleece</div>
+          <h3>Moonstone Heavy</h3>
+          <div class="game-label">Hades II</div>
+          <div class="price-row"><span class="price">$78</span><button class="btn-add" onclick="addToCart('Moonstone Heavy')">Add +</button></div>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="product" data-category="Tee" data-tier="Core">
+        <div class="media bone">
+          <span class="tier-pill">Tee · Core</span>
+          <span class="ship-pill">Ships 3 days</span>
+          <div class="artwork">TRIFORCE<br>▲</div>
+        </div>
+        <div class="body">
+          <div class="sku">CG-ZLD-003 · 240gsm cotton</div>
+          <h3>Triforce Type Study</h3>
+          <div class="game-label">Zelda (Classic)</div>
+          <div class="price-row"><span class="price">$42</span><button class="btn-add" onclick="addToCart('Triforce Type Study')">Add +</button></div>
+        </div>
+      </article>
+
+      <!-- 7 -->
+      <article class="product" data-category="Poster" data-tier="Collector">
+        <div class="media red">
+          <span class="tier-pill collector">Poster · Collector</span>
+          <span class="ship-pill">Ships 5 days</span>
+          <div class="artwork" style="color:#f5c8c8">SHORYUKEN<br>ANATOMY</div>
+        </div>
+        <div class="body">
+          <div class="sku">CG-SFC-002 · 300gsm matte</div>
+          <h3>Shoryuken Anatomy</h3>
+          <div class="game-label">Street Fighter (Classic)</div>
+          <div class="price-row"><span class="price">$40</span><button class="btn-add" onclick="addToCart('Shoryuken Anatomy')">Add +</button></div>
+        </div>
+      </article>
+
+      <!-- 8 -->
+      <article class="product" data-category="Tee" data-tier="Core">
+        <div class="media void">
+          <span class="tier-pill">Tee · Core</span>
+          <span class="ship-pill">Ships 3 days</span>
+          <div class="artwork" style="color:#ff6b6b">FINISH<br>HIM.</div>
+        </div>
+        <div class="body">
+          <div class="sku">CG-MK1-001 · 240gsm cotton</div>
+          <h3>Finish Him Tee</h3>
+          <div class="game-label">Mortal Kombat 1</div>
+          <div class="price-row"><span class="price">$44</span><button class="btn-add" onclick="addToCart('Finish Him Tee')">Add +</button></div>
+        </div>
+      </article>
+
+      <!-- 9 -->
+      <article class="product" data-category="Tote" data-tier="Core">
+        <div class="media bone">
+          <span class="tier-pill">Tote · Core</span>
+          <span class="ship-pill">Ships 3 days</span>
+          <div class="artwork">MAIDEN-<br>LESS.</div>
+        </div>
+        <div class="body">
+          <div class="sku">CG-ERN-005 · 12oz canvas</div>
+          <h3>Maidenless Tote</h3>
+          <div class="game-label">Elden Ring / SOTE</div>
+          <div class="price-row"><span class="price">$28</span><button class="btn-add" onclick="addToCart('Maidenless Tote')">Add +</button></div>
+        </div>
+      </article>
+
+      <!-- 10 -->
+      <article class="product" data-category="Tee" data-tier="Core">
+        <div class="media green">
+          <span class="tier-pill">Tee · Core</span>
+          <span class="ship-pill">Ships 3 days</span>
+          <div class="artwork" style="color:#00f5a0">FOR<br>SUPER<br>EARTH</div>
+        </div>
+        <div class="body">
+          <div class="sku">CG-HD2D-001 · 240gsm cotton</div>
+          <h3>For Super Earth</h3>
+          <div class="game-label">Helldivers 2</div>
+          <div class="price-row"><span class="price">$44</span><button class="btn-add" onclick="addToCart('For Super Earth')">Add +</button></div>
+        </div>
+      </article>
+
+      <!-- 11 -->
+      <article class="product" data-category="Pin" data-tier="Core">
+        <div class="media void">
+          <span class="tier-pill">Pin · Core</span>
+          <span class="ship-pill">Ships 3 days</span>
+          <div class="artwork" style="color:#d8dce8;font-size:56px">⚔</div>
+        </div>
+        <div class="body">
+          <div class="sku">CG-FF7-002 · Gunmetal die-struck</div>
+          <h3>Buster Sword Pin</h3>
+          <div class="game-label">Final Fantasy VII Rebirth</div>
+          <div class="price-row"><span class="price">$22</span><button class="btn-add" onclick="addToCart('Buster Sword Pin')">Add +</button></div>
+        </div>
+      </article>
+
+      <!-- 12 -->
+      <article class="product" data-category="Poster" data-tier="Collector">
+        <div class="media gold">
+          <span class="tier-pill collector">Poster · Collector</span>
+          <span class="ship-pill">Ships 5 days</span>
+          <div class="artwork" style="color:#ffc436">ROYAL<br>TOURNA-<br>MENT</div>
+        </div>
+        <div class="body">
+          <div class="sku">CG-MTR-001 · 300gsm matte</div>
+          <h3>Royal Tournament</h3>
+          <div class="game-label">Metaphor: ReFantazio</div>
+          <div class="price-row"><span class="price">$40</span><button class="btn-add" onclick="addToCart('Royal Tournament')">Add +</button></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values" id="story">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="cap" style="color:var(--static)"><span style="background:var(--crit);width:24px;height:2px;display:inline-block;margin-right:10px"></span>03 · Why Crit Goods</div>
+        <h2 style="color:var(--bone)">Built for fans.<br>Made to last.</h2>
+      </div>
+    </div>
+    <div class="vgrid">
+      <div class="value">
+        <div class="num">01 / 03</div>
+        <h3>Designed by players</h3>
+        <p>Every drop starts with a fan question: "why doesn't this exist yet?" Our designers play the games before they design for them. We don't ship generic-gamer-logo SKUs. We ship things we'd wear ourselves.</p>
+      </div>
+      <div class="value">
+        <div class="num">02 / 03</div>
+        <h3>Nothing sells out</h3>
+        <p>We print on demand at partner facilities. That means no waitlists, no "restocking soon," no landfill. If you see it, you can order it — even at 2am after a boss drop.</p>
+      </div>
+      <div class="value">
+        <div class="num">03 / 03</div>
+        <h3>Made to outlive the game</h3>
+        <p>240gsm+ cotton. 300gsm uncoated matte paper. Water-based inks that don't crack after wash ten. Pins with real die-struck weight. Price up so the quality can stay up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DROP CALENDAR -->
+<section class="calendar" id="drops">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="cap">04 · The drop calendar</div>
+        <h2>Every other<br>Thursday.</h2>
+      </div>
+      <a href="#signup" class="link">Get the drop list →</a>
+    </div>
+    <div class="cal-row">
+      <div class="cal-card">
+        <div class="cal-num">Drop 01</div>
+        <div class="cal-date">05/14 · Live</div>
+        <h4>The Bosses</h4>
+        <p>Mel's List, Tarnished, Company of the Dead Three.</p>
+      </div>
+      <div class="cal-card next">
+        <div class="badge-next">Next</div>
+        <div class="cal-num">Drop 02</div>
+        <div class="cal-date">05/28 · 1 week out</div>
+        <h4>Maps & Atlases</h4>
+        <p>Underworld Atlas, Lands Between Cartography, Hyrule Reworked.</p>
+      </div>
+      <div class="cal-card">
+        <div class="cal-num">Drop 03</div>
+        <div class="cal-date">06/11</div>
+        <h4>Classics Week</h4>
+        <p>Triforce, Perfect, Kombatant Roster — for the ones that built us.</p>
+      </div>
+      <div class="cal-card">
+        <div class="cal-num">Drop 04</div>
+        <div class="cal-date">06/25</div>
+        <h4>Heavyweight</h4>
+        <p>Hoodies and outerwear for boss-fight energy.</p>
+      </div>
+      <div class="cal-card">
+        <div class="cal-num">Drop 05</div>
+        <div class="cal-date">07/09</div>
+        <h4>Fan Favorites</h4>
+        <p>Gold Saucer, Buster Sword, Legend of the Ape.</p>
+      </div>
+      <div class="cal-card">
+        <div class="cal-num">Drop 06</div>
+        <div class="cal-date">07/23</div>
+        <h4>Wildcards</h4>
+        <p>The stuff we've been dying to make.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNUP -->
+<section class="signup" id="signup">
+  <div class="signup-inner">
+    <div class="eyebrow" style="color:#fff;opacity:.85;justify-content:center;display:inline-flex">◆ Get on the drop list</div>
+    <h2>Merch that hits different.</h2>
+    <p>Biweekly drops. Behind-the-scenes garment nerd content. The list of games you've been asking us to make stuff for. No spam, unsubscribe in one click — unless you'd like to keep being informed (understandable).</p>
+    <form class="signup-form" onsubmit="event.preventDefault(); this.querySelector('input').value=''; showToast('you\\'re on the list 🎯');">
+      <input type="email" placeholder="your@email.com" required>
+      <button type="submit">Join →</button>
+    </form>
+    <small>9,412 players already on the list · you'll be in good company</small>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="logo"><span class="logo-mark"><span class="logo-dot"></span></span>CR<span class="logo-tittle">I</span>T GOODS</a>
+        <p>Premium video game merch. Designed by players, printed on demand, shipped worldwide. Nothing sells out, ever.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Shop</h5>
+        <ul>
+          <li><a href="#">Tees</a></li>
+          <li><a href="#">Hoodies</a></li>
+          <li><a href="#">Posters</a></li>
+          <li><a href="#">Pins</a></li>
+          <li><a href="#">Gift cards</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Games</h5>
+        <ul>
+          <li><a href="#">Hades II</a></li>
+          <li><a href="#">Elden Ring</a></li>
+          <li><a href="#">Baldur's Gate 3</a></li>
+          <li><a href="#">Zelda</a></li>
+          <li><a href="#">All 11 →</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Studio</h5>
+        <ul>
+          <li><a href="#">Our story</a></li>
+          <li><a href="#">How it's made</a></li>
+          <li><a href="#">Collabs</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Help</h5>
+        <ul>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Size guide</a></li>
+          <li><a href="#">Care</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>© 2026 Crit Goods · Made on demand · All games are property of their respective publishers.</div>
+      <div>Terms · Privacy · Cookies</div>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast">added to bag.</div>
+
+<script>
+// Cart + toast
+let cart = 0;
+function addToCart(name){
+  cart++;
+  document.getElementById('cart-count').textContent = cart;
+  showToast(name + ' added to bag');
+}
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window._toastT);
+  window._toastT = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+// Filters
+document.querySelectorAll('#filters .chip').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#filters .chip').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('#product-grid .product').forEach(p=>{
+      if(f === 'all'){ p.classList.remove('hide'); return; }
+      const cat = p.dataset.category;
+      const tier = p.dataset.tier;
+      const match = (cat === f) || (tier === f);
+      p.classList.toggle('hide', !match);
+    });
+  });
+});
+
+// Game card → filter by game (scrolls to shop + shows visual cue)
+document.querySelectorAll('#games-grid .game').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    document.querySelectorAll('#games-grid .game').forEach(c=>c.classList.remove('active'));
+    card.classList.add('active');
+    const g = card.dataset.game;
+    showToast('filtered: ' + g);
+    document.querySelector('#shop').scrollIntoView({behavior:'smooth'});
+    // (real site would filter products by game; here we flash the grid)
+  });
+});
+
+// Smooth anchor scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href');
+    if(id.length > 1 && document.querySelector(id)){
+      e.preventDefault();
+      document.querySelector(id).scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  });
+});
+</script>
+</body>
+</html>

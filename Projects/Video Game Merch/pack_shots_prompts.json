@@ -1,0 +1,303 @@
+{
+  "meta": {
+    "brand": "Crit Goods",
+    "version": "1.0",
+    "generator": "Gemini 2.5 Flash Image (gemini-2.5-flash-image-preview)",
+    "notes": "Per-SKU product pack-shot prompts. Each SKU has 4 renderable angles. Combine `style_base` + `angle_template[<angle>]` + `sku.design` to form the final prompt — the generator script does this automatically."
+  },
+
+  "style_base": "Premium editorial product photography for CRIT GOODS — a modern, bold, sophisticated video game merch label. High-end e-commerce styling, clean and considered, magazine-quality. Color palette restricted to warm Bone off-white (hex #F5F2E8), near-black Void (#0B0B10), warm Ash gray (#2A2A30), with a signal accent of Crit Red (#FF2D3D). Subtle natural daylight or soft north-facing studio light. No text artifacts, no watermarks, no competitor logos, no extra clutter in frame. Sharp focus, true-to-life color, realistic material rendering.",
+
+  "angle_templates": {
+    "front": "Front-on hero pack shot. Camera level with the product at 90 degrees. Product centered, floating on a warm Bone off-white (#F5F2E8) seamless background with a very subtle soft drop shadow. Single soft key light from the upper left, gentle ambient fill. No props, no hands, no model. Composition: product fills 70 percent of frame, plenty of negative space. Shot like the front e-commerce thumbnail of a premium label such as Aimé Leon Dore, Sunspel, or Noah NY.",
+
+    "flatlay": "Top-down overhead flat-lay. Product arranged neatly on a warm Bone-colored paper or matte linen surface with a hint of natural texture. Subtle props: one cream-colored brand hang-tag with a small red square dot in the corner, one cream mailer envelope partially out of frame, nothing else. Soft, directional window light from the left, gentle shadows. Composition: product plus tag fills ~60 percent of frame, airy negative space on the right. Magazine editorial quality.",
+
+    "detail": "Extreme close-up macro detail shot. Tight crop showing the material and print quality: fabric weave, stitching, ink texture, paper grain, or enamel depth depending on the product. Shallow depth of field with tack-sharp focus on the texture detail. Moody low-key lighting with a single hard light raking across the surface. Background falls off into warm Ash gray (#2A2A30). Intended to convey craft and premium quality. No model, no hands.",
+
+    "on_body": "Naturalistic lifestyle shot in a modern editorial style. Clean, neutral styling; no visible other-brand logos; shot in warm available light. See product-specific on-body guidance inside the SKU 'on_body_variant' field. Shallow depth of field, cinematic but grounded. Model (if any) has natural posture, face can be cropped or turned away for timelessness. Warm palette — no color cast beyond the brand system."
+  },
+
+  "product_material_specs": {
+    "Tee": "240 gsm midweight heavyweight 100 percent combed ring-spun cotton tee, boxy unisex fit, slightly dropped shoulders, single-needle stitching, ribbed crew collar. Color of blank is Bone off-white (#F5F2E8) unless otherwise specified. Print is water-based DTG ink with a matte hand-feel.",
+    "Hoodie": "450 gsm heavyweight loopback cotton hoodie, relaxed boxy unisex cut, kangaroo pocket, tonal metal-tipped drawcords, ribbed cuffs and hem. Embroidered chest graphic unless otherwise specified.",
+    "Poster": "18x24 inch uncoated 300 gsm matte archival paper print, deep ink saturation, slight natural paper grain visible under raking light. Unframed for front/flatlay/detail unless otherwise noted.",
+    "Pin": "Approximately 1.25 inch die-struck hard-enamel pin, polished gold or silver metal bezel, recessed colored enamel fills, crisp raised relief. Single butterfly-clutch back.",
+    "Tote": "12 oz natural cotton canvas tote bag, long top-handle straps, boxed base, single-color screen printed graphic. Unstructured slouch.",
+    "Mug": "11 oz matte glazed ceramic mug, slightly off-white body with a subtle speckle, straight-sided with a C-handle. Wrap-around print in a single ink color.",
+    "Hat": "Structured 6-panel wool-blend baseball cap with a curved brim, adjustable metal strap-back, embroidered front panel graphic, taped seams."
+  },
+
+  "skus": [
+    {
+      "sku": "CG-HD2-001",
+      "game": "Hades II",
+      "game_slug": "hades-ii",
+      "category": "Tee",
+      "title": "Melinoe's List",
+      "design": "Bone off-white heavyweight cotton tee. Centered chest graphic: a typographic to-do list, set in a hand-inked classical serif, all lowercase, 6 lines long, printed in matte Crit Red (#FF2D3D). Lines read: 'kill time.', 'kill chronos.', 'train the shades.', 'visit hecate.', 'do the laundry (this).', 'get revenge.' Small typographic ornament (a single line-art pomegranate) at the bottom of the list.",
+      "on_body_variant": "Model wearing the tee, cropped from collar to mid-torso, shot against a warm taupe studio backdrop, 50mm lens, shallow depth of field. Natural posture, hands in pockets or at sides. Shirt drapes with the weight of a true 240gsm garment."
+    },
+    {
+      "sku": "CG-HD2-002",
+      "game": "Hades II",
+      "game_slug": "hades-ii",
+      "category": "Poster",
+      "title": "Underworld Atlas",
+      "design": "18x24 inch matte poster. A hand-drawn dark-fantasy cartography plate of an imagined underworld, rendered in black ink on warm cream paper in the style of a medieval atlas or naturalist's field plate. Rivers of molten gold, labeled regions in a classical serif, compass rose in the upper right, small ornamental creatures in the margins. Restrained use of Crit Red for one symbolic marker in the center. Looks archival and collectible.",
+      "on_body_variant": "Poster shown framed in a thin matte black frame, hanging on a warm plaster wall in a modern minimalist apartment. Soft late-afternoon sidelight. Slight 10-degree angle to show the frame has depth. A small plant and a partial bookshelf blurred in the background."
+    },
+    {
+      "sku": "CG-HD2-003",
+      "game": "Hades II",
+      "game_slug": "hades-ii",
+      "category": "Pin",
+      "title": "Witch's Staff",
+      "design": "Die-struck hard-enamel pin, about 1.5 inches tall. A stylized witch's staff rendered in silver metal with deep midnight-navy enamel and a single pearl-white cabochon set near the top of the staff. Clean art-deco-inspired line work. Butterfly clutch back visible in detail shots.",
+      "on_body_variant": "Pin fastened to the lapel of a Void-colored denim jacket or the strap of a Bone canvas tote. 45-degree angle macro. Natural daylight. Show the metal catching a highlight."
+    },
+    {
+      "sku": "CG-HD2-004",
+      "game": "Hades II",
+      "game_slug": "hades-ii",
+      "category": "Hoodie",
+      "title": "Moonstone Heavy Hoodie",
+      "design": "Heavyweight 450gsm loopback cotton hoodie in deep midnight navy (#0B1E3A). Small embroidered chest graphic on the left: a crescent moon with a single pearl cabochon-style silver accent, about 2 inches tall. Tonal navy drawcords with silver tipping. Clean, premium, minimal.",
+      "on_body_variant": "Model wearing the hoodie, cropped from mid-shoulder to waist, shot against a warm gray backdrop. Natural posture with hood down. The loopback fleece interior just visible at the collar."
+    },
+    {
+      "sku": "CG-ERN-001",
+      "game": "Elden Ring / SOTE",
+      "game_slug": "elden-ring-sote",
+      "category": "Tee",
+      "title": "Tarnished Tee",
+      "design": "Bone-colored heavyweight cotton tee. Centered across the chest, a single word 'TARNISHED' set in a large illuminated-manuscript-style decorative capital typeface, printed in antique gold ink with very subtle ink-bleed at the edges. Letterforms take up ~80 percent of the chest width. No other graphics.",
+      "on_body_variant": "Model wearing the tee, cropped chest shot, shot against a deep warm terracotta backdrop. Natural lighting, slight shadow from the left. Garment drapes with weight."
+    },
+    {
+      "sku": "CG-ERN-002",
+      "game": "Elden Ring / SOTE",
+      "game_slug": "elden-ring-sote",
+      "category": "Poster",
+      "title": "Lands Between Cartography",
+      "design": "18x24 inch matte print. An elegantly hand-drawn fictional fantasy-world map rendered as a medieval cartography plate: rolling terrain illustrated in black line work, hand-lettered region names in a flourished serif, ornamental sea creatures and a sailing ship in one corner, a compass rose top-right, decorative border. Paper tone is warm cream, ink is sepia black with sparing Gold XP (#FFC436) accents for waypoints. Very elevated and archival.",
+      "on_body_variant": "Poster shown framed in a warm oak frame, hanging above a tidy modern writing desk with a ceramic mug and a small brass lamp. Window sidelight."
+    },
+    {
+      "sku": "CG-ERN-003",
+      "game": "Elden Ring / SOTE",
+      "game_slug": "elden-ring-sote",
+      "category": "Pin",
+      "title": "Site of Grace Pin",
+      "design": "Die-struck hard-enamel pin about 1.25 inches. A stylized golden glowing wisp design, executed in bright warm gold enamel with a black recessed outline, set on a polished brass metal base. Single butterfly clutch back.",
+      "on_body_variant": "Pin on a Bone canvas tote strap, close crop, natural daylight, catching a soft highlight."
+    },
+    {
+      "sku": "CG-ERN-004",
+      "game": "Elden Ring / SOTE",
+      "game_slug": "elden-ring-sote",
+      "category": "Hoodie",
+      "title": "Malenia, Blade Of… Hoodie",
+      "design": "Heavyweight sand-colored (#C9B88A) loopback hoodie. Embroidered chest graphic on the right side: a stylized prosthetic arm with delicate etched line work, executed in dark bronze thread. Tonal sand drawcords, metal tips. Clean, restrained, collector-grade.",
+      "on_body_variant": "Model wearing the hoodie, three-quarter view, cropped shoulders to waist, shot against a warm cream studio backdrop."
+    },
+    {
+      "sku": "CG-ERN-005",
+      "game": "Elden Ring / SOTE",
+      "game_slug": "elden-ring-sote",
+      "category": "Tote",
+      "title": "Maidenless Tote",
+      "design": "Natural 12oz cotton canvas tote bag. Single word 'MAIDENLESS' printed in deep matte black blackletter type across the face of the bag, large and legible, about 80 percent of the bag width. Plain natural straps. No other graphics.",
+      "on_body_variant": "Tote slung over the shoulder of a person walking down a neutral city sidewalk in natural afternoon light. Three-quarter rear view, the bag slouches naturally with weight. Warm tones, street-photography feel."
+    },
+    {
+      "sku": "CG-BG3-001",
+      "game": "Baldur's Gate 3",
+      "game_slug": "baldurs-gate-3",
+      "category": "Tee",
+      "title": "Company of the Dead Three Tee",
+      "design": "Bone cotton tee. Full front graphic: a hand-lettered mock-fantasy tavern bill or party roster laid out in the style of a classical D&D character sheet. Six characters listed with stat blocks, all fictional names and fictional classes (no real-world IP names). Ink is dark Void (#0B0B10) with subtle Crit Red accents on key stat numbers. Highly typographic, looks hand-inked on parchment.",
+      "on_body_variant": "Model wearing the tee, shot against a warm study backdrop (wood tones, hint of leather-bound books blurred)."
+    },
+    {
+      "sku": "CG-BG3-002",
+      "game": "Baldur's Gate 3",
+      "game_slug": "baldurs-gate-3",
+      "category": "Poster",
+      "title": "Character Sheet Study",
+      "design": "18x24 inch matte print. A composition in the style of a hand-inked character sheet: three-up portraits of fictional fantasy-RPG companions — one dark-haired pale rogue archetype, one paladin with warm armor, one barbarian with warm skin and a red accent cloak — each rendered as a cross-hatched ink portrait, with stat blocks below each. Parchment-cream paper, sepia-black ink, subtle gold highlights.",
+      "on_body_variant": "Poster framed in thin matte black frame, hanging on a warm white plaster wall above a linen couch."
+    },
+    {
+      "sku": "CG-BG3-003",
+      "game": "Baldur's Gate 3",
+      "game_slug": "baldurs-gate-3",
+      "category": "Mug",
+      "title": "Bhaalspawn Coffee Mug",
+      "design": "11oz matte glazed off-white ceramic mug with a subtle speckle, C-handle. Wrap-around print: the phrase 'blood before breakfast' in a hand-inked lowercase serif type, printed in matte Crit Red. Small decorative drip ornament below the phrase. No other graphics.",
+      "on_body_variant": "Mug sitting on a warm oak desk next to a laptop and a small potted plant, morning window light, wisp of steam rising naturally."
+    },
+    {
+      "sku": "CG-BG3-004",
+      "game": "Baldur's Gate 3",
+      "game_slug": "baldurs-gate-3",
+      "category": "Pin",
+      "title": "Nat 20 Pin",
+      "design": "Die-struck hard-enamel pin, about 1.25 inches, shaped like a 20-sided die in three-quarter view. Polished gold metal bezel, deep Void-black enamel faces, each face showing a number in serif type. The 20-face is oriented forward and features a small inset Crit Red enamel jewel. Butterfly clutch back.",
+      "on_body_variant": "Pin on the lapel of a Void-colored wool blazer, 45-degree angle macro, catching a highlight."
+    },
+    {
+      "sku": "CG-ZLD-001",
+      "game": "Zelda: TOTK",
+      "game_slug": "zelda-totk",
+      "category": "Tee",
+      "title": "Sky Island Field Notes Tee",
+      "design": "Bone cotton tee. Full front graphic in the style of a botanical illustration or naturalist's field notes: hand-inked diagrams of fictional ancient glyphs and mechanical relics arranged in a grid, each labeled in a tiny serif hand. Ink is a soft warm green (#3F5E3A) on the bone tee. Composition is airy and elegant.",
+      "on_body_variant": "Model wearing the tee, shot against a dusty sage studio backdrop."
+    },
+    {
+      "sku": "CG-ZLD-002",
+      "game": "Zelda: TOTK",
+      "game_slug": "zelda-totk",
+      "category": "Poster",
+      "title": "Hyrule Reworked",
+      "design": "18x24 inch matte print. A hand-drawn fantasy overworld map in a reimagined post-upheaval state — floating islands above, a ground map below, rendered in warm sepia line work on cream paper, with hand-lettered region names in a flourished italic serif. Small ornamental creatures at the edges. Very collectible, archival in feel.",
+      "on_body_variant": "Poster framed in oak, hanging in a modern gaming room, soft rim light from a window, slight angle."
+    },
+    {
+      "sku": "CG-ZLD-003",
+      "game": "Zelda (Classic)",
+      "game_slug": "zelda-classic",
+      "category": "Tee",
+      "title": "Triforce Type Study Tee",
+      "design": "Bone cotton tee. Centered chest graphic: an elegant minimalist typographic composition of three interlocking triangles forming a larger triangle, executed as thin outlined strokes in matte Void black. Below the triangles, a single line of small-cap sans-serif type reads 'type study no. 03'. Extremely modernist and restrained.",
+      "on_body_variant": "Model wearing the tee, cropped chest view, warm beige studio backdrop."
+    },
+    {
+      "sku": "CG-SF6-001",
+      "game": "Street Fighter 6",
+      "game_slug": "street-fighter-6",
+      "category": "Tee",
+      "title": "World Tour Tee",
+      "design": "Black heavyweight cotton tee. Full-front graphic in the style of a late-90s gig-tour poster: list of fictional city stops for a 'world tour' in stacked block type, slight offset-printed misregistration feel. Accent color is Crit Red. Bold, street-wear-friendly.",
+      "on_body_variant": "Model wearing the tee, three-quarter view, urban loft backdrop, warm natural light."
+    },
+    {
+      "sku": "CG-SF6-002",
+      "game": "Street Fighter 6",
+      "game_slug": "street-fighter-6",
+      "category": "Hoodie",
+      "title": "Drive Impact Hoodie",
+      "design": "Void-black heavyweight hoodie. Embroidered chest graphic on the right: a simple stylized fist icon with a three-digit hit-counter '152' embroidered directly below in a retro digital font, using Crit Red thread. Bold but refined.",
+      "on_body_variant": "Model wearing the hoodie, hood down, cropped shoulders to waist, shot against a mid-tone warm gray backdrop."
+    },
+    {
+      "sku": "CG-SFC-001",
+      "game": "Street Fighter (Classic)",
+      "game_slug": "street-fighter-classic",
+      "category": "Tee",
+      "title": "Perfect Tee",
+      "design": "Bone cotton tee. Centered across the chest, a single word 'PERFECT.' set in a large retro arcade-cabinet display typeface, printed in vivid Crit Red with a very subtle CRT-scanline overlay texture. The letters fill ~75 percent of the chest width. Nothing else on the tee.",
+      "on_body_variant": "Model wearing the tee, shot against a warm concrete or arcade-neutral backdrop, slight neon warmth in lighting."
+    },
+    {
+      "sku": "CG-SFC-002",
+      "game": "Street Fighter (Classic)",
+      "game_slug": "street-fighter-classic",
+      "category": "Poster",
+      "title": "Shoryuken Anatomy",
+      "design": "18x24 inch matte archival print. A cross-sectional anatomical-diagram-style illustration of a rising uppercut punch motion, rendered in gold-leaf-look ink on warm cream paper, with labeled lines in a classical medical-textbook serif. The composition is scientific, elegant, and ironic — referencing old anatomical plates. Three color palette: cream, sepia-black, Gold XP (#FFC436).",
+      "on_body_variant": "Poster framed in thin brass frame, hanging in a warm-toned modern study, natural sidelight."
+    },
+    {
+      "sku": "CG-MK1-001",
+      "game": "Mortal Kombat 1",
+      "game_slug": "mortal-kombat-1",
+      "category": "Tee",
+      "title": "FINISH HIM Tee",
+      "design": "Heavyweight Void-black cotton tee. Centered across the chest, 'FINISH HIM.' set in a large dripping-serif typeface — as if hand-inked and bleeding — printed in vivid Crit Red with subtle drip accents below some letters. Fills ~75 percent of the chest. No other graphics.",
+      "on_body_variant": "Model wearing the tee, chest crop, shot against a moody low-key warm-gray backdrop, hard directional light."
+    },
+    {
+      "sku": "CG-MKC-001",
+      "game": "Mortal Kombat (Classic)",
+      "game_slug": "mortal-kombat-classic",
+      "category": "Poster",
+      "title": "Kombatant Roster",
+      "design": "24x36 inch matte archival print. An arcade-cabinet-style roster poster: eight fictional fighter silhouettes in classic side-profile fighting-game stances, each framed in a boxed cell with a fake character name in bold 90s arcade type below. Overall palette is deep Void black, Crit Red, Gold XP, with a subtle CRT scanline texture. Very nostalgic, gallery-grade.",
+      "on_body_variant": "Poster framed in matte black, hanging on a deep charcoal wall in a warmly lit game room, some vinyl records and a turntable visible in soft focus on a credenza below."
+    },
+    {
+      "sku": "CG-HD2D-001",
+      "game": "Helldivers 2",
+      "game_slug": "helldivers-2",
+      "category": "Tee",
+      "title": "For Super Earth Tee",
+      "design": "Heavyweight cotton tee in a vintage-warm white. Full-front graphic executed in the style of a mid-century Soviet propaganda poster: bold diagonal composition, stark red and black two-color screen print, simplified worker/soldier figure silhouette, large declarative hand-lettered phrase 'FOR SUPER EARTH' in a condensed grotesque, all printed with a slight distressed screen-print texture.",
+      "on_body_variant": "Model wearing the tee, three-quarter view, shot against a concrete-gray backdrop with hard directional light from the left."
+    },
+    {
+      "sku": "CG-HD2D-002",
+      "game": "Helldivers 2",
+      "game_slug": "helldivers-2",
+      "category": "Hat",
+      "title": "Democracy Officer Cap",
+      "design": "Structured 6-panel Void-black wool-blend cap with a curved brim and tonal black stitching. Embroidered front panel: a stylized eagle strike symbol executed in matte gold thread, about 2 inches wide, 1 inch tall. Tonal adjustable metal strap-back.",
+      "on_body_variant": "Cap worn by a person in a neutral workwear jacket, three-quarter portrait crop focused on the cap, natural afternoon light, model's face softened or partially cropped."
+    },
+    {
+      "sku": "CG-BMW-001",
+      "game": "Black Myth: Wukong",
+      "game_slug": "black-myth-wukong",
+      "category": "Poster",
+      "title": "Journey to the West, Part II",
+      "design": "18x24 inch matte archival print. A large sumi-e style ink-wash illustration of a dynamic mid-strike pose of a mythological warrior figure with a staff, rendered in bold black ink with expressive wet brushstrokes on warm cream paper. A single small red-seal chop signature in the lower right corner in Crit Red. Deeply elegant, gallery-grade East Asian ink-painting aesthetic.",
+      "on_body_variant": "Poster framed in thin black frame, hanging on a warm clay-colored wall in a minimalist modern interior, soft north light from the side."
+    },
+    {
+      "sku": "CG-BMW-002",
+      "game": "Black Myth: Wukong",
+      "game_slug": "black-myth-wukong",
+      "category": "Tee",
+      "title": "Legend of the Ape Tee",
+      "design": "Bone cotton tee. Centered chest: a bold sumi-e style brush illustration of a golden warrior's staff held diagonally across the chest, rendered with expressive black brushstrokes and a single red-seal chop signature in the lower right corner. Elegant, wabi-sabi, premium.",
+      "on_body_variant": "Model wearing the tee, chest crop, shot against a warm parchment-cream studio backdrop."
+    },
+    {
+      "sku": "CG-FF7-001",
+      "game": "Final Fantasy VII Rebirth",
+      "game_slug": "final-fantasy-vii-rebirth",
+      "category": "Tee",
+      "title": "Gold Saucer Tee",
+      "design": "Bone cotton tee. Full-front graphic in the style of a retro amusement-park ticket stub: a fictional 'Gold Saucer' theme-park map illustrated as a vintage 70s attraction poster, with curving path, labeled ride icons in a chunky retro display type, a banner at the top. Palette is warm cream, Crit Red, Gold XP. Joyful and nostalgic.",
+      "on_body_variant": "Model wearing the tee, three-quarter view, shot against a warm gold-yellow studio backdrop."
+    },
+    {
+      "sku": "CG-FF7-002",
+      "game": "Final Fantasy VII Rebirth",
+      "game_slug": "final-fantasy-vii-rebirth",
+      "category": "Pin",
+      "title": "Buster Sword Pin",
+      "design": "Die-struck gunmetal pin, approximately 2 inches tall, designed as a stylized large broadsword pointed downward with a shoulder-strap detail. Entirely gunmetal metal with polished silver highlights along the edges, no enamel fill, satisfyingly weighty-looking. Butterfly clutch back.",
+      "on_body_variant": "Pin on the lapel of a Void-black heavyweight denim jacket, 45-degree macro, catching a cool highlight."
+    },
+    {
+      "sku": "CG-MTR-001",
+      "game": "Metaphor: ReFantazio",
+      "game_slug": "metaphor-refantazio",
+      "category": "Poster",
+      "title": "Royal Tournament",
+      "design": "18x24 inch matte archival print. An illuminated-manuscript-style tournament bracket: hand-illustrated ornamental frames surround each bracket slot, featuring fictional candidate portraits rendered as miniature painted medallions, all set in rich illuminated colors (deep blues, golds, crimsons) on warm cream paper. Title banner at the top in hand-inked display serif. Feels like a museum-worthy artifact.",
+      "on_body_variant": "Poster framed in thin oak, hanging on a warm library wall next to a single sconce lamp, moody evening light."
+    },
+    {
+      "sku": "CG-MHW-001",
+      "game": "Monster Hunter Wilds",
+      "game_slug": "monster-hunter-wilds",
+      "category": "Tee",
+      "title": "Hunter's Field Journal Tee",
+      "design": "Bone cotton tee. Full-front graphic laid out like a torn hunter's field journal page: a mix of hand-inked line illustrations of fictional large beast silhouettes, tiny labeled diagrams of tracks, cryptic handwritten notes in a naturalist's script, and a few compass-rose ornaments. Ink is warm sepia with small Crit Red annotation marks. Dense, rich, story-telling composition.",
+      "on_body_variant": "Model wearing the tee, shot against a warm forest-canvas studio backdrop, 50mm lens, natural light."
+    }
+  ]
+}
