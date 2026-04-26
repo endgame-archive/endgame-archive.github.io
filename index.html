@@ -1,350 +1,1284 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>endgame.archive — Manifest Your Setup Era</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cyan: '#00F5D4',
-                        pink: '#F15BB5',
-                        uv: '#9B5DE5',
-                        yellow: '#FEE440',
-                        abyss: '#050505',
-                        pearl: '#F8F9FF',
-                    },
-                    fontFamily: {
-                        serif: ['Playfair Display', 'serif'],
-                        sans: ['Nunito', 'sans-serif'],
-                    },
-                    animation: {
-                        'ooze': 'ooze 20s infinite alternate ease-in-out',
-                        'pulse-uv': 'pulse-uv 4s infinite ease-in-out',
-                        'prism-spin': 'prism-spin 25s linear infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'shimmer': 'shimmer 10s ease infinite',
-                    },
-                    keyframes: {
-                        'ooze': { '0%': { transform: 'translate(-5%, -5%) scale(1.0)' }, '100%': { transform: 'translate(5%, 5%) scale(1.1)' } },
-                        'pulse-uv': {
-                            '0%, 100%': { borderColor: 'rgba(155, 93, 229, 0.4)', boxShadow: '0 0 15px rgba(155, 93, 229, 0.2)' },
-                            '50%': { borderColor: 'rgba(155, 93, 229, 1)', boxShadow: '0 0 35px rgba(155, 93, 229, 0.5)' },
-                        },
-                        'prism-spin': { from: { transform: 'rotate(0deg)' }, to: { transform: 'rotate(360deg)' } },
-                        'float': { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } },
-                        'shimmer': { '0%, 100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .glass { background: rgba(248, 249, 255, 0.1); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); border: 2px solid rgba(155, 93, 229, 0.3); border-radius: 32px; }
-        .glass-dark { background: rgba(5, 5, 5, 0.92); backdrop-filter: blur(50px); border-radius: 40px; }
-        .ooze-blob { position: fixed; border-radius: 50%; filter: blur(140px); z-index: -1; }
-        .iridescent-text {
-            background: linear-gradient(90deg, #00F5D4, #9B5DE5, #F15BB5, #FEE440, #00F5D4);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: flow 6s linear infinite;
-        }
-        @keyframes flow { to { background-position: 200% center; } }
-        .pearl-overlay {
-            position: fixed; inset: 0; z-index: -1; pointer-events: none;
-            background: linear-gradient(105deg, transparent 0%, rgba(248,249,255,0.05) 25%, rgba(155,93,229,0.06) 40%, transparent 100%);
-            background-size: 300% 300%;
-            animation: shimmer 12s ease infinite;
-        }
-        .nav-dropdown { display: none; transform-origin: top; }
-        .group:hover .nav-dropdown { display: block; animation: dropIn 0.3s ease forwards; }
-        @keyframes dropIn { from { opacity: 0; transform: translateY(-10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>endgame.archive — Elite Gaming Artifacts. Crafted in Huntsville.</title>
 
-        .mock-hoodie { width: 120px; height: 140px; background: #050505; border-radius: 12px 12px 35px 35px; position: relative; box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
-        .mock-hoodie::before { content:''; position: absolute; top: -18px; left: 12px; width: 96px; height: 48px; background: #050505; border-radius: 50% 50% 0 0; }
-        .mock-mat { width: 220px; height: 90px; background: linear-gradient(135deg, #9B5DE5, #00F5D4); border-radius: 10px; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 8px 25px rgba(155,93,229,0.5); }
-        .mock-plush { width: 90px; height: 90px; background: #F15BB5; border-radius: 50%; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 20px rgba(241,91,181,0.6)); font-size: 40px; }
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-        html { scroll-behavior: smooth; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: #9B5DE5; border-radius: 10px; }
-    </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cyan:         '#00F5D4',
+            pink:         '#F15BB5',
+            uv:           '#9B5DE5',
+            yellow:       '#FEE440',
+            sunset:       '#FF6B35',
+            abyss:        '#050505',
+            pearl:        '#F8F9FF',
+            sanctuary:    '#F9F9F9',
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            sans:  ['Nunito', 'sans-serif'],
+          },
+          animation: {
+            'ooze':     'ooze 20s infinite alternate ease-in-out',
+            'pulse-uv': 'pulse-uv 4s infinite ease-in-out',
+            'float':    'float 6s ease-in-out infinite',
+            'shimmer':  'shimmer 10s ease infinite',
+          },
+          keyframes: {
+            'ooze':     { '0%': { transform: 'translate(-5%,-5%) scale(1.0)' }, '100%': { transform: 'translate(5%,5%) scale(1.1)' } },
+            'pulse-uv': {
+              '0%,100%': { borderColor: 'rgba(155,93,229,0.4)', boxShadow: '0 0 15px rgba(155,93,229,0.2)' },
+              '50%':     { borderColor: 'rgba(155,93,229,1)',   boxShadow: '0 0 35px rgba(155,93,229,0.5)' },
+            },
+            'float':    { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } },
+            'shimmer':  { '0%,100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    /* ── Safe-area vars ── */
+    :root {
+      --sp-l: max(16px, env(safe-area-inset-left));
+      --sp-r: max(16px, env(safe-area-inset-right));
+    }
+    .page-px { padding-left: var(--sp-l); padding-right: var(--sp-r); }
+
+    /* ── Glass ── */
+    .glass {
+      background: rgba(248,249,255,0.10);
+      backdrop-filter: blur(35px);
+      -webkit-backdrop-filter: blur(35px);
+      border: 2px solid rgba(155,93,229,0.30);
+      border-radius: 24px;
+    }
+    .glass-dark {
+      background: rgba(5,5,5,0.93);
+      backdrop-filter: blur(50px);
+      -webkit-backdrop-filter: blur(50px);
+    }
+
+    /* ── Sunset Archive gradient button ── */
+    .btn-sunset {
+      background: linear-gradient(135deg, #FF6B35 0%, #F15BB5 45%, #9B5DE5 100%);
+      color: white;
+      transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .btn-sunset:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 32px rgba(255,107,53,0.35);
+    }
+
+    /* ── Sunset text gradient ── */
+    .sunset-text {
+      background: linear-gradient(90deg, #FF6B35, #F15BB5, #9B5DE5, #00F5D4);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: flow 5s linear infinite;
+    }
+
+    /* ── Iridescent text (retained) ── */
+    .iridescent-text {
+      background: linear-gradient(90deg, #00F5D4, #9B5DE5, #F15BB5, #FEE440, #00F5D4);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: flow 6s linear infinite;
+    }
+    @keyframes flow { to { background-position: 200% center; } }
+
+    /* ── Ooze blobs ── */
+    .ooze-blob {
+      position: fixed; border-radius: 50%;
+      filter: blur(140px); z-index: -1;
+    }
+
+    /* ── Pearl overlay shimmer ── */
+    .pearl-overlay {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background: linear-gradient(105deg, transparent 0%, rgba(248,249,255,0.05) 25%, rgba(155,93,229,0.06) 40%, transparent 100%);
+      background-size: 300% 300%;
+      animation: shimmer 12s ease infinite;
+    }
+
+    /* ── Vault Sidebar (FIXED — no dot-class bug) ── */
+    .vault-sidebar {
+      position: fixed; top: 0; left: 0; height: 100%; width: 280px;
+      z-index: 400; display: flex; flex-direction: column;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+    .vault-sidebar.closed { transform: translateX(-100%); }
+    .vault-sidebar.open   { transform: translateX(0); }
+
+    /* ── Mock product visuals ── */
+    .mock-hoodie {
+      width: 72px; height: 86px; background: #050505;
+      border-radius: 8px 8px 22px 22px; position: relative;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.45); flex-shrink: 0;
+    }
+    .mock-hoodie::before {
+      content: ''; position: absolute; top: -12px; left: 8px;
+      width: 56px; height: 28px; background: #050505; border-radius: 50% 50% 0 0;
+    }
+    .mock-mat {
+      width: 140px; height: 56px;
+      background: linear-gradient(135deg, #9B5DE5, #00F5D4);
+      border-radius: 8px; border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 6px 20px rgba(155,93,229,0.5); flex-shrink: 0;
+    }
+    .mock-plush {
+      width: 60px; height: 60px; background: #F15BB5; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      filter: drop-shadow(0 0 14px rgba(241,91,181,0.6)); flex-shrink: 0;
+    }
+
+    /* ── Light-mode modal ── */
+    .modal-sanctuary {
+      background: #F9F9F9;
+      color: #050505;
+    }
+
+    /* ── Radio / toggle — light mode active state ── */
+    .opt-active-light {
+      border-color: #FF6B35;
+      color: #FF6B35;
+      background: rgba(255,107,53,0.08);
+      box-shadow: 0 0 16px rgba(255,107,53,0.25);
+    }
+    .opt-inactive-light {
+      border-color: rgba(5,5,5,0.15);
+      color: rgba(5,5,5,0.55);
+    }
+    .opt-inactive-light:hover {
+      border-color: rgba(255,107,53,0.5);
+      color: #FF6B35;
+      background: rgba(255,107,53,0.06);
+    }
+
+    /* ── Scrollbars ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #9B5DE5; border-radius: 10px; }
+    .custom-scroll::-webkit-scrollbar { width: 4px; }
+    .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: rgba(155,93,229,0.4); border-radius: 10px; }
+
+    /* ── Responsive font clamps ── */
+    .hero-h1     { font-size: clamp(2.6rem, 11vw, 11rem); }
+    .cat-h2      { font-size: clamp(2.2rem, 7.5vw, 7rem); }
+    .section-h2  { font-size: clamp(1.8rem, 4.5vw, 3.8rem); }
+    .card-title  { font-size: clamp(0.9rem, 3vw, 2rem); }
+    .card-price  { font-size: clamp(1.2rem, 3.5vw, 2.8rem); }
+    .modal-h2    { font-size: clamp(2rem, 5.5vw, 5rem); }
+    .registry-value { font-size: clamp(3rem, 7.5vw, 6.5rem); }
+
+    /* ── Nav dropdown (now click-based; CSS fallback removed) ── */
+    .nav-drop-panel {
+      animation: dropIn 0.22s ease forwards;
+    }
+    @keyframes dropIn {
+      from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0)  scale(1); }
+    }
+
+    /* ── Premium nav tile hover ── */
+    .nav-tile:hover {
+      background: linear-gradient(135deg, rgba(255,107,53,0.1), rgba(155,93,229,0.1));
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(155,93,229,0.18);
+    }
+    .nav-tile { transition: all 0.2s ease; border-radius: 12px; }
+  </style>
 </head>
-<body class="bg-pearl text-abyss font-sans selection:bg-uv selection:text-white transition-colors duration-500 overflow-x-hidden">
-    <div id="root"></div>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
+<body class="bg-pearl text-abyss font-sans selection:bg-uv selection:text-white overflow-x-hidden transition-colors duration-500">
+<div id="root"></div>
 
-        const PrismLogo = ({ size = 32 }) => (
-            <div className="relative group cursor-pointer" style={{ width: size, height: size }}>
-                <svg viewBox="0 0 100 100" className="absolute inset-0 animate-prism-spin opacity-80">
-                    <path d="M50 5 L90 45"  stroke="#9B5DE5" strokeWidth="3" fill="none" />
-                    <path d="M95 50 L55 90" stroke="#F15BB5" strokeWidth="3" fill="none" />
-                    <path d="M50 95 L10 55" stroke="#00F5D4" strokeWidth="3" fill="none" />
-                    <path d="M5 50 L45 10"  stroke="#9B5DE5" strokeWidth="3" fill="none" />
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center font-serif italic font-black text-uv" style={{ fontSize: size * 0.45 }}>E.</div>
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+/* ═══════════════════════════════════════════════════════
+   BRAND ICON COMPONENTS — Lucide-style, duotone treatment
+   Each icon uses two brand colours: a primary stroke and
+   a secondary translucent fill for the duotone effect.
+═══════════════════════════════════════════════════════ */
+const IconHome = ({ s = 18 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="rgba(255,107,53,0.12)" stroke="#FF6B35" strokeWidth="1.8"/>
+    <polyline points="9 22 9 12 15 12 15 22" stroke="#9B5DE5" strokeWidth="1.8"/>
+  </svg>
+);
+const IconBook = ({ s = 18 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" fill="rgba(155,93,229,0.12)" stroke="#9B5DE5" strokeWidth="1.8"/>
+    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" fill="rgba(255,107,53,0.12)" stroke="#FF6B35" strokeWidth="1.8"/>
+  </svg>
+);
+const IconShirt = ({ s = 18 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z" fill="rgba(241,91,181,0.12)" stroke="#F15BB5" strokeWidth="1.8"/>
+  </svg>
+);
+const IconMonitor = ({ s = 18 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="3" width="20" height="14" rx="2" fill="rgba(155,93,229,0.12)" stroke="#9B5DE5" strokeWidth="1.8"/>
+    <line x1="8" y1="21" x2="16" y2="21" stroke="#9B5DE5" strokeWidth="1.8"/>
+    <line x1="12" y1="17" x2="12" y2="21" stroke="#9B5DE5" strokeWidth="1.8"/>
+  </svg>
+);
+const IconSparkle = ({ s = 18 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" fill="rgba(241,91,181,0.14)" stroke="#F15BB5" strokeWidth="1.8"/>
+    <circle cx="19" cy="5" r="1.5" fill="#FF6B35"/>
+    <circle cx="5"  cy="19" r="1.2" fill="#00F5D4"/>
+  </svg>
+);
+const IconCoffee = ({ s = 18 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="#FF6B35" strokeWidth="1.8"/>
+    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" fill="rgba(255,107,53,0.12)" stroke="#FF6B35" strokeWidth="1.8"/>
+    <line x1="6" y1="1" x2="6" y2="4" stroke="#9B5DE5" strokeWidth="1.8"/>
+    <line x1="10" y1="1" x2="10" y2="4" stroke="#9B5DE5" strokeWidth="1.8"/>
+    <line x1="14" y1="1" x2="14" y2="4" stroke="#9B5DE5" strokeWidth="1.8"/>
+  </svg>
+);
+const IconHelp = ({ s = 18 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" fill="rgba(0,245,212,0.10)" stroke="#00F5D4" strokeWidth="1.8"/>
+    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="#00F5D4" strokeWidth="1.8"/>
+    <circle cx="12" cy="17" r="0.5" fill="#00F5D4" stroke="#00F5D4" strokeWidth="1"/>
+  </svg>
+);
+const IconMail = ({ s = 18 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="rgba(155,93,229,0.10)" stroke="#9B5DE5" strokeWidth="1.8"/>
+    <polyline points="22,6 12,13 2,6" stroke="#FF6B35" strokeWidth="1.8"/>
+  </svg>
+);
+const IconSun = ({ s = 16 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="5" fill="rgba(255,107,53,0.18)" stroke="#FF6B35" strokeWidth="1.8"/>
+    {[[12,1,12,3],[12,21,12,23],[4.22,4.22,5.64,5.64],[18.36,18.36,19.78,19.78],[1,12,3,12],[21,12,23,12],[4.22,19.78,5.64,18.36],[18.36,5.64,19.78,4.22]].map((l,i)=>(
+      <line key={i} x1={l[0]} y1={l[1]} x2={l[2]} y2={l[3]} stroke="#FF6B35" strokeWidth="1.8"/>
+    ))}
+  </svg>
+);
+const IconMoon = ({ s = 16 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="rgba(155,93,229,0.18)" stroke="#9B5DE5" strokeWidth="1.8"/>
+  </svg>
+);
+const IconMenu = ({ s = 20 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="3" y1="6"  x2="21" y2="6"  stroke="currentColor" strokeWidth="2"/>
+    <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" strokeWidth="2"/>
+    <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" strokeWidth="2"/>
+  </svg>
+);
+const IconX = ({ s = 16 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" strokeWidth="2"/>
+    <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" strokeWidth="2"/>
+  </svg>
+);
+const IconCart = ({ s = 16 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="9"  cy="21" r="1" fill="white" stroke="white" strokeWidth="1"/>
+    <circle cx="20" cy="21" r="1" fill="white" stroke="white" strokeWidth="1"/>
+    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" stroke="white" strokeWidth="1.8"/>
+  </svg>
+);
+const IconChevron = ({ s = 12, open = false }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round"
+    style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>
+    <polyline points="6 9 12 15 18 9" stroke="currentColor" strokeWidth="2"/>
+  </svg>
+);
+const IconArrow = ({ s = 14 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" strokeWidth="2"/>
+    <polyline points="12 5 19 12 12 19" stroke="currentColor" strokeWidth="2"/>
+  </svg>
+);
+const IconPlus = ({ s = 20 }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" strokeWidth="2"/>
+    <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" strokeWidth="2"/>
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════════════
+   DIRECTION 05 — THE SUNSET ARCHIVE LOGO
+   Circular disc · diagonal gradient (Sunset Orange →
+   Electric Pink → UV-Purple @64% → Iridescent Cyan) ·
+   1.5px white hairline inner ring · radial lens overlay ·
+   oversized high-contrast white serif "E"
+═══════════════════════════════════════════════════════ */
+const SunsetArchiveLogo = ({ size = 42, placement = 'default' }) => {
+  // Inline defs per instance — avoids cross-SVG ID conflicts
+  const gid  = `sa-disc-${size}-${placement}`;
+  const lid  = `sa-lens-${size}-${placement}`;
+  return (
+    <div style={{ width: size, height: size, flexShrink: 0,
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+      <svg viewBox="0 0 100 100" width={size} height={size}
+           xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'hidden', borderRadius: '50%' }}>
+        <defs>
+          {/* Diagonal gradient: Sunset Orange → Electric Pink → UV-Purple @64% → Cyan */}
+          <linearGradient id={gid} x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%"   stopColor="#FF6B35" />
+            <stop offset="32%"  stopColor="#F15BB5" />
+            <stop offset="64%"  stopColor="#9B5DE5" />
+            <stop offset="100%" stopColor="#00F5D4" />
+          </linearGradient>
+          {/* Radial lens overlay — curved physical-disc illusion */}
+          <radialGradient id={lid} cx="36%" cy="34%" r="68%">
+            <stop offset="0%"   stopColor="white"  stopOpacity="0.28" />
+            <stop offset="45%"  stopColor="white"  stopOpacity="0.05" />
+            <stop offset="100%" stopColor="black"  stopOpacity="0.22" />
+          </radialGradient>
+        </defs>
+
+        {/* Disc fill */}
+        <circle cx="50" cy="50" r="50" fill={`url(#${gid})`} />
+
+        {/* White hairline inner ring (1.5px) — prevents colour bleed at edge */}
+        <circle cx="50" cy="50" r="47.5" fill="none" stroke="white" strokeWidth="1.5" opacity="0.55" />
+
+        {/* Radial lens overlay */}
+        <circle cx="50" cy="50" r="50" fill={`url(#${lid})`} />
+
+        {/* Oversized high-contrast white serif "E" */}
+        <text x="50" y="64" textAnchor="middle"
+          fontFamily="'Playfair Display', Georgia, serif"
+          fontStyle="italic" fontWeight="700"
+          fontSize="54" fill="white"
+          style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.35))' }}>E</text>
+      </svg>
+    </div>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════
+   FAQ ACCORDION ITEM
+═══════════════════════════════════════════════════════ */
+const FAQItem = ({ question, answer, mode }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`border-b-2 pb-8 pt-2 transition-colors duration-300
+      ${mode === 'dark' ? 'border-uv/20' : 'border-abyss/10'}`}>
+      <button className="w-full flex justify-between items-start gap-4 text-left"
+              onClick={() => setOpen(o => !o)}>
+        <h3 className="font-black text-lg md:text-2xl leading-snug">{question}</h3>
+        <span className={`flex-shrink-0 mt-1 transition-transform duration-300 ${open ? 'rotate-45' : ''}`}
+          style={{ color: '#FF6B35' }}>
+          <IconPlus s={22} />
+        </span>
+      </button>
+      {open && (
+        <p className="font-bold text-base md:text-xl opacity-70 mt-5 leading-relaxed">{answer}</p>
+      )}
+    </div>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════
+   VAULT SIDEBAR — Glassmorphism navigation
+   Emoji replaced with brand SVG icons
+═══════════════════════════════════════════════════════ */
+const VaultSidebar = ({ isOpen, onClose, mode, navigateToCategory, setView }) => {
+  const bg     = mode === 'light' ? 'rgba(255,255,255,0.14)' : 'rgba(5,5,5,0.84)';
+  const border = mode === 'light' ? 'rgba(155,93,229,0.22)'  : 'rgba(155,93,229,0.45)';
+
+  const SideBtn = ({ icon, children, onClick }) => (
+    <button
+      onClick={() => { onClick(); onClose(); }}
+      className={`w-full text-left px-5 py-3 flex items-center gap-3 font-black text-sm uppercase tracking-widest
+        transition-all duration-200 rounded-xl mx-2
+        ${mode === 'light'
+          ? 'hover:bg-black/5 hover:text-abyss'
+          : 'hover:bg-white/5 hover:text-white'
+        } opacity-80 hover:opacity-100`}
+      style={{ width: 'calc(100% - 16px)' }}>
+      <span className="flex-shrink-0">{icon}</span>
+      {children}
+    </button>
+  );
+
+  const Divider = ({ label }) => (
+    <div className="px-5 pt-5 pb-2 mt-1 border-t" style={{ borderColor: border }}>
+      <span className="font-black text-[9px] uppercase tracking-[0.5em] text-uv opacity-60">{label}</span>
+    </div>
+  );
+
+  return (
+    <>
+      <div className="fixed inset-0 z-[390] transition-all duration-400"
+        style={{
+          background: 'rgba(0,0,0,0.52)',
+          backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)',
+          opacity: isOpen ? 1 : 0, pointerEvents: isOpen ? 'auto' : 'none',
+        }}
+        onClick={onClose} />
+
+      <div className={`vault-sidebar ${isOpen ? 'open' : 'closed'}`}
+        style={{
+          backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+          background: bg, borderRight: `1px solid ${border}`,
+        }}>
+
+        <div className="flex items-center justify-between px-5 py-5 border-b" style={{ borderColor: border }}>
+          <div className="flex items-center gap-3 cursor-pointer"
+               onClick={() => { setView('home'); onClose(); }}>
+            <SunsetArchiveLogo size={30} placement="sidebar-hdr" />
+            <span className="font-black text-sm tracking-tighter">
+              endgame<span style={{ color: '#FF6B35' }}>.</span>archive
+            </span>
+          </div>
+          <button onClick={onClose} aria-label="Close vault"
+            className="w-8 h-8 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity">
+            <IconX s={16} />
+          </button>
+        </div>
+
+        <nav className="flex-1 overflow-y-auto py-3">
+          <Divider label="Navigate" />
+          <SideBtn icon={<IconHome s={16} />}    onClick={() => setView('home')}>Home</SideBtn>
+          <SideBtn icon={<IconBook s={16} />}    onClick={() => setView('about')}>Our Story</SideBtn>
+
+          <Divider label="The Archive" />
+          <SideBtn icon={<IconShirt s={16} />}   onClick={() => navigateToCategory('Apparel')}>Apparel</SideBtn>
+          <SideBtn icon={<IconMonitor s={16} />} onClick={() => navigateToCategory('Desktop')}>Desktop</SideBtn>
+          <SideBtn icon={<IconSparkle s={16} />} onClick={() => navigateToCategory('LilysCozyCorner')}>Lily's Corner</SideBtn>
+          <SideBtn icon={<IconCoffee s={16} />}  onClick={() => navigateToCategory('KitchenArchive')}>Kitchen</SideBtn>
+
+          <Divider label="Info" />
+          <SideBtn icon={<IconHelp s={16} />}    onClick={() => setView('faq')}>FAQ</SideBtn>
+          <SideBtn icon={<IconMail s={16} />}    onClick={() => setView('socials')}>Socials & Contact</SideBtn>
+        </nav>
+
+        <div className="px-5 py-5 border-t space-y-1" style={{ borderColor: border }}>
+          <p className="font-black text-[9px] uppercase tracking-[0.4em]" style={{ color: '#FF6B35' }}>Elite Gaming Artifacts.</p>
+          <p className="font-black text-[9px] uppercase tracking-[0.3em] opacity-40">Crafted in Huntsville, AL.</p>
+        </div>
+      </div>
+    </>
+  );
+};
+
+/* ═══════════════════════════════════════════════════════
+   INVENTORY
+═══════════════════════════════════════════════════════ */
+const INVENTORY = {
+  Apparel: {
+    Men:   [{ id:'EA-M01', n:'Abyssal Hoodie',   t:'Heavyweight Essential. Boxy & Cozy.',     p:145, mock:'mock-hoodie' }],
+    Women: [{ id:'EA-W01', n:'Meadow Crop',       t:'Main Character micro-knit.',              p:68,  mock:'mock-hoodie' }],
+    Kids:  [{ id:'EA-K01', n:'Slime Mini-Crew',   t:'Bubbly soft fleece for next-gen.',        p:45,  mock:'mock-hoodie' }],
+  },
+  Desktop: {
+    Office: [{ id:'EA-D01', n:'Liquid Sky Mat',   t:'Chrome micro-laminate surface.',          p:124, mock:'mock-mat'    }],
+    Battle: [{ id:'EA-D02', n:'Hades Artisan Cap',t:'Hand-poured resin setup jewelry.',        p:189, mock:'orb'         }],
+  },
+  LilysCozyCorner: {
+    Sensory: [{ id:'EA-L01', n:'Botanical Slime', t:'Iridescent setup reset.',                 p:28,  mock:'mock-plush'  }],
+    Softs:   [{ id:'EA-L02', n:'Glow Squishie',   t:'Desk companion with high-def aura.',      p:42,  mock:'mock-plush'  }],
+    Comfort: [{ id:'EA-L03', n:'Underworld Throw',t:'Elite 550gsm luxury heavy knit.',         p:195, mock:'mock-mat'    }],
+  },
+  KitchenArchive: {
+    Vessels: [{ id:'EA-KA1', n:'Mana Ceramic Mug',t:'Chrome-handle desk potion vessel.',       p:45,  mock:'mock-plush'  }],
+    Utility: [{ id:'EA-KA2', n:'Artifact Bento',  t:'Matte obsidian setup vault.',             p:65,  mock:'mock-mat'    }],
+  },
+};
+
+/* ═══════════════════════════════════════════════════════
+   CUSTOMIZATIONS — Alchemical Studio pricing engine
+═══════════════════════════════════════════════════════ */
+const CUSTOMIZATIONS = {
+  'EA-M01': [
+    { key:'size',       label:'Size',             type:'radio',
+      options:[{label:'XS',mod:0},{label:'S',mod:0},{label:'M',mod:0},{label:'L',mod:0},{label:'XL',mod:0},{label:'2XL',mod:15}], default:'M' },
+    { key:'finish',     label:'Finish Tier',       type:'radio',
+      options:[{label:'Standard',mod:0},{label:'Liquid Chrome',mod:35},{label:'Iridescent',mod:55},{label:'UV-Energy',mod:45},{label:'Void Matte',mod:25}], default:'Standard' },
+    { key:'embroidery', label:'Sleeve Embroidery', type:'toggle', mod:20, default:false },
+  ],
+  'EA-W01': [
+    { key:'size',       label:'Size',             type:'radio',
+      options:[{label:'XS',mod:0},{label:'S',mod:0},{label:'M',mod:0},{label:'L',mod:0},{label:'XL',mod:0}], default:'S' },
+    { key:'finish',     label:'Finish Tier',       type:'radio',
+      options:[{label:'Standard',mod:0},{label:'Iridescent',mod:35},{label:'UV-Energy',mod:45}], default:'Standard' },
+    { key:'embroidery', label:'Custom Embroidery', type:'toggle', mod:20, default:false },
+  ],
+  'EA-K01': [
+    { key:'size',   label:'Size',   type:'radio',
+      options:[{label:'XS (2-4)',mod:0},{label:'S (4-6)',mod:0},{label:'M (6-8)',mod:0},{label:'L (8-10)',mod:0}], default:'XS (2-4)' },
+    { key:'finish', label:'Finish', type:'radio',
+      options:[{label:'Standard',mod:0},{label:'Iridescent',mod:20}], default:'Standard' },
+  ],
+  'EA-D01': [
+    { key:'size',      label:'Mat Size',         type:'dropdown',
+      options:[{label:'Small (800×300mm)',mod:0},{label:'XL (900×400mm)',mod:30},{label:'XXL (1200×600mm)',mod:65}], default:'Small (800×300mm)' },
+    { key:'finish',    label:'Surface Finish',   type:'radio',
+      options:[{label:'Liquid Chrome',mod:0},{label:'Iridescent',mod:45},{label:'UV-Energy',mod:35},{label:'Void Matte',mod:25}], default:'Liquid Chrome' },
+    { key:'stitching', label:'UV Edge Stitching',type:'toggle', mod:18, default:false },
+  ],
+  'EA-D02': [
+    { key:'colorway',  label:'Resin Colorway',   type:'radio',
+      options:[{label:'Abyss Black',mod:0},{label:'UV Violet',mod:25},{label:'Arctic Cyan',mod:25},{label:'Prism Opal',mod:45}], default:'Abyss Black' },
+    { key:'engraving', label:'Custom Engraving', type:'toggle', mod:35, default:false },
+  ],
+  'EA-L01': [
+    { key:'scent',    label:'Scent Profile', type:'dropdown',
+      options:[{label:'Unscented',mod:0},{label:'Lavender Aura',mod:5},{label:'Citrus Prism',mod:5},{label:'Cedarwood Vault',mod:8}], default:'Unscented' },
+    { key:'quantity', label:'Quantity',      type:'radio',
+      options:[{label:'1 Jar',mod:0},{label:'2-Pack',mod:42},{label:'3-Pack',mod:70}], default:'1 Jar' },
+  ],
+  'EA-L02': [
+    { key:'glow', label:'Glow Mode', type:'radio',
+      options:[{label:'Pastel',mod:0},{label:'UV-Reactive',mod:12},{label:'Dark Energy',mod:18}], default:'Pastel' },
+    { key:'size', label:'Size',      type:'radio',
+      options:[{label:'Standard',mod:0},{label:'Oversized',mod:15}], default:'Standard' },
+  ],
+  'EA-L03': [
+    { key:'weight',   label:'Weight',   type:'radio',
+      options:[{label:'550gsm Standard',mod:0},{label:'750gsm Ultra',mod:40}], default:'550gsm Standard' },
+    { key:'colorway', label:'Colorway', type:'radio',
+      options:[{label:'Abyss Black',mod:0},{label:'UV Violet',mod:0},{label:'Pearl White',mod:0},{label:'Iridescent',mod:35}], default:'Abyss Black' },
+  ],
+  'EA-KA1': [
+    { key:'color',    label:'Ceramic Colorway', type:'radio',
+      options:[{label:'Void Black',mod:0},{label:'Pearl White',mod:0},{label:'UV Gradient',mod:15}], default:'Void Black' },
+    { key:'handle',   label:'Handle Finish',    type:'radio',
+      options:[{label:'Chrome',mod:0},{label:'Matte Black',mod:0},{label:'24k Gold',mod:25}], default:'Chrome' },
+    { key:'engraving',label:'Custom Engraving', type:'toggle', mod:20, default:false },
+  ],
+  'EA-KA2': [
+    { key:'compartments',label:'Compartment Layout', type:'radio',
+      options:[{label:'3-Section',mod:0},{label:'5-Section',mod:20},{label:'Modular',mod:35}], default:'3-Section' },
+    { key:'finish',      label:'Exterior Finish',    type:'radio',
+      options:[{label:'Matte Obsidian',mod:0},{label:'Carbon Texture',mod:15},{label:'UV-Reactive',mod:25}], default:'Matte Obsidian' },
+  ],
+};
+
+/* ═══════════════════════════════════════════════════════
+   APP
+═══════════════════════════════════════════════════════ */
+const App = () => {
+  const [view,            setView]            = useState('home');
+  const [activeCategory,  setActiveCategory]  = useState(null);
+  const [selectedItem,    setSelectedItem]    = useState(null);
+  const [mode,            setMode]            = useState('light');
+  const [cartCount,       setCartCount]       = useState(0);
+  const [sidebarOpen,     setSidebarOpen]     = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState({});
+  // Click-based dropdown state — tracks which nav item is open
+  const [openDropdown,    setOpenDropdown]    = useState(null);
+
+  /* ── Sync body class ── */
+  useEffect(() => {
+    document.body.className = mode === 'light'
+      ? 'bg-pearl text-abyss font-sans selection:bg-uv selection:text-white overflow-x-hidden transition-colors duration-500'
+      : 'bg-abyss text-pearl font-sans selection:bg-uv selection:text-white overflow-x-hidden transition-colors duration-500';
+  }, [mode]);
+
+  /* ── Reset option selections on modal open (openStudio parity) ── */
+  useEffect(() => {
+    if (selectedItem) {
+      const configs  = CUSTOMIZATIONS[selectedItem.id] || [];
+      const defaults = {};
+      configs.forEach(c => { defaults[c.key] = c.default; });
+      setSelectedOptions(defaults);
+    }
+  }, [selectedItem]);
+
+  /* ── Update one option ── */
+  const handleOptionChange = (key, value) =>
+    setSelectedOptions(prev => ({ ...prev, [key]: value }));
+
+  /* ═══ PRICING ENGINE — live registry value ═══ */
+  const calculatePrice = () => {
+    if (!selectedItem) return 0;
+    const configs = CUSTOMIZATIONS[selectedItem.id] || [];
+    let total = selectedItem.p;
+    configs.forEach(config => {
+      const val = selectedOptions[config.key];
+      if (config.type === 'toggle') {
+        if (val === true) total += config.mod;
+      } else {
+        const opt = config.options && config.options.find(o => o.label === val);
+        if (opt) total += opt.mod;
+      }
+    });
+    return total;
+  };
+
+  /* ── Navigate to shop category (showPage equivalent) ── */
+  const navigateToCategory = (cat) => {
+    setActiveCategory(cat);
+    setView('shop');
+    setOpenDropdown(null);
+    window.scrollTo(0, 0);
+  };
+
+  const getCatName = (cat) => {
+    if (cat === 'LilysCozyCorner') return "Lily's Corner";
+    if (cat === 'KitchenArchive')  return 'Kitchen Archive';
+    return cat;
+  };
+
+  /* ── Studio mode label ── */
+  const studioLabel = mode === 'light' ? 'The Laboratory' : 'The Abyssal Vault';
+
+  /* ═══════════════════════════════════════════════════════
+     FIXED NAV ITEM — click-based dropdown; sub-category
+     tiles use navigateToCategory so state updates and menu
+     closes correctly. Premium lift/glow hover via .nav-tile
+  ═══════════════════════════════════════════════════════ */
+  const NavItem = ({ label, items, catKey, icon }) => {
+    const isOpen = openDropdown === catKey;
+    const dropBg = mode === 'light'
+      ? 'rgba(249,249,249,0.97)'
+      : 'rgba(8,8,8,0.96)';
+
+    return (
+      <div className="relative py-2 px-2">
+        <button
+          onClick={() => setOpenDropdown(isOpen ? null : catKey)}
+          className="font-black text-[11px] uppercase tracking-widest opacity-80 hover:opacity-100 transition-all flex items-center gap-1.5 px-2 py-1 rounded-lg hover:text-uv">
+          {icon && <span className="opacity-70">{icon}</span>}
+          {label}
+          <IconChevron s={10} open={isOpen} />
+        </button>
+
+        {isOpen && (
+          <>
+            {/* Click-away backdrop */}
+            <div className="fixed inset-0 z-[200]" onClick={() => setOpenDropdown(null)} />
+
+            <div className="nav-drop-panel absolute top-full left-0 z-[300] mt-2 min-w-[210px] rounded-2xl overflow-hidden"
+              style={{
+                background: dropBg,
+                backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+                border: `1px solid rgba(155,93,229,${mode === 'light' ? '0.18' : '0.30'})`,
+                boxShadow: '0 12px 40px rgba(0,0,0,0.18)',
+              }}>
+              <div className="p-3 space-y-1">
+                {/* "View all" row */}
+                <button
+                  onClick={() => navigateToCategory(catKey)}
+                  className={`nav-tile w-full text-left px-4 py-3 flex items-center justify-between
+                    font-black text-xs uppercase tracking-widest
+                    ${mode === 'light' ? 'text-abyss' : 'text-white'}`}>
+                  <span>All {label}</span>
+                  <span style={{ color: '#FF6B35' }}><IconArrow s={12} /></span>
+                </button>
+                {/* Sub-category tiles */}
+                {Object.keys(items).map(sub => (
+                  <button key={sub}
+                    onClick={() => navigateToCategory(catKey)}
+                    className={`nav-tile w-full text-left px-4 py-2.5 font-black text-xs uppercase tracking-widest
+                      ${mode === 'light' ? 'text-abyss/55 hover:text-uv' : 'text-white/55 hover:text-uv'}`}>
+                    {sub}
+                  </button>
+                ))}
+              </div>
             </div>
-        );
+          </>
+        )}
+      </div>
+    );
+  };
 
-        const INVENTORY = {
-            Apparel: {
-                Men: [{ id: 'EA-M01', n: 'Abyssal Hoodie', t: 'Heavyweight Essential. Boxy & Cozy.', p: 145, mock: 'mock-hoodie' }],
-                Women: [{ id: 'EA-W01', n: 'Meadow Crop', t: 'Main Character micro-knit.', p: 68, mock: 'mock-hoodie' }],
-                Kids: [{ id: 'EA-K01', n: 'Slime Mini-Crew', t: 'Bubbly soft fleece for next-gen.', p: 45, mock: 'mock-hoodie' }]
-            },
-            Desktop: {
-                Office: [{ id: 'EA-D01', n: 'Liquid Sky Mat', t: 'Chrome micro-laminate surface.', p: 124, mock: 'mock-mat' }],
-                Battle: [{ id: 'EA-D02', n: 'Hades Artisan Cap', t: 'Hand-poured resin setup jewelry.', p: 189, mock: 'orb' }]
-            },
-            LilysCozyCorner: {
-                Sensory: [{ id: 'EA-L01', n: 'Botanical Slime', t: 'Iridescent setup reset.', p: 28, mock: 'mock-plush' }],
-                Softs: [{ id: 'EA-L02', n: 'Glow Squishie', t: 'Desk companion with high-def aura.', p: 42, mock: 'mock-plush' }],
-                Comfort: [{ id: 'EA-L03', n: 'Underworld Throw', t: 'Elite 550gsm luxury heavy knit.', p: 195, mock: 'mock-mat' }]
-            },
-            KitchenArchive: {
-                Vessels: [{ id: 'EA-KA1', n: 'Mana Ceramic Mug', t: 'Chrome-handle desk potion vessel.', p: 45, mock: 'mock-plush' }],
-                Utility: [{ id: 'EA-KA2', n: 'Artifact Bento', t: 'Matte obsidian setup vault.', p: 65, mock: 'mock-mat' }]
-            }
-        };
+  /* ── Category icon map ── */
+  const catIcons = {
+    Apparel:         <IconShirt   s={14} />,
+    Desktop:         <IconMonitor s={14} />,
+    LilysCozyCorner: <IconSparkle s={14} />,
+    KitchenArchive:  <IconCoffee  s={14} />,
+  };
 
-        const App = () => {
-            const [view, setView] = useState('home');
-            const [activeCategory, setActiveCategory] = useState(null);
-            const [selectedItem, setSelectedItem] = useState(null);
-            const [mode, setMode] = useState('light');
-            const [cartCount, setCartCount] = useState(0);
+  /* ── Conditional classes for Day Archive modal ── */
+  const isLight = mode === 'light';
+  const modalWrap   = isLight ? 'modal-sanctuary' : 'glass-dark';
+  const modalBorder = isLight ? 'border-uv/20'    : 'border-uv/40';
+  const modalText   = isLight ? 'text-abyss'      : 'text-white';
+  const labelOpacity = isLight ? 'opacity-70'     : 'opacity-60';
 
-            useEffect(() => {
-                document.body.className = mode === 'light'
-                    ? 'bg-pearl text-abyss font-sans selection:bg-uv selection:text-white overflow-x-hidden'
-                    : 'bg-abyss text-pearl font-sans selection:bg-uv selection:text-white overflow-x-hidden';
-            }, [mode]);
+  /* Radio button conditional classes (light vs dark) */
+  const radioActive   = (sel) => sel
+    ? (isLight ? 'opt-active-light'   : 'border-uv text-uv bg-uv/20 shadow-[0_0_16px_rgba(155,93,229,0.45)]')
+    : (isLight ? 'opt-inactive-light' : 'border-white/10 text-white/60 hover:border-uv/50 hover:text-uv hover:bg-uv/10');
 
-            const navigateToCategory = (cat) => {
-                setActiveCategory(cat);
-                setView('shop');
-                window.scrollTo(0, 0);
-            };
+  /* Toggle button conditional classes */
+  const toggleActive  = (val) => val
+    ? (isLight
+        ? 'border-sunset text-sunset bg-sunset/10 shadow-[0_0_16px_rgba(255,107,53,0.3)]'
+        : 'border-uv bg-uv/20 text-uv shadow-[0_0_16px_rgba(155,93,229,0.4)]')
+    : (isLight
+        ? 'border-abyss/15 text-abyss/45 hover:border-sunset/50 hover:text-sunset'
+        : 'border-white/10 text-white/50 hover:border-uv/40 hover:text-white/80');
 
-            const NavItem = ({ label, items, catKey }) => (
-                <div className="group relative py-2 px-4 cursor-pointer">
-                    <button onClick={() => navigateToCategory(catKey)} className="font-black text-sm uppercase tracking-widest opacity-80 hover:text-uv transition-all flex items-center gap-2">
-                        {label} <span className="text-[10px] opacity-40">▾</span>
-                    </button>
-                    <div className="nav-dropdown absolute top-full left-0 glass-dark p-6 space-y-4 min-w-[200px] z-[300]">
-                        {Object.keys(items).map(sub => (
-                            <button key={sub} onClick={() => navigateToCategory(catKey)} className="block w-full text-left text-xs font-bold text-white/60 hover:text-uv uppercase tracking-widest">{sub}</button>
-                        ))}
+  return (
+    <div className="min-h-screen relative">
+      <div className="pearl-overlay" />
+
+      {/* Ooze blobs */}
+      <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div className="ooze-blob w-[100vw] h-[100vh] top-[-20%] left-[-20%] bg-uv/15 animate-ooze" />
+        <div className="ooze-blob w-[80vw] h-[80vh] bottom-[-20%] right-[-20%] bg-cyan/15 animate-ooze" style={{animationDelay:'-5s'}} />
+        <div className="ooze-blob w-[60vw] h-[60vh] top-[30%] left-[20%] bg-pink/10 animate-ooze" style={{animationDelay:'-10s'}} />
+      </div>
+
+      <VaultSidebar
+        isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)}
+        mode={mode} navigateToCategory={navigateToCategory} setView={setView}
+      />
+
+      {/* ════════════════ NAVIGATION ════════════════ */}
+      <nav className={`fixed top-0 w-full z-[100] flex justify-between items-center transition-all duration-500 border-b backdrop-blur-3xl
+          ${isLight ? 'bg-pearl/80 border-uv/20' : 'bg-abyss/80 border-uv/40'}`}
+        style={{ padding:'0.85rem var(--sp-r) 0.85rem var(--sp-l)' }}>
+
+        <div className="flex items-center gap-3">
+          <button onClick={() => setSidebarOpen(true)} aria-label="Open vault menu"
+            className="p-2 hover:opacity-60 transition-opacity">
+            <IconMenu s={20} />
+          </button>
+          <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => { setView('home'); setOpenDropdown(null); }}>
+            <SunsetArchiveLogo size={34} placement="nav" />
+            <span className="font-black text-base md:text-lg tracking-tighter">
+              endgame<span style={{ color:'#FF6B35' }}>.</span>archive
+            </span>
+          </div>
+        </div>
+
+        <div className="hidden lg:flex items-center gap-0.5">
+          <NavItem label="Apparel"       items={INVENTORY.Apparel}         catKey="Apparel"         icon={<IconShirt   s={13} />} />
+          <NavItem label="Desktop"       items={INVENTORY.Desktop}         catKey="Desktop"         icon={<IconMonitor s={13} />} />
+          <NavItem label="Lily's Corner" items={INVENTORY.LilysCozyCorner} catKey="LilysCozyCorner" icon={<IconSparkle s={13} />} />
+          <NavItem label="Kitchen"       items={INVENTORY.KitchenArchive}  catKey="KitchenArchive"  icon={<IconCoffee  s={13} />} />
+          <button onClick={() => { setView('about'); setOpenDropdown(null); }}
+            className="font-black text-[11px] uppercase tracking-widest opacity-80 px-3 py-2 hover:text-uv transition-colors flex items-center gap-1.5">
+            <IconBook s={13} /> About
+          </button>
+          <button onClick={() => { setView('faq'); setOpenDropdown(null); }}
+            className="font-black text-[11px] uppercase tracking-widest opacity-80 px-3 py-2 hover:text-uv transition-colors flex items-center gap-1.5">
+            <IconHelp s={13} /> FAQ
+          </button>
+        </div>
+
+        <div className="flex items-center gap-3 md:gap-4">
+          {/* Mode toggle with sun/moon icons */}
+          <button onClick={() => setMode(m => m === 'light' ? 'dark' : 'light')}
+            className="w-12 h-6 rounded-full border-2 border-uv/30 relative flex items-center px-0.5 transition-all">
+            <div className={`w-4 h-4 rounded-full transition-all duration-300 flex items-center justify-center overflow-hidden
+              ${isLight ? 'translate-x-0 bg-sunset/80' : 'translate-x-6 bg-uv shadow-[0_0_8px_#9B5DE5]'}`}>
+            </div>
+          </button>
+          <button className="btn-sunset px-4 md:px-6 py-2 rounded-full font-black text-[11px] uppercase tracking-widest flex items-center gap-2 whitespace-nowrap shadow-lg">
+            <IconCart s={14} /> Cart ({cartCount})
+          </button>
+        </div>
+      </nav>
+
+      {/* ════════════════ HOME ════════════════ */}
+      {view === 'home' && (
+        <div>
+          <header className="pt-40 md:pt-56 pb-20 md:pb-32 text-center relative max-w-7xl mx-auto flex flex-col items-center page-px">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl aspect-square z-0 pointer-events-none flex items-center justify-center opacity-50">
+              <div className={`absolute w-full  h-full  border-2 rotate-45 ${isLight?'border-uv/50 bg-uv/5':'border-uv/10'}`} />
+              <div className={`absolute w-[78%] h-[78%] border-2 rotate-45 ${isLight?'border-cyan/50 bg-cyan/5':'border-cyan/10'}`} />
+              <div className={`absolute w-[56%] h-[56%] border-2 rotate-45 ${isLight?'border-pink/50 bg-pink/5':'border-pink/10'}`} />
+            </div>
+
+            <div className="relative z-10 w-full flex flex-col items-center">
+              <div className="animate-float mb-10 md:mb-16">
+                <SunsetArchiveLogo size={150} placement="hero" />
+              </div>
+              <h1 className="hero-h1 font-serif italic leading-[0.86] tracking-tighter mb-6 md:mb-10">
+                Your setup<br />is a <span className="sunset-text">sanctuary.</span>
+              </h1>
+              <p className="font-black text-sm md:text-lg uppercase tracking-[0.25em] mb-3"
+                style={{ color:'#FF6B35' }}>
+                Elite Gaming Artifacts. Crafted in Huntsville.
+              </p>
+              <p className="font-bold text-base md:text-2xl opacity-60 mb-10 md:mb-20 max-w-2xl">
+                The elite aura your setup deserves. Manifesting the ultimate setup reveal.
+              </p>
+              <button onClick={() => navigateToCategory('Apparel')}
+                className="btn-sunset px-10 md:px-16 py-4 md:py-6 rounded-full font-black text-xs tracking-widest uppercase shadow-2xl">
+                Browse the Gallery
+              </button>
+            </div>
+          </header>
+
+          {/* Category quick-links — Lucide icons, no emoji */}
+          <section className="max-w-7xl mx-auto pb-16 page-px">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+              {[
+                { key:'Apparel',         label:'Apparel',       icon:<IconShirt   s={36} /> },
+                { key:'Desktop',         label:'Desktop',       icon:<IconMonitor s={36} /> },
+                { key:'LilysCozyCorner', label:"Lily's Corner", icon:<IconSparkle s={36} /> },
+                { key:'KitchenArchive',  label:'Kitchen',       icon:<IconCoffee  s={36} /> },
+              ].map(cat => (
+                <button key={cat.key} onClick={() => navigateToCategory(cat.key)}
+                  className="glass p-5 md:p-8 text-center space-y-3 hover:scale-[1.04] transition-all duration-300 animate-pulse-uv flex flex-col items-center">
+                  {cat.icon}
+                  <p className="font-black text-[10px] md:text-xs uppercase tracking-widest">{cat.label}</p>
+                </button>
+              ))}
+            </div>
+          </section>
+
+          {/* Collection spotlight */}
+          <section className="max-w-7xl mx-auto py-16 md:py-40 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 page-px">
+            <div className="glass p-8 md:p-12 space-y-6 flex flex-col justify-center animate-pulse-uv">
+              <span className="font-black text-xs uppercase tracking-[0.5em]" style={{ color:'#FF6B35' }}>Collection Spotlight</span>
+              <h2 className="section-h2 font-serif italic leading-tight">Elite Artifacts<br />for Collectors.</h2>
+              <p className="font-bold text-base md:text-xl opacity-80">
+                We don't do mass production. We do alchemy. Curating the high-def items your favorite gaming worlds always deserved.
+              </p>
+              <button onClick={() => navigateToCategory('Desktop')}
+                className="w-fit flex items-center gap-2 font-black text-xs uppercase tracking-widest pb-2 hover:opacity-70 transition-opacity"
+                style={{ borderBottom: '3px solid #FF6B35', color:'#FF6B35' }}>
+                Shop Desktop Upgrade <IconArrow s={12} />
+              </button>
+            </div>
+            <div className="aspect-square glass flex items-center justify-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-pink/20 to-uv/20 animate-ooze" />
+              <div className="mock-mat scale-150 rotate-12 z-10" />
+            </div>
+          </section>
+        </div>
+      )}
+
+      {/* ════════════════ SHOP ════════════════ */}
+      {view === 'shop' && activeCategory && INVENTORY[activeCategory] && (
+        <div className="pt-28 md:pt-36 pb-32 md:pb-48 page-px">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row md:items-end justify-between border-b-4 border-uv/20 pb-8 md:pb-12 mb-8 md:mb-20 gap-4">
+              <div className="space-y-2 md:space-y-3">
+                <p className="font-black text-[10px] tracking-[0.5em] uppercase" style={{ color:'#FF6B35' }}>
+                  Vault Segment / 0{Object.keys(INVENTORY).indexOf(activeCategory) + 1}
+                </p>
+                <h2 className="cat-h2 font-serif italic leading-none">{getCatName(activeCategory)}</h2>
+              </div>
+              <div className="md:text-right space-y-1">
+                <span className="font-bold text-xs opacity-40 uppercase tracking-[0.4em] block">Status: Access Granted</span>
+                <span className="font-black text-xs tracking-widest uppercase" style={{ color:'#FF6B35' }}>Studio: Huntsville, AL</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 lg:gap-10">
+              {Object.values(INVENTORY[activeCategory]).flat().map(item => (
+                <div key={item.id}
+                  onClick={() => setSelectedItem(item)}
+                  className="glass group cursor-pointer transition-all duration-500 hover:scale-[1.03] animate-pulse-uv overflow-hidden"
+                  style={{ borderRadius:'20px' }}>
+                  <div className="relative overflow-hidden bg-white/5"
+                    style={{ aspectRatio:'4/5', borderRadius:'18px 18px 0 0' }}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-uv/30 to-cyan/20 opacity-40 group-hover:opacity-90 transition-opacity duration-500" />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-3 md:px-6 group-hover:scale-105 transition-transform duration-700">
+                      {item.mock === 'orb'
+                        ? <div className="w-12 h-12 md:w-20 md:h-20 rounded-full bg-uv/40 mb-3 md:mb-6" />
+                        : <div className={`${item.mock} mb-3 md:mb-6 mx-auto`} />
+                      }
+                      <h3 className="card-title font-serif italic text-center leading-tight">{item.n}</h3>
+                      <p className="font-bold text-center opacity-70 leading-snug mt-1 md:mt-2 hidden md:block"
+                        style={{ fontSize:'clamp(0.6rem, 1.4vw, 0.85rem)' }}>{item.t}</p>
                     </div>
+                  </div>
+                  <div className="px-3 md:px-6 py-2 md:py-4 flex justify-between items-center">
+                    <span className="font-serif italic card-price" style={{ color:'#FF6B35' }}>${item.p}</span>
+                    <span className="flex items-center gap-1 font-black text-[9px] md:text-xs opacity-40 uppercase tracking-wider">
+                      Open <IconArrow s={10} />
+                    </span>
+                  </div>
                 </div>
-            );
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
-            return (
-                <div className="min-h-screen relative">
-                    <div className="pearl-overlay"></div>
-                    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-                        <div className="ooze-blob w-[100vw] h-[100vh] top-[-20%] left-[-20%] bg-uv/15 animate-ooze"></div>
-                        <div className="ooze-blob w-[80vw] h-[80vh] bottom-[-20%] right-[-20%] bg-cyan/15 animate-ooze" style={{ animationDelay: '-5s' }}></div>
-                        <div className="ooze-blob w-[60vw] h-[60vh] top-[30%] left-[20%] bg-pink/10 animate-ooze" style={{ animationDelay: '-10s' }}></div>
-                    </div>
+      {/* ════════════════ ABOUT ════════════════ */}
+      {view === 'about' && (
+        <div className="pt-28 md:pt-40 pb-32 md:pb-48 page-px">
+          <div className="max-w-4xl mx-auto space-y-10 md:space-y-16">
+            <h1 className="cat-h2 font-serif italic">The Studio.</h1>
+            <div className="space-y-8 font-bold text-lg md:text-2xl leading-relaxed opacity-80">
+              <p>Based in <span style={{ color:'#FF6B35' }}>Huntsville, AL</span>, endgame.archive is a high-fidelity collective of aesthetic architects — designing elite gaming artifacts for the setup-obsessed.</p>
+              <p className="font-black text-sm md:text-base uppercase tracking-[0.3em] opacity-100 py-2" style={{ color:'#FF6B35' }}>
+                Elite Gaming Artifacts. Crafted in Huntsville.
+              </p>
+              <p>We reject gatekeeping and low-quality merch. We manifest the high-def setup reveal through museum-grade materials and alchemical design processes honed right here in Rocket City.</p>
+              <div className="p-8 md:p-12 border-4 border-uv/20 bg-uv/5 rounded-[32px]">
+                <h4 className="font-black text-xs uppercase tracking-widest text-uv mb-4">Manifesto</h4>
+                <p className="font-serif italic leading-tight" style={{ fontSize:'clamp(1.4rem, 3.5vw, 2.4rem)' }}>
+                  "To create the luxury artifacts that honor the legacy<br className="hidden md:block" /> of the worlds we grew up in."
+                </p>
+              </div>
+              <div className="p-6 md:p-10 border-2 border-uv/10 rounded-[24px] space-y-4">
+                <p className="font-black text-xs uppercase tracking-[0.5em]" style={{ color:'#FF6B35' }}>Our Home</p>
+                <p>Proud to be rooted in <strong style={{ color:'#FF6B35' }}>Huntsville, Alabama</strong> — Rocket City. Every artifact ships from our Huntsville studio, carrying the precision and ambition that defines this city.</p>
+              </div>
+            </div>
+            <button onClick={() => setView('home')}
+              className="flex items-center gap-2 font-black text-xs uppercase tracking-widest hover:opacity-70 transition-opacity"
+              style={{ borderBottom: '3px solid #FF6B35', color:'#FF6B35', paddingBottom:'6px' }}>
+              Return to Archive <IconArrow s={12} />
+            </button>
+          </div>
+        </div>
+      )}
 
-                    {/* NAVIGATION */}
-                    <nav className={`fixed top-0 w-full z-[100] px-8 py-4 flex justify-between items-center transition-all duration-500 border-b ${mode === 'light' ? 'bg-pearl/80 border-uv/20' : 'bg-abyss/80 border-uv/40'} backdrop-blur-3xl`}>
-                        <div className="flex items-center gap-4 cursor-pointer" onClick={() => setView('home')}>
-                            <PrismLogo size={42} />
-                            <span className="font-bold text-xl tracking-tighter">endgame<span className="text-uv">.</span>archive</span>
-                        </div>
-                        <div className="hidden lg:flex items-center gap-4">
-                            <NavItem label="Apparel" items={INVENTORY.Apparel} catKey="Apparel" />
-                            <NavItem label="Desktop" items={INVENTORY.Desktop} catKey="Desktop" />
-                            <NavItem label="Lily's Corner" items={INVENTORY.LilysCozyCorner} catKey="LilysCozyCorner" />
-                            <NavItem label="Kitchen" items={INVENTORY.KitchenArchive} catKey="KitchenArchive" />
-                            <button onClick={() => setView('about')} className="font-black text-sm uppercase tracking-widest opacity-80 px-4 hover:text-uv">About</button>
-                        </div>
-                        <div className="flex items-center gap-8">
-                            <button onClick={() => setMode(m => m === 'light' ? 'dark' : 'light')} className="w-14 h-8 rounded-full border-2 border-uv/30 relative px-1 flex items-center">
-                                <div className={`w-5 h-5 rounded-full bg-uv transition-all ${mode === 'dark' ? 'translate-x-6 shadow-[0_0_10px_#9B5DE5]' : 'translate-x-0'}`}></div>
-                            </button>
-                            <button className="bg-uv px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest text-white hover:bg-pink transition-all shadow-lg shadow-uv/20">Cart ({cartCount})</button>
-                        </div>
-                    </nav>
+      {/* ════════════════ FAQ ════════════════ */}
+      {view === 'faq' && (
+        <div className="pt-28 md:pt-40 pb-32 md:pb-48 page-px">
+          <div className="max-w-4xl mx-auto">
+            <div className="mb-12 md:mb-20 space-y-4">
+              <p className="font-black text-[10px] uppercase tracking-[0.5em]" style={{ color:'#FF6B35' }}>Archive FAQ</p>
+              <h1 className="cat-h2 font-serif italic">Questions?<br />We got you.</h1>
+              <p className="font-bold text-base md:text-xl opacity-60 max-w-xl">Everything you need to know about endgame.archive and our Huntsville studio.</p>
+            </div>
+            <div className="space-y-2">
+              {[
+                { q:"Where is endgame.archive based?", a:"endgame.archive is a boutique studio rooted in Huntsville, AL — Rocket City. Every artifact is conceptualized, curated, and quality-checked in our Huntsville workshop before it ships to you." },
+                { q:"What is the Alchemical Studio?", a:"The Alchemical Studio is our in-modal customization engine. Click any product to unlock finish tiers, size configurations, embroidery, material grades, and more — with a live Registry Value that updates in real time. In Day Mode it operates as The Laboratory; in Night Mode it becomes The Abyssal Vault." },
+                { q:"What premium finishes are available?", a:"We offer Liquid Chrome, Iridescent, UV-Energy, and Void Matte across applicable products, plus UV Edge Stitching (+$18) on mats and custom engraving on caps and mugs. Each finish is applied by hand in our Huntsville studio." },
+                { q:"How long does production take?", a:"Custom artifacts with premium finishes or engraving typically take 7–14 business days. Standard configurations ship within 3–5 business days from Huntsville, AL." },
+                { q:"Do you ship internationally?", a:"We currently focus on domestic US shipping. International shipping is in development — follow @endgame.archive on TikTok and Instagram for the announcement." },
+                { q:"What is your return policy?", a:"All custom, personalized, or made-to-order items are final sale. Standard items may be returned within 14 days of delivery in original, unused condition." },
+                { q:"Can I track my order?", a:"Yes — all orders receive a tracking number via email once shipped from our Huntsville studio." },
+                { q:"Is there a wholesale or collab program?", a:"We're selective about partnerships. Reach out via the Socials & Contact page to start a conversation with the archive team." },
+              ].map((item, i) => (
+                <FAQItem key={i} question={item.q} answer={item.a} mode={mode} />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
-                    {/* HOME */}
-                    {view === 'home' && (
-                        <div>
-                            <header className="pt-64 pb-32 px-8 text-center relative max-w-7xl mx-auto flex flex-col items-center">
-                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl aspect-square z-0 pointer-events-none flex items-center justify-center opacity-70">
-                                    <div className={`absolute w-[100%] h-[100%] border-2 rotate-45 ${mode === 'light' ? 'border-uv/50 bg-uv/5' : 'border-uv/10'}`}></div>
-                                    <div className={`absolute w-[80%] h-[80%] border-2 rotate-45 ${mode === 'light' ? 'border-cyan/50 bg-cyan/5' : 'border-cyan/10'}`}></div>
-                                    <div className={`absolute w-[60%] h-[60%] border-2 rotate-45 ${mode === 'light' ? 'border-pink/50 bg-pink/5' : 'border-pink/10'}`}></div>
-                                    <div className={`absolute w-[40%] h-[40%] border-2 rotate-45 ${mode === 'light' ? 'border-yellow/50 bg-yellow/5' : 'border-yellow/10'}`}></div>
-                                </div>
-                                <div className="relative z-10 w-full flex flex-col items-center">
-                                    <div className="animate-float mb-20"><PrismLogo size={240} /></div>
-                                    <h1 className="font-serif italic text-8xl md:text-[14rem] leading-[0.8] tracking-tighter mb-12">
-                                        Your setup<br />is a <span className="iridescent-text">sanctuary.</span>
-                                    </h1>
-                                    <p className="font-bold text-2xl md:text-4xl opacity-80 mb-20 max-w-4xl">The elite aura your setup deserves. Manifesting the ultimate setup reveal.</p>
-                                    <button onClick={() => navigateToCategory('Apparel')} className="px-16 py-8 rounded-full border-4 border-uv/40 font-black text-sm tracking-widest uppercase hover:bg-uv hover:text-white transition-all shadow-2xl">Browse the Gallery</button>
-                                </div>
-                            </header>
+      {/* ════════════════ SOCIALS & CONTACT ════════════════ */}
+      {view === 'socials' && (
+        <div className="pt-28 md:pt-40 pb-32 md:pb-48 page-px">
+          <div className="max-w-4xl mx-auto space-y-12 md:space-y-20">
+            <div className="space-y-4">
+              <p className="font-black text-[10px] uppercase tracking-[0.5em]" style={{ color:'#FF6B35' }}>Connect</p>
+              <h1 className="font-serif italic leading-tight" style={{ fontSize:'clamp(2.2rem, 8vw, 6rem)' }}>Socials &<br />Contact.</h1>
+              <p className="font-bold text-base md:text-xl opacity-60 max-w-md">Follow the archive. Slide into the vault.</p>
+            </div>
 
-                            <section className="max-w-7xl mx-auto px-8 py-48 grid grid-cols-1 md:grid-cols-2 gap-32">
-                                <div className="glass p-12 space-y-8 flex flex-col justify-center animate-pulse-uv">
-                                    <span className="font-black text-sm text-uv uppercase tracking-[0.5em]">Collection Spotlight</span>
-                                    <h2 className="font-serif italic text-6xl leading-tight">Elite Artifacts<br />for Collectors.</h2>
-                                    <p className="font-bold text-xl opacity-80">We don't do mass production. We do alchemy. Curating the high-def items your favorite gaming worlds always deserved.</p>
-                                    <button onClick={() => navigateToCategory('Desktop')} className="w-fit border-b-4 border-uv font-black text-sm uppercase tracking-widest pb-2 hover:text-uv">Shop Desktop Upgrade</button>
-                                </div>
-                                <div className="aspect-square glass flex items-center justify-center relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-pink/20 to-uv/20 animate-ooze"></div>
-                                    <div className="mock-mat scale-150 rotate-12"></div>
-                                </div>
-                            </section>
-                        </div>
-                    )}
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+              <div className="glass p-6 md:p-10 space-y-5">
+                <h3 className="font-black text-xs uppercase tracking-[0.4em]" style={{ color:'#FF6B35' }}>Follow the Archive</h3>
+                {[
+                  { name:'TikTok',    handle:'@endgame.archive', color:'#F15BB5' },
+                  { name:'Instagram', handle:'@endgame.archive', color:'#9B5DE5' },
+                  { name:'Pinterest', handle:'endgame.archive',  color:'#00F5D4' },
+                ].map(s => (
+                  <a key={s.name} href="#"
+                    className="flex items-center justify-between p-4 border-2 border-uv/20 rounded-2xl hover:border-uv transition-all group">
+                    <span className="font-black text-sm uppercase tracking-widest" style={{ color:s.color }}>{s.name}</span>
+                    <span className="flex items-center gap-1 font-bold text-sm opacity-50 group-hover:opacity-100 transition-opacity">
+                      {s.handle} <IconArrow s={12} />
+                    </span>
+                  </a>
+                ))}
+              </div>
 
-                    {/* SHOP */}
-                    {view === 'shop' && activeCategory && INVENTORY[activeCategory] && (
-                        <div className="pt-48 px-8 max-w-7xl mx-auto pb-48">
-                            <div className="flex items-end justify-between border-b-4 border-uv/20 pb-12 mb-24">
-                                <div className="space-y-4">
-                                    <p className="font-black text-sm text-uv tracking-[0.5em] uppercase">Vault Segment / 0{Object.keys(INVENTORY).indexOf(activeCategory) + 1}</p>
-                                    <h2 className="font-serif italic text-8xl md:text-[9rem] leading-none">
-                                        {activeCategory === 'LilysCozyCorner' ? "Lily's Corner" : activeCategory === 'KitchenArchive' ? 'Kitchen Archive' : activeCategory}
-                                    </h2>
-                                </div>
-                                <div className="text-right">
-                                    <span className="font-bold text-xs opacity-40 uppercase tracking-[0.4em] block">Status: Access Granted</span>
-                                    <span className="font-black text-uv text-xs tracking-widest uppercase">Studio: Huntsville, AL</span>
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
-                                {Object.values(INVENTORY[activeCategory]).flat().map(item => (
-                                    <div key={item.id} onClick={() => setSelectedItem(item)} className="glass group p-2 cursor-pointer transition-all duration-700 hover:scale-[1.05] animate-pulse-uv">
-                                        <div className="aspect-[4/5] bg-white/5 rounded-[32px] relative flex items-center justify-center overflow-hidden">
-                                            <div className="absolute inset-0 bg-gradient-to-br from-uv/30 to-cyan/20 opacity-40 group-hover:opacity-90 transition-opacity"></div>
-                                            <div className="z-10 text-center px-12 group-hover:scale-110 transition-all duration-1000">
-                                                <div className={`mx-auto mb-10 ${item.mock === 'orb' ? 'w-24 h-24 rounded-full bg-uv/40' : item.mock}`}></div>
-                                                <h3 className="font-serif italic text-5xl leading-tight mb-8">{item.n}</h3>
-                                                <p className="font-bold text-lg opacity-90 leading-relaxed">{item.t}</p>
-                                            </div>
-                                        </div>
-                                        <div className="p-12 flex justify-between items-center">
-                                            <span className="font-black text-xs opacity-40 uppercase">Ref: {item.id}</span>
-                                            <span className="font-serif italic text-5xl text-uv">${item.p}</span>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
+              <div className="glass p-6 md:p-10 space-y-4">
+                <h3 className="font-black text-xs uppercase tracking-[0.4em]" style={{ color:'#FF6B35' }}>Send a Message</h3>
+                {['Your name', 'Your email'].map(ph => (
+                  <input key={ph} type={ph.includes('email') ? 'email' : 'text'} placeholder={ph}
+                    className={`w-full p-4 rounded-xl border-2 outline-none text-sm font-bold transition-all focus:border-uv font-sans
+                      ${isLight ? 'bg-black/5 border-black/10 text-abyss placeholder-abyss/30'
+                                : 'bg-white/5 border-white/10 text-white placeholder-white/30'}`} />
+                ))}
+                <textarea rows={4} placeholder="Your message..."
+                  className={`w-full p-4 rounded-xl border-2 outline-none text-sm font-bold resize-none transition-all focus:border-uv font-sans
+                    ${isLight ? 'bg-black/5 border-black/10 text-abyss placeholder-abyss/30'
+                              : 'bg-white/5 border-white/10 text-white placeholder-white/30'}`} />
+                <button className="btn-sunset w-full py-4 rounded-full font-black text-xs uppercase tracking-widest">
+                  Send to Archive
+                </button>
+              </div>
+            </div>
 
-                    {/* ABOUT */}
-                    {view === 'about' && (
-                        <div className="pt-64 px-8 max-w-4xl mx-auto pb-48">
-                            <div className="space-y-16">
-                                <h1 className="font-serif italic text-8xl md:text-9xl">The Studio.</h1>
-                                <div className="space-y-12 font-bold text-2xl leading-relaxed opacity-80">
-                                    <p>Based in <span className="text-uv">Huntsville, AL</span>, endgame.archive is a high-fidelity collective of aesthetic architects.</p>
-                                    <p>We reject gatekeeping and low-quality merch. We manifest the high-def setup reveal through museum-grade materials and alchemical design.</p>
-                                    <div className="p-12 border-4 border-uv/20 bg-uv/5 rounded-[40px]">
-                                        <h4 className="font-black text-sm uppercase tracking-widest text-uv mb-6">Manifesto</h4>
-                                        <p className="font-serif italic text-4xl leading-tight">"To create the luxury artifacts that honor the legacy of the worlds we grew up in."</p>
-                                    </div>
-                                </div>
-                                <button onClick={() => setView('home')} className="font-black text-sm uppercase tracking-widest border-b-4 border-uv">Return to Archive</button>
-                            </div>
-                        </div>
-                    )}
+            <div className={`p-6 md:p-10 border-2 rounded-3xl text-center space-y-3 ${isLight ? 'border-uv/10' : 'border-uv/20'}`}>
+              <div className="flex justify-center"><SunsetArchiveLogo size={52} placement="socials-card" /></div>
+              <p className="font-black text-xs uppercase tracking-widest mt-4" style={{ color:'#FF6B35' }}>endgame.archive Studio</p>
+              <p className="font-bold opacity-60">Huntsville, Alabama</p>
+              <p className="font-black text-[10px] uppercase tracking-widest opacity-40">Elite Gaming Artifacts. Crafted in Huntsville.</p>
+            </div>
+          </div>
+        </div>
+      )}
 
-                    {/* PRODUCT MODAL */}
-                    {selectedItem && (
-                        <div className="fixed inset-0 z-[500] flex items-center justify-center p-6 bg-abyss/98 backdrop-blur-3xl">
-                            <div className="relative w-full max-w-6xl glass-dark border-4 border-uv/40 p-10 md:p-24 overflow-y-auto max-h-[95vh] shadow-[0_0_100px_rgba(155,93,229,0.3)]">
-                                <button onClick={() => setSelectedItem(null)} className="absolute top-8 right-8 w-16 h-16 rounded-full border-4 border-white/20 flex items-center justify-center font-black text-white hover:border-uv transition-all">✕</button>
-                                <div className="grid lg:grid-cols-2 gap-24 items-center">
-                                    <div className="aspect-square glass border-4 border-uv/40 flex items-center justify-center relative overflow-hidden animate-pulse-uv">
-                                        <div className="absolute inset-0 bg-gradient-to-tr from-uv/50 to-cyan/40 animate-ooze opacity-60"></div>
-                                        <PrismLogo size={280} />
-                                    </div>
-                                    <div className="space-y-14">
-                                        <div>
-                                            <span className="font-black text-sm text-uv uppercase tracking-[0.4em] block mb-8 px-6 py-2 bg-uv/10 rounded-full w-fit">Aura Calibration</span>
-                                            <h2 className="font-serif italic text-7xl md:text-[6rem] leading-[0.9]">{selectedItem.n}</h2>
-                                        </div>
-                                        <div className="space-y-8">
-                                            <label className="font-black text-xs uppercase tracking-widest opacity-60 block">Select Finish Tier (+$45.00)</label>
-                                            <div className="grid grid-cols-2 gap-4">
-                                                {['Liquid Chrome', 'Iridescent', 'UV-Energy', 'Void Matte'].map(f => (
-                                                    <button key={f} className="border-4 border-white/10 rounded-3xl py-6 font-black text-xs uppercase tracking-widest hover:border-uv hover:text-uv hover:bg-uv/10 transition-all">{f}</button>
-                                                ))}
-                                            </div>
-                                        </div>
-                                        <div className="p-12 border-4 border-uv/40 bg-uv/5 rounded-[40px] flex justify-between items-end">
-                                            <span className="font-serif italic text-3xl opacity-60">Total Value</span>
-                                            <span className="font-serif text-7xl md:text-[7rem] text-uv leading-none italic">${selectedItem.p + 45}</span>
-                                        </div>
-                                        <div className="flex gap-8">
-                                            <button onClick={() => { setCartCount(c => c + 1); setSelectedItem(null); }} className="flex-grow bg-uv py-8 rounded-full font-black text-sm uppercase tracking-widest text-white hover:bg-pink transition-all shadow-2xl shadow-uv/40">Add to Cart</button>
-                                            <button className="px-16 font-black text-xs uppercase tracking-widest opacity-40 hover:opacity-100" onClick={() => setSelectedItem(null)}>Cancel</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
+      {/* ════════════════════════════════════════════════════
+          ALCHEMICAL STUDIO MODAL
+          DAY ARCHIVE (light mode) → Sanctuary White bg,
+          deep abyss text, sunset gradient CTA.
+          ABYSSAL VAULT (dark mode) → retains glass-dark.
+          Pricing engine + Laboratory/Vault labels intact.
+      ════════════════════════════════════════════════════ */}
+      {selectedItem && (
+        <div className="fixed inset-0 z-[500] flex items-end md:items-center justify-center bg-abyss/95 backdrop-blur-3xl">
+          <div
+            className={`relative w-full md:max-w-6xl overflow-y-auto border-4 ${modalBorder} ${modalWrap} ${modalText}
+              shadow-[0_0_80px_rgba(255,107,53,0.2)]`}
+            style={{
+              maxHeight: '92vh',
+              borderRadius: '32px 32px 0 0',
+              padding: 'max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left))',
+            }}>
 
-                    {/* FOOTER */}
-                    <footer className={`py-48 px-12 border-t-8 transition-all ${mode === 'light' ? 'bg-pearl border-uv/10' : 'bg-abyss border-uv/30'}`}>
-                        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-24">
-                            <div className="col-span-2 space-y-12">
-                                <div className="flex items-center gap-6"><PrismLogo size={64} /><span className="font-black text-4xl tracking-tighter">endgame.archive</span></div>
-                                <p className="font-serif italic text-4xl opacity-50 leading-snug">"Setup reveals for the elite. Documented artifacts for the aesthetic architect."</p>
-                                <div className="space-y-4">
-                                    <p className="font-black text-xs uppercase tracking-widest text-uv">Crafted in Huntsville, AL</p>
-                                    <div className="flex gap-8 opacity-60 font-black text-xs uppercase tracking-widest">
-                                        <a href="#" className="hover:text-uv">TikTok</a>
-                                        <a href="#" className="hover:text-uv">Instagram</a>
-                                        <a href="#" className="hover:text-uv">Pinterest</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="space-y-10">
-                                <h5 className="font-black text-sm uppercase tracking-[0.5em] text-uv">Directory</h5>
-                                <ul className="font-bold text-2xl space-y-6 opacity-60">
-                                    <li><button onClick={() => navigateToCategory('Apparel')} className="hover:text-uv hover:translate-x-2 transition-all">Apparel Reveal</button></li>
-                                    <li><button onClick={() => navigateToCategory('Desktop')} className="hover:text-uv hover:translate-x-2 transition-all">Desktop Upgrade</button></li>
-                                    <li><button onClick={() => navigateToCategory('LilysCozyCorner')} className="hover:text-uv hover:translate-x-2 transition-all">Lily's Cozy Corner</button></li>
-                                    <li><button onClick={() => navigateToCategory('KitchenArchive')} className="hover:text-uv hover:translate-x-2 transition-all">Kitchen Archive</button></li>
-                                </ul>
-                            </div>
-                            <div className="text-right space-y-10">
-                                <div className="glass p-8 text-left space-y-4">
-                                    <p className="font-black text-xs uppercase text-uv tracking-widest">Join the Registry</p>
-                                    <input type="email" placeholder="your@email.com" className="w-full bg-white/10 p-4 rounded-xl border border-white/10 text-sm" />
-                                    <button className="w-full bg-uv py-4 rounded-full font-black text-xs uppercase text-white">Register</button>
-                                </div>
-                                <span className="font-black text-xs tracking-widest uppercase opacity-20 block">© 2026 ARCHIVE STUDIO / NODE: NOMINAL</span>
-                            </div>
-                        </div>
-                    </footer>
+            {/* Studio badge + close */}
+            <div className="flex items-center justify-between mb-6 md:mb-8">
+              <span className={`font-black text-[10px] uppercase tracking-[0.45em] px-4 py-2 rounded-full border
+                ${isLight
+                  ? 'text-sunset border-sunset/30 bg-sunset/8'
+                  : 'text-uv border-uv/20 bg-uv/10'}`}>
+                {isLight ? <span><IconSun s={10} style={{display:'inline',marginRight:4}} /></span> : null}
+                {studioLabel} — Aura Calibration
+              </span>
+              <button onClick={() => setSelectedItem(null)}
+                className={`w-11 h-11 rounded-full border-2 flex items-center justify-center transition-all
+                  ${isLight ? 'border-abyss/20 hover:border-sunset text-abyss' : 'border-white/20 hover:border-uv text-white'}`}>
+                <IconX s={14} />
+              </button>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-20 items-start">
+              {/* Left — product visual */}
+              <div className={`aspect-square flex items-center justify-center relative overflow-hidden rounded-3xl border-4
+                ${isLight ? 'border-uv/20 bg-gradient-to-br from-pink/10 to-uv/10' : 'border-uv/40 animate-pulse-uv'}`}>
+                {!isLight && <div className="absolute inset-0 bg-gradient-to-tr from-uv/50 to-cyan/40 animate-ooze opacity-60" />}
+                <SunsetArchiveLogo size={isLight ? 140 : 160} placement="modal-visual" />
+              </div>
+
+              {/* Right — info + options + price */}
+              <div className="space-y-7 md:space-y-9">
+                <div>
+                  <h2 className={`modal-h2 font-serif italic leading-[0.9] ${modalText}`}>{selectedItem.n}</h2>
+                  <p className={`font-bold text-sm md:text-base mt-2 ${isLight ? 'text-abyss/55' : 'text-white/55'}`}>{selectedItem.t}</p>
                 </div>
-            );
-        };
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
+                {/* ── Dynamic Customization Panel ── */}
+                <div className="space-y-6 max-h-[36vh] overflow-y-auto custom-scroll pr-2">
+                  {(CUSTOMIZATIONS[selectedItem.id] || []).map(config => {
+                    let modBadge = '';
+                    if (config.type === 'toggle') {
+                      modBadge = '+$' + config.mod;
+                    } else {
+                      const activeOpt = config.options && config.options.find(o => o.label === selectedOptions[config.key]);
+                      if (activeOpt && activeOpt.mod > 0) modBadge = '+$' + activeOpt.mod;
+                    }
+                    return (
+                      <div key={config.key} className="space-y-3">
+                        <label className={`font-black text-[10px] uppercase tracking-widest flex items-center gap-3 ${labelOpacity}`}
+                          style={{ color: isLight ? 'rgba(5,5,5,0.65)' : undefined }}>
+                          {config.label}
+                          {modBadge && (
+                            <span className="font-black text-[10px] px-3 py-1 rounded-full border"
+                              style={{
+                                color: isLight ? '#FF6B35' : '#9B5DE5',
+                                borderColor: isLight ? 'rgba(255,107,53,0.35)' : 'rgba(155,93,229,0.35)',
+                                background: isLight ? 'rgba(255,107,53,0.08)' : 'rgba(155,93,229,0.08)',
+                              }}>
+                              {modBadge}
+                            </span>
+                          )}
+                        </label>
+
+                        {/* RADIO */}
+                        {config.type === 'radio' && (
+                          <div className="flex flex-wrap gap-2 md:gap-3">
+                            {config.options.map(opt => (
+                              <button key={opt.label}
+                                onClick={() => handleOptionChange(config.key, opt.label)}
+                                className={`border-[3px] rounded-2xl py-3 px-4 font-black text-[10px] uppercase tracking-widest transition-all duration-300
+                                  ${radioActive(selectedOptions[config.key] === opt.label)}`}>
+                                {opt.label}
+                                {opt.mod > 0 && <span className="ml-1 opacity-50">+${opt.mod}</span>}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* DROPDOWN */}
+                        {config.type === 'dropdown' && (
+                          <select
+                            value={selectedOptions[config.key] || config.default}
+                            onChange={e => handleOptionChange(config.key, e.target.value)}
+                            className={`w-full border-[3px] rounded-2xl p-4 font-black text-xs uppercase tracking-wider
+                              outline-none cursor-pointer transition-all font-sans
+                              ${isLight
+                                ? 'border-abyss/15 text-abyss bg-white hover:border-sunset/50 focus:border-sunset'
+                                : 'border-white/10 text-white hover:border-uv/50 focus:border-uv'}`}
+                            style={{ background: isLight ? '#ffffff' : 'rgba(5,5,5,0.88)', fontFamily:'Nunito, sans-serif' }}>
+                            {config.options.map(opt => (
+                              <option key={opt.label} value={opt.label}
+                                style={{ background: isLight ? '#ffffff' : '#050505', color: isLight ? '#050505' : '#ffffff' }}>
+                                {opt.label}{opt.mod > 0 ? ` (+$${opt.mod})` : ''}
+                              </option>
+                            ))}
+                          </select>
+                        )}
+
+                        {/* TOGGLE */}
+                        {config.type === 'toggle' && (
+                          <button
+                            onClick={() => handleOptionChange(config.key, !selectedOptions[config.key])}
+                            className={`flex items-center gap-4 border-[3px] rounded-2xl py-4 px-6 font-black text-[10px] uppercase tracking-widest transition-all duration-300
+                              ${toggleActive(selectedOptions[config.key])}`}>
+                            <div className={`relative w-10 h-5 rounded-full border-2 border-current flex-shrink-0 transition-colors
+                              ${selectedOptions[config.key] ? (isLight ? 'bg-sunset/20' : 'bg-uv/30') : (isLight ? 'bg-abyss/8' : 'bg-white/10')}`}>
+                              <div className={`absolute top-0.5 w-3.5 h-3.5 rounded-full bg-current transition-transform duration-300
+                                ${selectedOptions[config.key] ? 'translate-x-[18px]' : 'translate-x-0.5'}`} />
+                            </div>
+                            {selectedOptions[config.key] ? 'Added — ' : 'Add — '}{config.label}
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
+                  {(!CUSTOMIZATIONS[selectedItem.id] || CUSTOMIZATIONS[selectedItem.id].length === 0) && (
+                    <p className={`font-bold text-xs uppercase tracking-widest ${isLight ? 'text-abyss/35' : 'text-white/35'}`}>
+                      Standard configuration — no customizations available.
+                    </p>
+                  )}
+                </div>
+
+                {/* ── Live Registry Value ── */}
+                <div className={`p-6 md:p-10 rounded-[32px] flex justify-between items-end border-4
+                  ${isLight ? 'border-sunset/20 bg-sunset/5' : 'border-uv/40 bg-uv/5'}`}>
+                  <div>
+                    <span className={`font-serif italic text-xl md:text-3xl block ${isLight ? 'text-abyss/55' : 'opacity-60'}`}>Registry Value</span>
+                    <span className={`font-black text-[10px] uppercase tracking-widest mt-1 block ${isLight ? 'text-sunset/60' : 'text-uv/60'}`}>
+                      Base ${selectedItem.p} + options
+                    </span>
+                  </div>
+                  <span className="registry-value font-serif italic leading-none"
+                    style={{ color: isLight ? '#FF6B35' : '#9B5DE5' }}>
+                    ${calculatePrice()}
+                  </span>
+                </div>
+
+                {/* CTA — Sunset gradient "Secure Item" button in both modes */}
+                <div className="flex gap-4 md:gap-6">
+                  <button
+                    onClick={() => { setCartCount(c => c + 1); setSelectedItem(null); }}
+                    className="btn-sunset flex-grow py-5 md:py-7 rounded-full font-black text-xs uppercase tracking-widest shadow-2xl flex items-center justify-center gap-2">
+                    <IconCart s={14} /> Secure Item
+                  </button>
+                  <button onClick={() => setSelectedItem(null)}
+                    className={`px-8 md:px-12 font-black text-xs uppercase tracking-widest transition-opacity
+                      ${isLight ? 'text-abyss opacity-35 hover:opacity-70' : 'opacity-40 hover:opacity-100'}`}>
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ════════════════ FOOTER ════════════════ */}
+      <footer className={`py-20 md:py-40 border-t-8 transition-all
+          ${isLight ? 'bg-pearl border-uv/10' : 'bg-abyss border-uv/30'}`}
+        style={{ paddingLeft:'var(--sp-l)', paddingRight:'var(--sp-r)' }}>
+        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 md:gap-20">
+
+          {/* Brand — Embossed Seal placement */}
+          <div className="col-span-full md:col-span-2 space-y-8 md:space-y-10">
+            <div className="flex items-center gap-4">
+              <SunsetArchiveLogo size={56} placement="footer-seal" />
+              <span className="font-black text-2xl md:text-4xl tracking-tighter">endgame.archive</span>
+            </div>
+            <p className="font-black text-xs md:text-sm uppercase tracking-[0.3em]" style={{ color:'#FF6B35' }}>
+              Elite Gaming Artifacts. Crafted in Huntsville.
+            </p>
+            <p className="font-serif italic text-xl md:text-3xl opacity-50 leading-snug">
+              "Setup reveals for the elite.<br />Documented artifacts for the aesthetic architect."
+            </p>
+            <div className="space-y-3">
+              <p className="font-black text-xs uppercase tracking-widest" style={{ color:'#FF6B35' }}>Huntsville, AL Studio — Node: Nominal</p>
+              <div className="flex gap-6 opacity-60 font-black text-xs uppercase tracking-widest">
+                <button onClick={() => setView('socials')} className="hover:text-uv transition-colors">TikTok</button>
+                <button onClick={() => setView('socials')} className="hover:text-uv transition-colors">Instagram</button>
+                <button onClick={() => setView('socials')} className="hover:text-uv transition-colors">Pinterest</button>
+              </div>
+            </div>
+          </div>
+
+          {/* Directory */}
+          <div className="space-y-8">
+            <h5 className="font-black text-xs uppercase tracking-[0.5em]" style={{ color:'#FF6B35' }}>Directory</h5>
+            <ul className="font-bold text-lg md:text-xl space-y-4 opacity-60">
+              {[
+                { label:'Home',             action:() => setView('home') },
+                { label:'Our Story',        action:() => setView('about') },
+                { label:'Apparel',          action:() => navigateToCategory('Apparel') },
+                { label:'Desktop',          action:() => navigateToCategory('Desktop') },
+                { label:"Lily's Corner",    action:() => navigateToCategory('LilysCozyCorner') },
+                { label:'Kitchen',          action:() => navigateToCategory('KitchenArchive') },
+                { label:'FAQ',              action:() => setView('faq') },
+                { label:'Socials & Contact',action:() => setView('socials') },
+              ].map(({ label, action }) => (
+                <li key={label}>
+                  <button onClick={action}
+                    className="flex items-center gap-2 hover:text-uv hover:translate-x-2 transition-all duration-200 text-left">
+                    {label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Registry */}
+          <div className="space-y-8">
+            <div className="glass p-6 md:p-8 space-y-4">
+              <p className="font-black text-xs uppercase tracking-widest" style={{ color:'#FF6B35' }}>Join the Registry</p>
+              <input type="email" placeholder="your@email.com"
+                className={`w-full p-4 rounded-xl border-2 text-sm font-bold outline-none focus:border-uv transition-all
+                  ${isLight ? 'bg-black/5 border-black/10 text-abyss placeholder-abyss/30'
+                            : 'bg-white/10 border-white/10 text-white placeholder-white/30'}`} />
+              <button className="btn-sunset w-full py-4 rounded-full font-black text-xs uppercase tracking-widest">
+                Register
+              </button>
+            </div>
+            <span className="font-black text-[10px] tracking-widest uppercase opacity-20 block">
+              © 2026 ARCHIVE STUDIO / HUNTSVILLE NODE: NOMINAL
+            </span>
+          </div>
+
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
 </body>
 </html>
+
