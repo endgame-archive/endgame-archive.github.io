@@ -5,6 +5,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>endgame.archive — Elite Gaming Artifacts. Crafted in Huntsville, AL.</title>
+
+  <!-- ═══════════════════════════════════════════════════
+       SEO & SOCIAL SHARING — iOS / iMessage Compatible
+       ─────────────────────────────────────────────────
+       Fix for "previews on Mac but not iPhone":
+         1. og:image:secure_url  — iOS crawler requires explicit https variant
+         2. og:image:type        — prevents iOS from mis-detecting MIME type
+         3. og:image:width/height — skips the re-fetch iOS does to measure image
+         4. twitter:card summary_large_image — iMessage falls back to Twitter
+            Card metadata when its own OG crawl stalls on cellular
+         5. apple-mobile-web-app-* — required for share-sheet / home-screen ctx
+  ════════════════════════════════════════════════════ -->
+
+  <!-- General SEO -->
+  <meta name="description" content="Premium video game artifacts and custom merchandise for the Aesthetic Architect. Crafted in Huntsville, AL." />
+  <meta name="theme-color" content="#FF6B35" />
+  <link rel="canonical" href="https://endgamearchive.com/" />
+
+  <!-- Apple / iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="endgame.archive" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://endgamearchive.com/apple-touch-icon.png" />
+
+  <!-- Twitter / X Card (iOS iMessage uses this as its large-bubble fallback) -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@endgamearchive" />
+  <meta name="twitter:title"       content="endgame.archive | The elite aura your setup deserves." />
+  <meta name="twitter:description" content="Premium video game artifacts and custom merchandise for the Aesthetic Architect. Crafted in Huntsville, AL." />
+  <meta name="twitter:image"       content="https://endgamearchive.com/social-preview.png" />
+  <meta name="twitter:image:alt"   content="endgame.archive — The elite aura your setup deserves." />
+
+  <!-- Open Graph -->
+  <meta property="og:type"             content="website" />
+  <meta property="og:site_name"        content="endgame.archive" />
+  <meta property="og:url"              content="https://endgamearchive.com/" />
+  <meta property="og:title"            content="endgame.archive | The elite aura your setup deserves." />
+  <meta property="og:description"      content="Premium video game artifacts and custom merchandise for the Aesthetic Architect. Crafted in Huntsville, AL." />
+  <meta property="og:image"            content="https://endgamearchive.com/social-preview.png" />
+  <meta property="og:image:secure_url" content="https://endgamearchive.com/social-preview.png" />
+  <meta property="og:image:type"       content="image/png" />
+  <meta property="og:image:width"      content="1200" />
+  <meta property="og:image:height"     content="630" />
+  <meta property="og:image:alt"        content="endgame.archive — The elite aura your setup deserves." />
+  <meta property="og:locale"           content="en_US" />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -59,7 +105,6 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     /* ── Safe-area vars ── */
     :root {
       --sp-l: max(16px, env(safe-area-inset-left));
@@ -69,7 +114,6 @@
       padding-left: var(--sp-l);
       padding-right: var(--sp-r);
     }
-
     /* ── Glass ── */
     .glass {
       background: rgba(248,249,255,0.10);
@@ -84,7 +128,6 @@
       backdrop-filter: blur(50px);
       -webkit-backdrop-filter: blur(50px);
     }
-
     /* ── Sunset Archive gradient button ── */
     .btn-sunset {
       background: linear-gradient(135deg, #FF6B35 0%, #F15BB5 45%, #9B5DE5 100%);
@@ -96,7 +139,6 @@
       transform: translateY(-2px);
       box-shadow: 0 14px 36px rgba(255,107,53,0.40);
     }
-
     /* ── Sunset text gradient ── */
     .sunset-text {
       background: linear-gradient(90deg, #FF6B35, #F15BB5, #9B5DE5, #00F5D4);
@@ -105,7 +147,6 @@
       -webkit-text-fill-color: transparent;
       animation: flow 5s linear infinite;
     }
-
     /* ── Iridescent text ── */
     .iridescent-text {
       background: linear-gradient(90deg, #00F5D4, #9B5DE5, #F15BB5, #FEE440, #00F5D4);
@@ -114,9 +155,7 @@
       -webkit-text-fill-color: transparent;
       animation: flow 6s linear infinite;
     }
-
     @keyframes flow { to { background-position: 200% center; } }
-
     /* ── Ooze blobs ── */
     .ooze-blob {
       position: fixed;
@@ -124,7 +163,6 @@
       filter: blur(140px);
       z-index: -1;
     }
-
     /* ── Pearl overlay shimmer ── */
     .pearl-overlay {
       position: fixed; inset: 0; z-index: -1; pointer-events: none;
@@ -132,8 +170,7 @@
       background-size: 300% 300%;
       animation: shimmer 12s ease infinite;
     }
-
-    /* ── Vault Sidebar (FIXED selector) ── */
+    /* ── Vault Sidebar ── */
     .vault-sidebar {
       position: fixed; top: 0; left: 0; height: 100%; width: 280px;
       z-index: 400; display: flex; flex-direction: column;
@@ -141,7 +178,6 @@
     }
     .vault-sidebar.closed { transform: translateX(-100%); }
     .vault-sidebar.open   { transform: translateX(0); }
-
     /* ── Mock product visuals ── */
     .mock-hoodie {
       width: 72px; height: 86px;
@@ -172,10 +208,8 @@
       filter: drop-shadow(0 0 14px rgba(241,91,181,0.6));
       flex-shrink: 0;
     }
-
     /* ── Light-mode modal ── */
     .modal-sanctuary { background: #F9F9F9; color: #050505; }
-
     /* ── Radio / toggle — light mode ── */
     .opt-active-light {
       border-color: #FF6B35; color: #FF6B35;
@@ -187,14 +221,12 @@
       border-color: rgba(255,107,53,0.5); color: #FF6B35;
       background: rgba(255,107,53,0.06);
     }
-
     /* ── Scrollbars ── */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-thumb { background: #9B5DE5; border-radius: 10px; }
     .custom-scroll::-webkit-scrollbar { width: 4px; }
     .custom-scroll::-webkit-scrollbar-track { background: transparent; }
     .custom-scroll::-webkit-scrollbar-thumb { background: rgba(155,93,229,0.4); border-radius: 10px; }
-
     /* ── Responsive font clamps ── */
     .hero-h1       { font-size: clamp(2.6rem, 11vw, 11rem); }
     .cat-h2        { font-size: clamp(2.2rem, 7.5vw, 7rem); }
@@ -203,14 +235,12 @@
     .card-price    { font-size: clamp(1.2rem, 3.5vw, 2.8rem); }
     .modal-h2      { font-size: clamp(2rem, 5.5vw, 5rem); }
     .registry-value { font-size: clamp(3rem, 7.5vw, 6.5rem); }
-
     /* ── Nav dropdown ── */
     .nav-drop-panel { animation: dropIn 0.22s ease forwards; }
     @keyframes dropIn {
       from { opacity: 0; transform: translateY(-8px) scale(0.96); }
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
-
     /* ── Premium nav tile hover ── */
     .nav-tile:hover {
       background: linear-gradient(135deg, rgba(255,107,53,0.1), rgba(155,93,229,0.1));
@@ -218,9 +248,8 @@
       box-shadow: 0 4px 16px rgba(155,93,229,0.18);
     }
     .nav-tile { transition: all 0.2s ease; border-radius: 12px; }
-
     /* ════════════════════════════════════════
-       NEW: Fade-in / slide-in animations
+       Fade-in / slide-in animations
     ════════════════════════════════════════ */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(32px); }
@@ -244,7 +273,6 @@
     .delay-500 { animation-delay: 0.50s; }
     .delay-600 { animation-delay: 0.60s; }
     .delay-700 { animation-delay: 0.70s; }
-
     /* ── Story section aura glows ── */
     .story-aura {
       position: absolute;
@@ -257,7 +285,6 @@
       0%   { transform: scale(1) translate(0, 0); }
       100% { transform: scale(1.14) translate(3%, 4%); }
     }
-
     /* ── Gallery filter active ── */
     .filter-active {
       background: linear-gradient(135deg, rgba(155,93,229,0.18), rgba(241,91,181,0.10));
@@ -265,7 +292,6 @@
       color: #9B5DE5 !important;
       box-shadow: 0 0 22px rgba(155,93,229,0.30);
     }
-
     /* ── Hover glow on product cards ── */
     .product-card {
       transition: transform 0.35s ease, box-shadow 0.35s ease;
@@ -276,7 +302,6 @@
                   0 20px 50px rgba(155,93,229,0.18),
                   0 0 80px rgba(241,91,181,0.10);
     }
-
     /* ── Story section quote border pulse ── */
     @keyframes borderGlow {
       0%,100% { border-color: rgba(241,91,181,0.40); }
@@ -289,7 +314,6 @@
 <div id="root"></div>
 <script type="text/babel">
 const { useState, useEffect, useRef } = React;
-
 /* ═══════════════════════════════════════════════════════
    BRAND ICON COMPONENTS
 ═══════════════════════════════════════════════════════ */
@@ -402,7 +426,6 @@ const IconFilter = ({ s = 14 }) => (
     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" fill="rgba(155,93,229,0.12)" stroke="#9B5DE5" strokeWidth="1.8"/>
   </svg>
 );
-
 /* ═══════════════════════════════════════════════════════
    SUNSET ARCHIVE LOGO
 ═══════════════════════════════════════════════════════ */
@@ -435,7 +458,6 @@ const SunsetArchiveLogo = ({ size = 42, placement = 'default' }) => {
     </div>
   );
 };
-
 /* ═══════════════════════════════════════════════════════
    FAQ ACCORDION ITEM
 ═══════════════════════════════════════════════════════ */
@@ -455,14 +477,12 @@ const FAQItem = ({ question, answer, mode }) => {
     </div>
   );
 };
-
 /* ═══════════════════════════════════════════════════════
-   VAULT SIDEBAR — updated category labels
+   VAULT SIDEBAR
 ═══════════════════════════════════════════════════════ */
 const VaultSidebar = ({ isOpen, onClose, mode, navigateToCategory, goTo }) => {
   const bg     = mode === 'light' ? 'rgba(255,255,255,0.14)' : 'rgba(5,5,5,0.84)';
   const border = mode === 'light' ? 'rgba(155,93,229,0.22)'  : 'rgba(155,93,229,0.45)';
-
   const SideBtn = ({ icon, children, onClick }) => (
     <button
       onClick={() => { onClick(); onClose(); }}
@@ -479,7 +499,6 @@ const VaultSidebar = ({ isOpen, onClose, mode, navigateToCategory, goTo }) => {
       <span className="font-black text-[9px] uppercase tracking-[0.5em] text-uv opacity-60">{label}</span>
     </div>
   );
-
   return (
     <>
       <div className="fixed inset-0 z-[390] transition-all duration-400"
@@ -520,7 +539,6 @@ const VaultSidebar = ({ isOpen, onClose, mode, navigateToCategory, goTo }) => {
     </>
   );
 };
-
 /* ═══════════════════════════════════════════════════════
    INVENTORY
 ═══════════════════════════════════════════════════════ */
@@ -544,7 +562,6 @@ const INVENTORY = {
     Utility: [{ id:'EA-KA2', n:'Artifact Bento',   t:'Matte obsidian setup vault.',             p:65,  mock:'mock-mat'   }],
   },
 };
-
 /* ═══════════════════════════════════════════════════════
    CUSTOMIZATIONS
 ═══════════════════════════════════════════════════════ */
@@ -594,7 +611,6 @@ const CUSTOMIZATIONS = {
     { key:'finish',      label:'Exterior Finish',    type:'radio', options:[{label:'Matte Obsidian',mod:0},{label:'Carbon Texture',mod:15},{label:'UV-Reactive',mod:25}], default:'Matte Obsidian' },
   ],
 };
-
 /* ═══════════════════════════════════════════════════════
    APP
 ═══════════════════════════════════════════════════════ */
@@ -610,14 +626,12 @@ const App = () => {
   const [galleryOpen,     setGalleryOpen]     = useState(false);
   const [galleryFilter,   setGalleryFilter]   = useState('All');
   const galleryRef = useRef(null);
-
   /* ── Sync body class ── */
   useEffect(() => {
     document.body.className = mode === 'light'
       ? 'bg-pearl text-abyss font-sans selection:bg-uv selection:text-white overflow-x-hidden transition-colors duration-500'
       : 'bg-abyss text-pearl font-sans selection:bg-uv selection:text-white overflow-x-hidden transition-colors duration-500';
   }, [mode]);
-
   /* ── Reset option selections on modal open ── */
   useEffect(() => {
     if (selectedItem) {
@@ -627,10 +641,8 @@ const App = () => {
       setSelectedOptions(defaults);
     }
   }, [selectedItem]);
-
   /* ── Update one option ── */
   const handleOptionChange = (key, value) => setSelectedOptions(prev => ({ ...prev, [key]: value }));
-
   /* ═══ PRICING ENGINE ═══ */
   const calculatePrice = () => {
     if (!selectedItem) return 0;
@@ -647,23 +659,20 @@ const App = () => {
     });
     return total;
   };
-
-  /* ── Navigate to category (scrolls to top) ── */
+  /* ── Navigate to category ── */
   const navigateToCategory = (cat) => {
     setActiveCategory(cat);
     setView('shop');
     setOpenDropdown(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  /* ── NEW: goTo — view change with scroll-to-top ── */
+  /* ── goTo ── */
   const goTo = (viewName) => {
     setView(viewName);
     setOpenDropdown(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  /* ── NEW: openGallery — scroll to gallery section ── */
+  /* ── openGallery ── */
   const openGallery = () => {
     setGalleryOpen(true);
     setTimeout(() => {
@@ -672,8 +681,7 @@ const App = () => {
       }
     }, 150);
   };
-
-  /* ── NEW: getGalleryItems — filtered product list ── */
+  /* ── getGalleryItems ── */
   const getGalleryItems = () => {
     const catKeyMap = {
       'Premium Apparel': 'Apparel',
@@ -687,19 +695,16 @@ const App = () => {
     const catKey = catKeyMap[galleryFilter];
     return catKey && INVENTORY[catKey] ? Object.values(INVENTORY[catKey]).flat() : [];
   };
-
-  /* ── Updated getCatName ── */
+  /* ── getCatName ── */
   const getCatName = (cat) => {
-    if (cat === 'Apparel')        return 'Premium Apparel';
-    if (cat === 'Desktop')        return 'Office Core';
+    if (cat === 'Apparel')         return 'Premium Apparel';
+    if (cat === 'Desktop')         return 'Office Core';
     if (cat === 'LilysCozyCorner') return "Lily's Corner";
-    if (cat === 'KitchenArchive') return 'Accessories';
+    if (cat === 'KitchenArchive')  return 'Accessories';
     return cat;
   };
-
   const studioLabel = mode === 'light' ? 'The Laboratory' : 'The Abyssal Vault';
-
-  /* ── Click-based nav dropdown ── */
+  /* ── Nav dropdown ── */
   const NavItem = ({ label, items, catKey, icon }) => {
     const isOpen = openDropdown === catKey;
     const dropBg = mode === 'light' ? 'rgba(249,249,249,0.97)' : 'rgba(8,8,8,0.96)';
@@ -738,34 +743,27 @@ const App = () => {
       </div>
     );
   };
-
   const isLight      = mode === 'light';
   const modalWrap    = isLight ? 'modal-sanctuary' : 'glass-dark';
   const modalBorder  = isLight ? 'border-uv/20'   : 'border-uv/40';
   const modalText    = isLight ? 'text-abyss'      : 'text-white';
   const labelOpacity = isLight ? 'opacity-70'      : 'opacity-60';
-
   const radioActive  = (sel) => sel
     ? (isLight ? 'opt-active-light' : 'border-uv text-uv bg-uv/20 shadow-[0_0_16px_rgba(155,93,229,0.45)]')
     : (isLight ? 'opt-inactive-light' : 'border-white/10 text-white/60 hover:border-uv/50 hover:text-uv hover:bg-uv/10');
-
   const toggleActive = (val) => val
     ? (isLight ? 'border-sunset text-sunset bg-sunset/10 shadow-[0_0_16px_rgba(255,107,53,0.3)]' : 'border-uv bg-uv/20 text-uv shadow-[0_0_16px_rgba(155,93,229,0.4)]')
     : (isLight ? 'border-abyss/15 text-abyss/45 hover:border-sunset/50 hover:text-sunset' : 'border-white/10 text-white/50 hover:border-uv/40 hover:text-white/80');
-
   const galleryFilters = ['All', 'Premium Apparel', 'Office Core', "Lily's Corner", 'Accessories'];
-
   return (
     <div className="min-h-screen relative">
       <div className="pearl-overlay" />
-
       {/* Ooze blobs */}
       <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
         <div className="ooze-blob w-[100vw] h-[100vh] top-[-20%] left-[-20%] bg-uv/15 animate-ooze" />
         <div className="ooze-blob w-[80vw] h-[80vh] bottom-[-20%] right-[-20%] bg-cyan/15 animate-ooze" style={{animationDelay:'-5s'}} />
         <div className="ooze-blob w-[60vw] h-[60vh] top-[30%] left-[20%] bg-pink/10 animate-ooze" style={{animationDelay:'-10s'}} />
       </div>
-
       <VaultSidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
@@ -773,7 +771,6 @@ const App = () => {
         navigateToCategory={navigateToCategory}
         goTo={goTo}
       />
-
       {/* ════════════════ NAVIGATION ════════════════ */}
       <nav className={`fixed top-0 w-full z-[100] flex justify-between items-center transition-all duration-500 border-b backdrop-blur-3xl ${isLight ? 'bg-pearl/80 border-uv/20' : 'bg-abyss/80 border-uv/40'}`}
         style={{ padding:'0.85rem var(--sp-r) 0.85rem var(--sp-l)' }}>
@@ -781,7 +778,6 @@ const App = () => {
           <button onClick={() => setSidebarOpen(true)} aria-label="Open vault menu" className="p-2 hover:opacity-60 transition-opacity">
             <IconMenu s={20} />
           </button>
-          {/* Logo — scroll to top on click */}
           <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => goTo('home')}>
             <SunsetArchiveLogo size={34} placement="nav" />
             <span className="font-black text-base md:text-lg tracking-tighter">
@@ -789,7 +785,6 @@ const App = () => {
             </span>
           </div>
         </div>
-
         <div className="hidden lg:flex items-center gap-0.5">
           <NavItem label="Premium Apparel" items={INVENTORY.Apparel}          catKey="Apparel"          icon={<IconShirt s={13} />} />
           <NavItem label="Office Core"     items={INVENTORY.Desktop}          catKey="Desktop"          icon={<IconMonitor s={13} />} />
@@ -802,7 +797,6 @@ const App = () => {
             <IconHelp s={13} /> FAQ
           </button>
         </div>
-
         <div className="flex items-center gap-3 md:gap-4">
           <button onClick={() => setMode(m => m === 'light' ? 'dark' : 'light')}
             className="w-12 h-6 rounded-full border-2 border-uv/30 relative flex items-center px-0.5 transition-all">
@@ -813,11 +807,9 @@ const App = () => {
           </button>
         </div>
       </nav>
-
       {/* ════════════════ HOME ════════════════ */}
       {view === 'home' && (
         <div>
-
           {/* ── HERO ── */}
           <header className="pt-40 md:pt-56 pb-20 md:pb-32 text-center relative max-w-7xl mx-auto flex flex-col items-center page-px">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl aspect-square z-0 pointer-events-none flex items-center justify-center opacity-50">
@@ -848,32 +840,22 @@ const App = () => {
               </button>
             </div>
           </header>
-
-          {/* ════════════════════════════════════════
-              OUR STORY — Two-column section with aura
-          ════════════════════════════════════════ */}
-          <section className={`relative py-24 md:py-40 overflow-hidden page-px ${isLight ? '' : ''}`}>
-            {/* Aura glow blobs */}
+          {/* ════════ OUR STORY SECTION ════════ */}
+          <section className={`relative py-24 md:py-40 overflow-hidden page-px`}>
             <div className="story-aura w-[420px] h-[420px]"
               style={{ top: '-80px', left: '-80px', background: 'radial-gradient(circle, rgba(241,91,181,0.18) 0%, transparent 70%)' }} />
             <div className="story-aura w-[360px] h-[360px]"
               style={{ bottom: '-60px', right: '-60px', background: 'radial-gradient(circle, rgba(155,93,229,0.15) 0%, transparent 70%)', animationDelay: '-4s' }} />
             <div className="story-aura w-[280px] h-[280px]"
               style={{ top: '40%', right: '25%', background: 'radial-gradient(circle, rgba(0,245,212,0.12) 0%, transparent 70%)', animationDelay: '-7s' }} />
-
             <div className="max-w-7xl mx-auto relative z-10">
-
-              {/* Section label + divider line */}
               <div className="flex items-center gap-4 mb-14 md:mb-20 fade-in">
                 <span className="font-black text-[10px] uppercase tracking-[0.6em] whitespace-nowrap" style={{ color: '#FF6B35' }}>
                   The Studio · Est. 2022 · Huntsville, AL
                 </span>
                 <div className="flex-1 h-px opacity-20" style={{ background: 'linear-gradient(90deg, #FF6B35, transparent)' }} />
               </div>
-
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-start">
-
-                {/* ── LEFT: Bold typographic anchor column ── */}
                 <div className="space-y-8 fade-in-l delay-100">
                   <h2 className="font-serif italic leading-[0.88]"
                     style={{ fontSize: 'clamp(2.5rem, 6vw, 5.6rem)' }}>
@@ -881,15 +863,11 @@ const App = () => {
                     Player 2 who<br />
                     became <span className="sunset-text">Player 1.</span>
                   </h2>
-
-                  {/* Pull quote */}
                   <div className={`border-l-4 pl-6 py-2 quote-border ${isLight ? 'border-pink/50' : 'border-pink/40'}`}>
                     <p className="font-serif italic text-xl md:text-2xl leading-relaxed opacity-75">
                       "We all escape into other worlds.<br />Why shouldn't our setup make us feel just as good?"
                     </p>
                   </div>
-
-                  {/* Currently playing badges */}
                   <div className="space-y-3">
                     <p className={`font-black text-[10px] uppercase tracking-[0.45em] ${isLight ? 'opacity-40' : 'opacity-30'}`}>
                       Currently Playing
@@ -903,15 +881,12 @@ const App = () => {
                       ))}
                     </div>
                   </div>
-
-                  {/* Tagline chips */}
                   <div className={`p-5 rounded-2xl border-2 ${isLight ? 'border-sunset/20 bg-sunset/4' : 'border-sunset/20 bg-sunset/8'}`}>
                     <p className="font-black text-xs uppercase tracking-[0.3em] mb-2" style={{ color: '#FF6B35' }}>The Archive Manifesto</p>
                     <p className={`font-serif italic text-lg leading-snug ${isLight ? 'opacity-80' : 'opacity-70'}`}>
                       "Where high-end aesthetic meets high-level play."
                     </p>
                   </div>
-
                   <button
                     onClick={() => goTo('about')}
                     className="flex items-center gap-2 font-black text-xs uppercase tracking-widest pb-2 hover:opacity-70 transition-opacity"
@@ -919,8 +894,6 @@ const App = () => {
                     Read the full archive <IconArrow s={12} />
                   </button>
                 </div>
-
-                {/* ── RIGHT: Narrative text column ── */}
                 <div className={`space-y-6 leading-relaxed fade-in-r delay-200 font-bold text-base md:text-[1.1rem] ${isLight ? 'text-abyss/75' : 'text-pearl/70'}`}>
                   <p>
                     I didn't grow up with a controller. Until 2022, gaming was someone else's language — beautiful, foreign, and honestly a little intimidating. What changed everything wasn't a hardware drop or a viral clip. It was{' '}
@@ -956,11 +929,9 @@ const App = () => {
                     Drawn by love, stayed for the soul. Proudly crafting in Huntsville, Alabama.
                   </p>
                 </div>
-
               </div>
             </div>
           </section>
-
           {/* ── Category quick-links ── */}
           <section className="max-w-7xl mx-auto pb-16 page-px">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
@@ -978,15 +949,10 @@ const App = () => {
               ))}
             </div>
           </section>
-
-          {/* ════════════════════════════════════════
-              GALLERY SECTION — appears on "Browse the Gallery" click
-          ════════════════════════════════════════ */}
+          {/* ════════ GALLERY SECTION ════════ */}
           {galleryOpen && (
             <section ref={galleryRef} className="py-20 md:py-36 page-px">
               <div className="max-w-7xl mx-auto">
-
-                {/* Header */}
                 <div className="text-center mb-12 md:mb-16 fade-in">
                   <span className="font-black text-[10px] uppercase tracking-[0.55em]" style={{ color: '#FF6B35' }}>
                     The Archive
@@ -996,8 +962,6 @@ const App = () => {
                     Gaming artifacts for the curated home.
                   </p>
                 </div>
-
-                {/* Filter buttons */}
                 <div className="flex flex-wrap gap-3 justify-center mb-10 md:mb-14 fade-in delay-100">
                   <span className="flex items-center gap-1.5 font-black text-[10px] uppercase tracking-[0.4em] opacity-40 my-auto">
                     <IconFilter s={11} /> Filter
@@ -1017,8 +981,6 @@ const App = () => {
                     </button>
                   ))}
                 </div>
-
-                {/* Products grid */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
                   {getGalleryItems().map((item, idx) => (
                     <div
@@ -1046,8 +1008,6 @@ const App = () => {
                     </div>
                   ))}
                 </div>
-
-                {/* View all in category CTAs */}
                 <div className="flex flex-wrap gap-4 justify-center mt-14">
                   {galleryFilters.filter(f => f !== 'All').map(f => {
                     const catKeyMap = { 'Premium Apparel':'Apparel', 'Office Core':'Desktop', "Lily's Corner":'LilysCozyCorner', 'Accessories':'KitchenArchive' };
@@ -1059,11 +1019,9 @@ const App = () => {
                     );
                   })}
                 </div>
-
               </div>
             </section>
           )}
-
           {/* ── Collection spotlight ── */}
           <section className="max-w-7xl mx-auto py-16 md:py-40 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 page-px">
             <div className="glass p-8 md:p-12 space-y-6 flex flex-col justify-center animate-pulse-uv">
@@ -1083,10 +1041,8 @@ const App = () => {
               <div className="mock-mat scale-150 rotate-12 z-10" />
             </div>
           </section>
-
         </div>
       )}
-
       {/* ════════════════ SHOP ════════════════ */}
       {view === 'shop' && activeCategory && INVENTORY[activeCategory] && (
         <div className="pt-28 md:pt-36 pb-32 md:pb-48 page-px">
@@ -1131,13 +1087,10 @@ const App = () => {
           </div>
         </div>
       )}
-
-      {/* ════════════════ ABOUT / OUR STORY ════════════════ */}
+      {/* ════════════════ ABOUT ════════════════ */}
       {view === 'about' && (
         <div className="pt-28 md:pt-40 pb-32 md:pb-48 page-px">
           <div className="max-w-4xl mx-auto space-y-10 md:space-y-16">
-
-            {/* Header */}
             <div className="space-y-4 fade-in">
               <span className="font-black text-[10px] uppercase tracking-[0.6em]" style={{ color: '#FF6B35' }}>
                 The Studio · Est. 2022 · Huntsville, AL
@@ -1147,15 +1100,11 @@ const App = () => {
                 From Player 2 to Curator. A love story, a setup obsession, and the luxury gaming brand nobody was making.
               </p>
             </div>
-
-            {/* Big pull quote */}
             <div className={`border-l-4 pl-8 py-2 quote-border ${isLight ? 'border-pink/50' : 'border-pink/40'}`}>
               <p className="font-serif italic leading-tight" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.6rem)' }}>
                 "For the Player 2 who became Player 1."
               </p>
             </div>
-
-            {/* Story paragraphs */}
             <div className={`space-y-8 font-bold text-lg md:text-xl leading-relaxed fade-in delay-200 ${isLight ? 'opacity-80' : 'opacity-75'}`}>
               <p>
                 I didn't grow up with a controller. Until 2022, gaming was someone else's world — a language I admired from the outside but never spoke. What changed everything wasn't a console drop or a viral moment. It was <span className="font-black" style={{ color: '#FF6B35' }}>love</span>, and a four-year long-distance relationship that brought me to <span style={{ color: '#FF6B35' }} className="font-black">Huntsville, AL</span>.
@@ -1170,16 +1119,12 @@ const App = () => {
                 My personal aesthetic — minimal, bright, sophisticated — didn't match the merchandise available. I wanted premium <span style={{ color: '#00F5D4' }} className="font-black">"artifacts"</span> that complemented a cozy, European-chic home. Not another piece of plastic. Not mass-produced merch that looked like an afterthought.
               </p>
             </div>
-
-            {/* Mission manifesto */}
             <div className="p-8 md:p-12 border-4 border-uv/20 bg-uv/5 rounded-[32px] space-y-4 fade-in delay-300">
               <h4 className="font-black text-xs uppercase tracking-widest text-uv">The Mission</h4>
               <p className="font-serif italic leading-tight" style={{ fontSize: 'clamp(1.4rem, 3.5vw, 2.4rem)' }}>
                 "Your setup is a sanctuary. If we escape into elite worlds, our physical space should match that energy."
               </p>
             </div>
-
-            {/* The birth of EA */}
             <div className={`space-y-6 font-bold text-lg md:text-xl leading-relaxed ${isLight ? 'opacity-80' : 'opacity-75'}`}>
               <p>
                 <span style={{ color: '#FF6B35' }} className="font-black">Endgame Archive</span> was born from that gap. We believe your gaming setup shouldn't just be a station — it should be a sanctuary. A space that honors the legacy of the worlds you've fallen into.
@@ -1188,8 +1133,6 @@ const App = () => {
                 Aesthetic gaming isn't a niche. It's a lifestyle. And it belongs to everyone — especially the Player 2 who became Player 1.
               </p>
             </div>
-
-            {/* Tagline grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 fade-in delay-400">
               {[
                 "Gaming artifacts for the curated home.",
@@ -1202,8 +1145,6 @@ const App = () => {
                 </div>
               ))}
             </div>
-
-            {/* Huntsville block */}
             <div className={`p-6 md:p-10 border-2 border-uv/10 rounded-[24px] space-y-4`}>
               <p className="font-black text-xs uppercase tracking-[0.5em]" style={{ color: '#FF6B35' }}>Our Home</p>
               <p className={`font-bold text-lg md:text-xl leading-relaxed ${isLight ? 'opacity-80' : 'opacity-70'}`}>
@@ -1213,7 +1154,6 @@ const App = () => {
                 Love and controllers brought me to Huntsville, AL. The community made it home.
               </p>
             </div>
-
             <button onClick={() => goTo('home')}
               className="flex items-center gap-2 font-black text-xs uppercase tracking-widest hover:opacity-70 transition-opacity"
               style={{ borderBottom: '3px solid #FF6B35', color:'#FF6B35', paddingBottom:'6px' }}>
@@ -1222,7 +1162,6 @@ const App = () => {
           </div>
         </div>
       )}
-
       {/* ════════════════ FAQ ════════════════ */}
       {view === 'faq' && (
         <div className="pt-28 md:pt-40 pb-32 md:pb-48 page-px">
@@ -1257,7 +1196,6 @@ const App = () => {
           </div>
         </div>
       )}
-
       {/* ════════════════ SOCIALS & CONTACT ════════════════ */}
       {view === 'socials' && (
         <div className="pt-28 md:pt-40 pb-32 md:pb-48 page-px">
@@ -1306,7 +1244,6 @@ const App = () => {
           </div>
         </div>
       )}
-
       {/* ════════════════════════════════════════════════════
           ALCHEMICAL STUDIO MODAL
       ════════════════════════════════════════════════════ */}
@@ -1315,8 +1252,6 @@ const App = () => {
           <div className={`relative w-full md:max-w-6xl overflow-y-auto border-4 ${modalBorder} ${modalWrap} ${modalText} shadow-[0_0_80px_rgba(255,107,53,0.2)]`}
             style={{ maxHeight: '92vh', borderRadius: '32px 32px 0 0',
               padding: 'max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left))' }}>
-
-            {/* Studio badge + close */}
             <div className="flex items-center justify-between mb-6 md:mb-8">
               <span className={`font-black text-[10px] uppercase tracking-[0.45em] px-4 py-2 rounded-full border ${isLight ? 'text-sunset border-sunset/30 bg-sunset/8' : 'text-uv border-uv/20 bg-uv/10'}`}>
                 {studioLabel} — Aura Calibration
@@ -1326,22 +1261,16 @@ const App = () => {
                 <IconX s={14} />
               </button>
             </div>
-
             <div className="grid lg:grid-cols-2 gap-8 md:gap-20 items-start">
-              {/* Left — product visual */}
               <div className={`aspect-square flex items-center justify-center relative overflow-hidden rounded-3xl border-4 ${isLight ? 'border-uv/20 bg-gradient-to-br from-pink/10 to-uv/10' : 'border-uv/40 animate-pulse-uv'}`}>
                 {!isLight && <div className="absolute inset-0 bg-gradient-to-tr from-uv/50 to-cyan/40 animate-ooze opacity-60" />}
                 <SunsetArchiveLogo size={isLight ? 140 : 160} placement="modal-visual" />
               </div>
-
-              {/* Right — info + options + price */}
               <div className="space-y-7 md:space-y-9">
                 <div>
                   <h2 className={`modal-h2 font-serif italic leading-[0.9] ${modalText}`}>{selectedItem.n}</h2>
                   <p className={`font-bold text-sm md:text-base mt-2 ${isLight ? 'text-abyss/55' : 'text-white/55'}`}>{selectedItem.t}</p>
                 </div>
-
-                {/* Dynamic Customization Panel */}
                 <div className="space-y-6 max-h-[36vh] overflow-y-auto custom-scroll pr-2">
                   {(CUSTOMIZATIONS[selectedItem.id] || []).map(config => {
                     let modBadge = '';
@@ -1365,8 +1294,6 @@ const App = () => {
                             </span>
                           )}
                         </label>
-
-                        {/* RADIO */}
                         {config.type === 'radio' && (
                           <div className="flex flex-wrap gap-2 md:gap-3">
                             {config.options.map(opt => (
@@ -1379,8 +1306,6 @@ const App = () => {
                             ))}
                           </div>
                         )}
-
-                        {/* DROPDOWN */}
                         {config.type === 'dropdown' && (
                           <select
                             value={selectedOptions[config.key] || config.default}
@@ -1395,8 +1320,6 @@ const App = () => {
                             ))}
                           </select>
                         )}
-
-                        {/* TOGGLE */}
                         {config.type === 'toggle' && (
                           <button
                             onClick={() => handleOptionChange(config.key, !selectedOptions[config.key])}
@@ -1416,8 +1339,6 @@ const App = () => {
                     </p>
                   )}
                 </div>
-
-                {/* Live Registry Value */}
                 <div className={`p-6 md:p-10 rounded-[32px] flex justify-between items-end border-4 ${isLight ? 'border-sunset/20 bg-sunset/5' : 'border-uv/40 bg-uv/5'}`}>
                   <div>
                     <span className={`font-serif italic text-xl md:text-3xl block ${isLight ? 'text-abyss/55' : 'opacity-60'}`}>Registry Value</span>
@@ -1429,8 +1350,6 @@ const App = () => {
                     ${calculatePrice()}
                   </span>
                 </div>
-
-                {/* CTA */}
                 <div className="flex gap-4 md:gap-6">
                   <button
                     onClick={() => { setCartCount(c => c + 1); setSelectedItem(null); }}
@@ -1447,15 +1366,11 @@ const App = () => {
           </div>
         </div>
       )}
-
       {/* ════════════════ FOOTER ════════════════ */}
       <footer className={`py-20 md:py-40 border-t-8 transition-all ${isLight ? 'bg-pearl border-uv/10' : 'bg-abyss border-uv/30'}`}
         style={{ paddingLeft:'var(--sp-l)', paddingRight:'var(--sp-r)' }}>
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 md:gap-20">
-
-          {/* Brand */}
           <div className="col-span-full md:col-span-2 space-y-8 md:space-y-10">
-            {/* Logo — scroll to top on click */}
             <div className="flex items-center gap-4 cursor-pointer" onClick={() => goTo('home')}>
               <SunsetArchiveLogo size={56} placement="footer-seal" />
               <span className="font-black text-2xl md:text-4xl tracking-tighter">endgame.archive</span>
@@ -1475,8 +1390,6 @@ const App = () => {
               </div>
             </div>
           </div>
-
-          {/* Directory */}
           <div className="space-y-8">
             <h5 className="font-black text-xs uppercase tracking-[0.5em]" style={{ color:'#FF6B35' }}>Directory</h5>
             <ul className="font-bold text-lg md:text-xl space-y-4 opacity-60">
@@ -1498,8 +1411,6 @@ const App = () => {
               ))}
             </ul>
           </div>
-
-          {/* Registry */}
           <div className="space-y-8">
             <div className="glass p-6 md:p-8 space-y-4">
               <p className="font-black text-xs uppercase tracking-widest" style={{ color:'#FF6B35' }}>Join the Registry</p>
@@ -1513,18 +1424,16 @@ const App = () => {
               © 2026 ARCHIVE STUDIO / HUNTSVILLE, AL NODE: NOMINAL
             </span>
           </div>
-
         </div>
       </footer>
-
     </div>
   );
 };
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
 </script>
 </body>
 </html>
+
 
 
