@@ -160,7 +160,7 @@ const VaultSidebar=({isOpen,onClose,mode,navigateToShop,goTo})=>{
         <SideBtn icon={<IconMonitor s={16}/>} onClick={()=>navigateToShop('Sanctuary')}>Sanctuary / Office</SideBtn>
         <SideBtn icon={<IconCoffee s={16}/>} onClick={()=>navigateToShop('Home')}>Home</SideBtn>
         <SideBtn icon={<IconSparkle s={16}/>} onClick={()=>navigateToShop("Lily's Corner")}>{"Lily's Corner"}</SideBtn>
-        <SideBtn icon={<IconPaw s={16}/>} onClick={()=>navigateToShop('Pets')}>{"Pets - The Familiar's Vault"}</SideBtn>
+        <SideBtn icon={<IconPaw s={16}/>} onClick={()=>navigateToShop('Pets')}>{"Pets - Cerberus's Gate"}</SideBtn>
         <Divider label="Info"/>
         <SideBtn icon={<IconHelp s={16}/>} onClick={()=>goTo('faq')}>FAQ</SideBtn>
         <SideBtn icon={<IconMail s={16}/>} onClick={()=>goTo('socials')}>{"Socials & Contact"}</SideBtn>
@@ -269,6 +269,7 @@ const App=()=>{
   const[openDropdown,setOpenDropdown]=useState(null);
   const[galleryOpen,setGalleryOpen]=useState(false);
   const[galleryFilter,setGalleryFilter]=useState('All');
+  const[filtersOpen,setFiltersOpen]=useState(false);
   const galleryRef=useRef(null);
 
   /* body class */
@@ -277,6 +278,9 @@ const App=()=>{
       ?'bg-pearl text-abyss font-sans selection:bg-uv selection:text-white overflow-x-hidden transition-colors duration-500'
       :'bg-abyss text-pearl font-sans selection:bg-uv selection:text-white overflow-x-hidden transition-colors duration-500';
   },[mode]);
+
+  /* scroll to top on every view change */
+  useEffect(()=>{window.scrollTo({top:0,behavior:'smooth'});},[view]);
 
   /* defaults when item selected */
   useEffect(()=>{
@@ -548,7 +552,7 @@ const App=()=>{
               <span className="font-black text-xs uppercase tracking-[0.48em]" style={{color:'#FF6B35'}}>Collection Spotlight</span>
               <h2 className="section-h2 font-serif italic leading-tight">IYKYK Artifacts<br/>for True Players.</h2>
               <p className="font-bold text-base md:text-xl opacity-78">23 products. 4 universes. Every piece built around the mechanics and secrets only the dedicated know. Not merch; artifacts.</p>
-              <button onClick={()=>navigateToShop('Sanctuary')} className="w-fit flex items-center gap-2 font-black text-xs uppercase tracking-widest pb-2 hover:opacity-65 transition-opacity" style={{borderBottom:'3px solid #FF6B35',color:'#FF6B35'}}>Shop Sanctuary / Office <IconArrow s={12}/></button>
+              <button onClick={()=>{window.scrollTo({top:0,behavior:'smooth'});navigateToShop('Sanctuary');}} className="w-fit flex items-center gap-2 font-black text-xs uppercase tracking-widest pb-2 hover:opacity-65 transition-opacity" style={{borderBottom:'3px solid #FF6B35',color:'#FF6B35'}}>Shop Sanctuary / Office <IconArrow s={12}/></button>
             </div>
             <div className="aspect-square glass flex items-center justify-center relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-pink/18 to-uv/18 animate-ooze"/>
@@ -576,20 +580,30 @@ const App=()=>{
               </div>
             </div>
 
-            {/* Category filters */}
-            <div className="flex flex-wrap gap-2 mb-3 fade-in">
-              <span className="flex items-center gap-1.5 font-black text-[9px] uppercase tracking-[0.4em] opacity-38 my-auto"><IconFilter s={10}/>Category</span>
-              {CATS.map(cat=>(<button key={cat} onClick={()=>setActiveCategory(cat)} className={`px-4 py-2 rounded-full font-black text-[10px] uppercase tracking-widest border-2 transition-all duration-300 ${activeCategory===cat?'filter-active':isLight?'border-abyss/14 text-abyss/48 hover:border-uv/48 hover:text-uv hover:bg-uv/5':'border-white/14 text-white/48 hover:border-uv/48 hover:text-uv hover:bg-uv/10'}`}>{cat}</button>))}
-            </div>
-
-            {/* Game filters */}
-            <div className="flex flex-wrap gap-2 mb-10 fade-in delay-100">
-              <span className="flex items-center gap-1.5 font-black text-[9px] uppercase tracking-[0.4em] opacity-38 my-auto"><IconSparkle s={10}/>Game</span>
-              {GAMES.map(game=>{
-                const isActiveGame=activeGame===game;
-                const gc=GAME_COLORS[game];
-                return(<button key={game} onClick={()=>setActiveGame(game)} className={`px-4 py-2 rounded-full font-black text-[10px] uppercase tracking-widest border-2 transition-all duration-300 ${!isActiveGame?(isLight?'border-abyss/14 text-abyss/48 hover:border-uv/48 hover:text-uv hover:bg-uv/5':'border-white/14 text-white/48 hover:border-uv/48 hover:text-uv hover:bg-uv/10'):(game==='All'?'filter-active':'')}`} style={isActiveGame&&game!=='All'?{borderColor:gc,color:gc,background:`${gc}12`,boxShadow:`0 0 18px ${gc}22`}:{}}>{game}</button>);
-              })}
+            {/* Collapsible Filters */}
+            <div className="mb-10 fade-in">
+              <button onClick={()=>setFiltersOpen(o=>!o)} className={`flex items-center gap-2 font-black text-[10px] uppercase tracking-widest mb-3 px-4 py-2 rounded-full border-2 transition-all duration-300 ${filtersOpen?(isLight?'filter-active':'border-uv/55 text-uv bg-uv/10'):(isLight?'border-abyss/14 text-abyss/55 hover:border-uv/48 hover:text-uv':'border-white/14 text-white/55 hover:border-uv/48 hover:text-uv')}`}>
+                <IconFilter s={11}/> Filters <IconChevron s={10} open={filtersOpen}/>
+                {(activeCategory!=='All'||activeGame!=='All')&&(<span className="ml-1 px-2 py-0.5 rounded-full font-black text-[9px]" style={{background:'rgba(155,93,229,0.18)',color:'#9B5DE5'}}>Active</span>)}
+              </button>
+              {filtersOpen&&(
+                <div className={`p-4 rounded-2xl border-2 space-y-4 ${isLight?'border-abyss/8 bg-black/3':'border-white/8 bg-white/3'}`}>
+                  {/* Category filters */}
+                  <div className="flex flex-wrap gap-2">
+                    <span className="flex items-center gap-1.5 font-black text-[9px] uppercase tracking-[0.4em] opacity-38 my-auto"><IconFilter s={10}/>Category</span>
+                    {CATS.map(cat=>(<button key={cat} onClick={()=>setActiveCategory(cat)} className={`px-4 py-2 rounded-full font-black text-[10px] uppercase tracking-widest border-2 transition-all duration-300 ${activeCategory===cat?'filter-active':isLight?'border-abyss/14 text-abyss/48 hover:border-uv/48 hover:text-uv hover:bg-uv/5':'border-white/14 text-white/48 hover:border-uv/48 hover:text-uv hover:bg-uv/10'}`}>{cat}</button>))}
+                  </div>
+                  {/* Game filters */}
+                  <div className="flex flex-wrap gap-2">
+                    <span className="flex items-center gap-1.5 font-black text-[9px] uppercase tracking-[0.4em] opacity-38 my-auto"><IconSparkle s={10}/>Game</span>
+                    {GAMES.map(game=>{
+                      const isActiveGame=activeGame===game;
+                      const gc=GAME_COLORS[game];
+                      return(<button key={game} onClick={()=>setActiveGame(game)} className={`px-4 py-2 rounded-full font-black text-[10px] uppercase tracking-widest border-2 transition-all duration-300 ${!isActiveGame?(isLight?'border-abyss/14 text-abyss/48 hover:border-uv/48 hover:text-uv hover:bg-uv/5':'border-white/14 text-white/48 hover:border-uv/48 hover:text-uv hover:bg-uv/10'):(game==='All'?'filter-active':'')}`} style={isActiveGame&&game!=='All'?{borderColor:gc,color:gc,background:`${gc}12`,boxShadow:`0 0 18px ${gc}22`}:{}}>{game}</button>);
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Grid */}
@@ -675,8 +689,8 @@ const App=()=>{
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">
               <div className="glass p-6 md:p-10 space-y-5 fade-in-l delay-100">
                 <h3 className="font-black text-xs uppercase tracking-[0.4em]" style={{color:'#FF6B35'}}>Follow the Archive</h3>
-                {[{name:'TikTok',handle:'@endgame.archive',color:'#F15BB5'},{name:'Instagram',handle:'@endgame.archive',color:'#9B5DE5'},{name:'Pinterest',handle:'endgame.archive',color:'#00F5D4'}].map(s=>(
-                  <a key={s.name} href="#" className="flex items-center justify-between p-4 border-2 border-uv/18 rounded-2xl hover:border-uv transition-all group">
+                {[{name:'TikTok',handle:'@endgame.archive',color:'#F15BB5',href:'#'},{name:'Instagram',handle:'@endgame.archive',color:'#9B5DE5',href:'https://www.instagram.com/endgame.archive/'},{name:'Pinterest',handle:'endgame.archive',color:'#00F5D4',href:'#'}].map(s=>(
+                  <a key={s.name} href={s.href} target={s.href!=='#'?'_blank':undefined} rel="noopener noreferrer" className="flex items-center justify-between p-4 border-2 border-uv/18 rounded-2xl hover:border-uv transition-all group">
                     <span className="font-black text-sm uppercase tracking-widest" style={{color:s.color}}>{s.name}</span>
                     <span className="flex items-center gap-1 font-bold text-sm opacity-48 group-hover:opacity-100 transition-opacity">{s.handle} <IconArrow s={12}/></span>
                   </a>
@@ -814,7 +828,7 @@ const App=()=>{
                 {label:'Sanctuary / Office',action:()=>navigateToShop('Sanctuary')},
                 {label:'Home Goods',action:()=>navigateToShop('Home')},
                 {label:"Lily's Corner",action:()=>navigateToShop("Lily's Corner")},
-                {label:"Pets - The Familiar's Vault",action:()=>navigateToShop('Pets')},
+                {label:"Pets - Cerberus's Gate",action:()=>navigateToShop('Pets')},
                 {label:'FAQ',action:()=>goTo('faq')},
                 {label:'Socials and Contact',action:()=>goTo('socials')},
               ].map(({label,action})=>(<li key={label}><button onClick={action} className="flex items-center gap-2 hover:text-uv hover:translate-x-2 transition-all duration-200 text-left">{label}</button></li>))}
