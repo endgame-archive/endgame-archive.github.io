@@ -142,7 +142,10 @@ body{overflow-x:hidden;width:100%;max-width:100vw}
 /* Mobile container */
 @media(max-width:640px){
   .page-px{padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right))}
-  /* vault-sidebar uses min(280px,85vw) — no override needed */
+  /* Full-screen mobile menu — eliminates blob/triangle bleed-through from partial drawer */
+  .vault-sidebar{width:100vw!important;border-right:none!important}
+  /* Larger tap targets and readable text in full-screen mobile menu */
+  .vault-sidebar-navbtn{font-size:14px!important;padding-top:14px!important;padding-bottom:14px!important;letter-spacing:0.22em!important}
   img,video,canvas,svg{max-width:100%;height:auto}
   /* Reduce blob blur on small viewports so they stay subtle */
   .ooze-blob{filter:blur(60px)!important}
@@ -345,29 +348,39 @@ const VaultSidebar=({isOpen,onClose,mode,navigateToShop,goTo})=>{
   const isLight=mode==='light';
   const bg=isLight?'rgba(251,240,246,1.0)':'rgba(14,4,16,1.0)';
   const border=isLight?'rgba(255,51,153,0.18)':'rgba(196,96,238,0.40)';
-  const SideBtn=({icon,children,onClick})=>(<button onClick={()=>{onClick();onClose();}} className={`w-full text-left px-4 py-3 flex items-center gap-3 font-black text-[11px] uppercase tracking-widest transition-all duration-200 rounded-xl mx-2 ${isLight?'hover:bg-black/5':'hover:bg-white/5'} opacity-75 hover:opacity-100`} style={{width:'calc(100% - 16px)'}}><span className="flex-shrink-0">{icon}</span>{children}</button>);
-  const Divider=({label})=>(<div className="px-4 pt-5 pb-2 mt-1 border-t" style={{borderColor:border}}><span className="font-black text-[9px] uppercase tracking-[0.5em] text-uv opacity-55">{label}</span></div>);
+  const SideBtn=({icon,children,onClick})=>(<button onClick={()=>{onClick();onClose();}} className={`vault-sidebar-navbtn w-full text-left px-5 py-3.5 flex items-center gap-3.5 font-black text-[11px] uppercase tracking-widest transition-all duration-200 rounded-xl mx-2 ${isLight?'hover:bg-black/5':'hover:bg-white/5'} opacity-80 hover:opacity-100`} style={{width:'calc(100% - 16px)'}}><span className="flex-shrink-0">{icon}</span>{children}</button>);
+  const Divider=({label})=>(<div className="px-5 pt-5 pb-2 mt-1 border-t" style={{borderColor:border}}><span className="font-black text-[9px] uppercase tracking-[0.5em] text-uv opacity-55">{label}</span></div>);
   return(<>
-    <div className="fixed inset-0 z-[390] transition-all duration-400" style={{background:'rgba(0,0,0,0.55)',opacity:isOpen?1:0,pointerEvents:isOpen?'auto':'none'}} onClick={onClose}/>
-    <div className={`vault-sidebar ${isOpen?'open':'closed'}`} style={{background:bg,borderRight:`1px solid ${border}`}}>
-      <div className="flex items-center justify-between px-5 py-5 border-b" style={{borderColor:border}}>
-        <div className="flex items-center gap-3 cursor-pointer" onClick={()=>{goTo('home');onClose();}}><span className="font-black text-sm tracking-tight uppercase">ENDGAME<span style={{color:'#FF3399'}}>.</span>ARCHIVE</span></div>
-        <button onClick={onClose} aria-label="Close vault" className="w-8 h-8 flex items-center justify-center opacity-45 hover:opacity-100 transition-opacity"><IconX s={16}/></button>
+    {/* Backdrop — hidden on mobile since sidebar is full-screen */}
+    <div className="fixed inset-0 z-[390] transition-all duration-400 hidden sm:block" style={{background:'rgba(0,0,0,0.55)',opacity:isOpen?1:0,pointerEvents:isOpen?'auto':'none'}} onClick={onClose}/>
+    {/* Mobile-only backdrop for tap-to-close (sidebar is full-screen so this just catches edge cases) */}
+    <div className="fixed inset-0 z-[390] sm:hidden" style={{opacity:0,pointerEvents:isOpen?'auto':'none'}} onClick={onClose}/>
+    <div className={`vault-sidebar ${isOpen?'open':'closed'}`} style={{background:bg}}>
+      {/* ── Header: logo left, X right — flex-shrink-0 on both prevents overlap ── */}
+      <div className="flex items-center justify-between px-5 border-b" style={{borderColor:border,minHeight:'60px',paddingTop:'14px',paddingBottom:'14px'}}>
+        <div className="flex items-center gap-2 cursor-pointer flex-shrink-0 min-w-0" onClick={()=>{goTo('home');onClose();}}>
+          <span className="font-black text-sm tracking-tight uppercase select-none truncate">ENDGAME<span style={{color:'#FF3399'}}>.</span>ARCHIVE</span>
+        </div>
+        <button onClick={onClose} aria-label="Close menu" className="flex-shrink-0 ml-3 w-9 h-9 flex items-center justify-center rounded-full border transition-all opacity-50 hover:opacity-100" style={{borderColor:'rgba(255,51,153,0.28)',background:'transparent'}}>
+          <IconX s={15}/>
+        </button>
       </div>
+      {/* ── Navigation links ── */}
       <nav className="flex-1 overflow-y-auto py-3">
         <Divider label="Navigate"/>
         <SideBtn icon={<IconHome s={16}/>} onClick={()=>goTo('home')}>Home</SideBtn>
-        <SideBtn icon={<IconBook s={16}/>} onClick={()=>goTo('about')}>Our Story</SideBtn>
-        <Divider label="Genesis Archive"/>
+        <SideBtn icon={<IconBook s={16}/>} onClick={()=>goTo('about')}>The Manifesto</SideBtn>
+        <Divider label="The Archive"/>
         <SideBtn icon={<IconShirt s={16}/>} onClick={()=>navigateToShop('Apparel')}>Apparel</SideBtn>
-        <SideBtn icon={<IconMonitor s={16}/>} onClick={()=>navigateToShop('Sanctuary')}>Sanctuary / Office</SideBtn>
+        <SideBtn icon={<IconMonitor s={16}/>} onClick={()=>navigateToShop('Sanctuary')}>Sanctuary</SideBtn>
         <SideBtn icon={<IconCoffee s={16}/>} onClick={()=>navigateToShop('Home')}>Home</SideBtn>
         <SideBtn icon={<IconSparkle s={16}/>} onClick={()=>navigateToShop("Lily's Corner")}>{"Lily's Corner"}</SideBtn>
-        <SideBtn icon={<IconPaw s={16}/>} onClick={()=>navigateToShop('Pets')}>{"Pets - Cerberus's Gate"}</SideBtn>
+        <SideBtn icon={<IconPaw s={16}/>} onClick={()=>navigateToShop('Pets')}>{"Pets — Cerberus's Gate"}</SideBtn>
         <Divider label="Info"/>
         <SideBtn icon={<IconHelp s={16}/>} onClick={()=>goTo('faq')}>FAQ</SideBtn>
         <SideBtn icon={<IconMail s={16}/>} onClick={()=>goTo('socials')}>{"Socials & Contact"}</SideBtn>
       </nav>
+      {/* ── Footer tagline ── */}
       <div className="px-5 py-5 border-t space-y-1" style={{borderColor:border}}>
         <p className="font-black text-[9px] uppercase tracking-[0.4em]" style={{color:'#FF3399'}}>Elite Gaming Artifacts.</p>
         <p className="font-black text-[9px] uppercase tracking-[0.3em] opacity-35">Crafted in Huntsville, AL.</p>
@@ -568,7 +581,7 @@ const App=()=>{
   /* NavItem dropdown — used for ARTIFACTS mega-menu */
   const CATEGORIES_META=[
     {key:'Apparel',label:'Apparel',icon:<IconShirt s={13}/>},
-    {key:'Sanctuary',label:'Sanctuary / Office',icon:<IconMonitor s={13}/>},
+    {key:'Sanctuary',label:'Sanctuary',icon:<IconMonitor s={13}/>},
     {key:'Home',label:'Home',icon:<IconCoffee s={13}/>},
     {key:"Lily's Corner",label:"Lily's Corner",icon:<IconSparkle s={13}/>},
     {key:'Pets',label:'Pets',icon:<IconPaw s={13}/>},
@@ -643,13 +656,13 @@ const App=()=>{
           </div>
         </div>
 
-        {/* Center: ARTIFACTS / MANIFESTO / REGISTRY / STUDIO */}
+        {/* Center: ARTIFACTS / THE MANIFESTO / FAQ / SOCIALS & CONTACT */}
         <div className="hidden lg:flex items-center gap-1">
           {/* ARTIFACTS — dropdown with all categories */}
           <NavItem label="Artifacts" catKey="All" icon={null} gameSubItems={null}/>
-          <button onClick={()=>goTo('about')} className="font-black text-[10px] uppercase tracking-widest opacity-75 px-3 py-2 hover:text-sunset hover:opacity-100 transition-all rounded-lg">Manifesto</button>
-          <button onClick={()=>goTo('faq')} className="font-black text-[10px] uppercase tracking-widest opacity-75 px-3 py-2 hover:text-sunset hover:opacity-100 transition-all rounded-lg">Registry</button>
-          <button onClick={()=>goTo('socials')} className="font-black text-[10px] uppercase tracking-widest opacity-75 px-3 py-2 hover:text-sunset hover:opacity-100 transition-all rounded-lg">Studio</button>
+          <button onClick={()=>goTo('about')} className="font-black text-[10px] uppercase tracking-widest opacity-75 px-3 py-2 hover:text-sunset hover:opacity-100 transition-all rounded-lg">The Manifesto</button>
+          <button onClick={()=>goTo('faq')} className="font-black text-[10px] uppercase tracking-widest opacity-75 px-3 py-2 hover:text-sunset hover:opacity-100 transition-all rounded-lg">FAQ</button>
+          <button onClick={()=>goTo('socials')} className="font-black text-[10px] uppercase tracking-widest opacity-75 px-3 py-2 hover:text-sunset hover:opacity-100 transition-all rounded-lg">Socials & Contact</button>
         </div>
 
         {/* Right: mode toggle + SECURE YOUR ARTIFACT */}
