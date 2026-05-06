@@ -188,6 +188,12 @@ body{overflow-x:hidden;width:100%;max-width:100vw}
 .dark-theme .glass{background:rgba(20,4,28,0.78)!important;border-color:rgba(196,96,238,0.25)!important}
 /* Sidebar — text inherits body text-pearl in dark mode via body class */
 .dark-theme .vault-sidebar{background:rgba(14,4,16,1.0)!important}
+/* Hero triangles & sphere — pull back in dark mode so white text leads */
+.dark-theme .geo-tri{opacity:0.38!important}
+.dark-theme .pearl-sphere{opacity:0.55!important;filter:brightness(0.85)}
+/* Nav dark-mode legibility */
+.dark-theme nav button,.dark-theme nav span{color:rgba(255,255,255,0.90)}
+.dark-theme nav .nav-hist-btn{border-color:rgba(196,96,238,0.30)}
 
 /* ═══ MARQUEE STRIP ═══════════════════════════════════════════ */
   .marquee-strip{background:#1E0A18;padding:13px 0;overflow:hidden;width:100%}
@@ -712,26 +718,26 @@ const App=()=>{
                 <span style={{opacity:0.6}}>▶</span>Initializing Archive<span style={{opacity:0.4}}>·</span>Huntsville, AL<span style={{opacity:0.4}}>·</span>Est. 2026
               </p>
               {/* Massive display headline */}
-              <h1 className="fade-in delay-100" style={{fontFamily:'Outfit,sans-serif',fontWeight:900,fontSize:'clamp(3.8rem,12vw,13rem)',lineHeight:0.88,letterSpacing:'-0.02em',color:'white',textShadow:'0 2px 48px rgba(255,51,153,0.20),0 0 100px rgba(196,170,238,0.14)',marginBottom:'clamp(16px,2.5vw,28px)',textTransform:'uppercase',maxWidth:'100%'}}>
+              <h1 className="fade-in delay-100" style={{fontFamily:'Outfit,sans-serif',fontWeight:900,fontSize:'clamp(3.8rem,12vw,13rem)',lineHeight:0.88,letterSpacing:'-0.02em',color:'white',textShadow:isLight?'0 2px 48px rgba(255,51,153,0.20),0 0 100px rgba(196,170,238,0.14)':'0 2px 40px rgba(255,51,153,0.55),0 0 80px rgba(196,96,238,0.40)',marginBottom:'clamp(16px,2.5vw,28px)',textTransform:'uppercase',maxWidth:'100%'}}>
                 ENDGAME<span style={{color:'#FF3399',textShadow:'0 0 40px rgba(255,51,153,0.60)'}}>.</span><br/>ARCHIVE
               </h1>
               {/* User copy as subtitle */}
-              <p className="fade-in delay-200" style={{fontFamily:'Cormorant Garamond,Georgia,serif',fontStyle:'italic',fontSize:'clamp(1rem,2vw,1.5rem)',lineHeight:1.65,color:'rgba(30,10,24,0.68)',maxWidth:'500px',marginBottom:'8px'}}>
+              <p className="fade-in delay-200" style={{fontFamily:'Cormorant Garamond,Georgia,serif',fontStyle:'italic',fontSize:'clamp(1rem,2vw,1.5rem)',lineHeight:1.65,color:isLight?'rgba(30,10,24,0.68)':'rgba(255,255,255,0.84)',maxWidth:'500px',marginBottom:'8px'}}>
                 Your setup is a sanctuary.<br/>Archive-grade artifacts for the aura you're building. Zero filler. Built for players who already know.
               </p>
-              <p className="fade-in delay-300" style={{fontFamily:'Space Mono,monospace',fontSize:'clamp(10px,1vw,12px)',letterSpacing:'0.06em',color:'rgba(30,10,24,0.42)',marginBottom:'clamp(28px,5vw,52px)'}}>
+              <p className="fade-in delay-300" style={{fontFamily:'Space Mono,monospace',fontSize:'clamp(10px,1vw,12px)',letterSpacing:'0.06em',color:isLight?'rgba(30,10,24,0.42)':'rgba(255,255,255,0.45)',marginBottom:'clamp(28px,5vw,52px)'}}>
                 🖤 Crafted in Huntsville, AL — EST. 2026.
               </p>
-              {/* Square CTAs — matching mockup */}
+              {/* Square CTAs — light uses dark ink buttons, dark uses inverted white buttons */}
               <div className="flex flex-wrap gap-4 justify-center fade-in delay-400">
-                <button onClick={openGallery} className="btn-dark" style={{padding:'clamp(14px,1.8vw,19px) clamp(28px,4vw,52px)'}}>Browse the Archive</button>
-                <button onClick={()=>goTo('about')} className="btn-outline-sq" style={{padding:'clamp(14px,1.8vw,19px) clamp(24px,3.5vw,44px)'}}>Read the Manifesto</button>
+                <button onClick={openGallery} className={isLight?'btn-dark':'btn-dark-inv'} style={{padding:'clamp(14px,1.8vw,19px) clamp(28px,4vw,52px)'}}>Browse the Archive</button>
+                <button onClick={()=>goTo('about')} className={isLight?'btn-outline-sq':'btn-outline-inv'} style={{padding:'clamp(14px,1.8vw,19px) clamp(24px,3.5vw,44px)'}}>Read the Manifesto</button>
               </div>
             </div>
 
             {/* Scroll cue */}
             <div className="fade-in delay-600 absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style={{zIndex:10}}>
-              <span style={{fontFamily:'Space Mono,monospace',fontSize:'9px',letterSpacing:'0.40em',textTransform:'uppercase',color:'rgba(30,10,24,0.32)'}}>Scroll</span>
+              <span style={{fontFamily:'Space Mono,monospace',fontSize:'9px',letterSpacing:'0.40em',textTransform:'uppercase',color:isLight?'rgba(30,10,24,0.32)':'rgba(255,255,255,0.38)'}}>Scroll</span>
               <div style={{width:'1px',height:'36px',background:'linear-gradient(180deg,rgba(255,51,153,0.50),transparent)'}}/>
             </div>
           </header>
