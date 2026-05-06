@@ -295,13 +295,13 @@ const FAQItem=({question,answer,mode})=>{
 /* ── Vault Sidebar ── */
 const VaultSidebar=({isOpen,onClose,mode,navigateToShop,goTo})=>{
   const isLight=mode==='light';
-  const bg=isLight?'rgba(251,240,246,0.97)':'rgba(30,10,24,0.97)';
+  const bg=isLight?'rgba(251,240,246,1.0)':'rgba(14,4,16,1.0)';
   const border=isLight?'rgba(255,51,153,0.18)':'rgba(196,96,238,0.40)';
   const SideBtn=({icon,children,onClick})=>(<button onClick={()=>{onClick();onClose();}} className={`w-full text-left px-4 py-3 flex items-center gap-3 font-black text-[11px] uppercase tracking-widest transition-all duration-200 rounded-xl mx-2 ${isLight?'hover:bg-black/5':'hover:bg-white/5'} opacity-75 hover:opacity-100`} style={{width:'calc(100% - 16px)'}}><span className="flex-shrink-0">{icon}</span>{children}</button>);
   const Divider=({label})=>(<div className="px-4 pt-5 pb-2 mt-1 border-t" style={{borderColor:border}}><span className="font-black text-[9px] uppercase tracking-[0.5em] text-uv opacity-55">{label}</span></div>);
   return(<>
     <div className="fixed inset-0 z-[390] transition-all duration-400" style={{background:'rgba(0,0,0,0.48)',backdropFilter:'blur(4px)',WebkitBackdropFilter:'blur(4px)',opacity:isOpen?1:0,pointerEvents:isOpen?'auto':'none'}} onClick={onClose}/>
-    <div className={`vault-sidebar ${isOpen?'open':'closed'}`} style={{backdropFilter:'blur(18px)',WebkitBackdropFilter:'blur(18px)',background:bg,borderRight:`1px solid ${border}`}}>
+    <div className={`vault-sidebar ${isOpen?'open':'closed'}`} style={{background:bg,borderRight:`1px solid ${border}`}}>
       <div className="flex items-center justify-between px-5 py-5 border-b" style={{borderColor:border}}>
         <div className="flex items-center gap-3 cursor-pointer" onClick={()=>{goTo('home');onClose();}}><span className="font-black text-sm tracking-tight uppercase">ENDGAME<span style={{color:'#FF3399'}}>.</span>ARCHIVE</span></div>
         <button onClick={onClose} aria-label="Close vault" className="w-8 h-8 flex items-center justify-center opacity-45 hover:opacity-100 transition-opacity"><IconX s={16}/></button>
@@ -567,7 +567,10 @@ const App=()=>{
 
   return(
     <div className="min-h-screen relative overflow-x-hidden" style={{maxWidth:'100vw',width:'100%'}}>
-      <div className="pearl-overlay"/>
+      {isLight
+        ? <div className="pearl-overlay"/>
+        : <div style={{position:'fixed',inset:0,zIndex:-1,pointerEvents:'none',background:'linear-gradient(160deg,#1E0A18 0%,#2A0A2A 40%,#0D0A20 70%,#14021E 100%)'}}/>
+      }
       {/* Ooze blobs */}
       <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
         <div className="ooze-blob w-[100vw] h-[100vh] top-[-20%] left-[-20%] animate-ooze" style={{background:'rgba(255,51,153,0.09)'}}/>
